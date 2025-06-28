@@ -25,6 +25,18 @@
             height: 100vh;
             min-width: 500px;
         }
+        .toggle-button {
+            background: #007BFF;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 5px;
+        }
+        .toggle-button:hover {
+            background: #0056b3;
+        }
     </style>
 </head>
     
@@ -34,7 +46,7 @@
         </div>
     </div>
 
-    <button id="toggleMarkerLayerBtn">Afficher/masquer le marqueur</button>
+    <button id="toggleMarkerLayerBtn" class="toggle-button">Afficher/masquer le marqueur</button>
     </div>
     
     <div id="map"></div>
