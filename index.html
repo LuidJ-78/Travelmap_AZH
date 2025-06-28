@@ -91,14 +91,22 @@
         const map = L.map('map').setView([20, 0], 2);
         L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {attribution: '&copy; OpenStreetMap contributeurs'}).addTo(map);
 
+        // Create a custom icon using marker.png
+        const customIcon = L.icon({
+            iconUrl: 'marker.png',      // Make sure marker.png is in the same directory as index.html
+            iconSize: [32, 32],         // Adjust size as needed
+            iconAnchor: [16, 32],       // The point of the icon which will correspond to marker's location
+            popupAnchor: [0, -32]       // Point from which the popup should open relative to the iconAnchor
+        });
+
         // Create a marker at the provided coordinates
-        const marker = L.marker([45.6, 5.8]).bindPopup('Marker at 45.6, 5.8');
+        const marker_1 = L.marker([45.6, 5.8], { icon: customIcon }).bindPopup('Marker at 45.6, 5.8');
 
         // Add the marker to a layer group
-        const markerLayer = L.layerGroup([marker]);
+        const markerLayer_1 = L.layerGroup([marker_1]);
 
         // Add the layer group to the map
-        markerLayer.addTo(map);
+        markerLayer_1.addTo(map);
 
         // Optionally, add layer control to toggle marker layer
         L.control.layers(null, { "My Marker": markerLayer }).addTo(map);
