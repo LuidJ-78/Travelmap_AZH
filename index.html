@@ -6,6 +6,26 @@
     <title>Travel Map Azgharie Airlines</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-measure/dist/leaflet-measure.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        #sidebar {
+            width: 250px;
+            background: #f4f4f4;
+            padding: 10px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            overflow-y: auto;
+        }
+        #map {
+            flex-grow: 1;
+            height: 100vh;
+            min-width: 500px;
+        }
+    </style>
 </head>
     
 <body>
