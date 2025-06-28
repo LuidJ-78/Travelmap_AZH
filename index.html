@@ -100,10 +100,12 @@
         });
 
         // Create a marker at the provided coordinates
-        const marker_1 = L.marker([45.6, 5.8], { icon: customIcon }).bindPopup('Marker at 45.6, 5.8');
+        const marker_1 = L.marker([45.6, 5.8], { icon: customIcon }).bindPopup('LFLB');
+        const marker_2 = L.marker([47.6, 7.5], { icon: customIcon }).bindPopup('LFSB');
+        const marker_3 = L.marker([50.6, 5.4], { icon: customIcon }).bindPopup('EBLG');
 
         // Add the marker to a layer group
-        const markerLayer_1 = L.layerGroup([marker_1]);
+        const markerLayer_1 = L.layerGroup([marker_1, marker_2, marker_3]);
 
         // Add the layer group to the map
         markerLayer_1.addTo(map);
