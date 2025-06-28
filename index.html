@@ -83,6 +83,9 @@
         </div>
     </div>
 
+    <button id="toggleMarkerLayerBtn">Afficher/masquer le marqueur</button>
+    </div>
+    
     <div id="map"></div>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
@@ -104,14 +107,19 @@
         const marker_2 = L.marker([47.6, 7.5], { icon: customIcon }).bindPopup('LFSB');
         const marker_3 = L.marker([50.6, 5.4], { icon: customIcon }).bindPopup('EBLG');
 
-        // Add the marker to a layer group
-        const markerLayer_1 = L.layerGroup([marker_1, marker_2, marker_3]);
+        // Add the marker to a layer group and add it to the map
+        const markerLayer_1 = L.layerGroup([marker_1, marker_2, marker_3]).addTo(map);
 
-        // Add the layer group to the map
-        markerLayer_1.addTo(map);
-
-        // Optionally, add layer control to toggle marker layer
-        L.control.layers(null, { "My Marker": markerLayer }).addTo(map);
+        //display layer
+        let markerLayerVisible = true;
+            document.getElementById('toggleMarkerLayerBtn').onclick = function() {
+            if (markerLayerVisible) {
+                map.removeLayer(markerLayer_1);
+            } else {
+                map.addLayer(markerLayer_1);
+            }
+            markerLayerVisible = !markerLayerVisible;
+        };
                
     </script>
 </body>
