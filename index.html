@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -77,7 +77,430 @@
     </style>
 </head>
 <body>
-    <h1>Bienvenue sur ma page GitHub</h1>
-    <p>Page créée avec amour et HTML 💖</p>
+    <div id="sidebar">
+        <h2>Sélection des aéroports</h2>
+        <div class="info-box">
+            Départ: <span id="departure" class="clickable">Non sélectionné</span>
+            <input type="text" id="departureInput" style="display:none" placeholder="Entrez un aéroport">
+        </div>
+        <div class="info-box">
+            Arrivée: <span id="arrival" class="clickable">Non sélectionné</span>
+            <input type="text" id="arrivalInput" style="display:none" placeholder="Entrez un aéroport">
+        </div>
+        <div class="info-box">
+            <label>Callsign :</label>
+            <span style="font-weight:bold;" id="callsignDisplayPrefix">AZH</span>-<span id="callsignDisplayNumber">201</span>
+            <select id="callsign" name="callsign">
+                <option value="">Sélectionner un numéro</option>
+                <option value="201">201</option>
+                <option value="202">202</option>
+                <option value="203">203</option>
+                <option value="204">204</option>
+                <option value="205">205</option>
+                <option value="206">206</option>
+                <option value="FR">FR</option>
+                <option value="US">US</option>
+                <option value="ACC">ACC</option>
+                <option value="501">501</option>
+                <option value="502">502</option>
+                <option value="503">503</option>
+                <option value="513">513</option>
+                <option value="523">523</option>
+                <option value="533">533</option>
+                <option value="504">504</option>
+                <option value="505">505</option>
+                <option value="506">506</option>
+                <option value="507">507</option>
+                <option value="other">Autre (saisir un callsign)</option>
+            </select>
+            <div id="customCallsignFields" style="display:none;">
+                <input type="text" id="customAirline" placeholder="Préfixe (ex: XYZ)">
+                <input type="text" id="customNumber" placeholder="Numéro (ex: 123)">
+            </div>
+        </div>
+
+        <!-- Boutons pour la génération et réinitialisation -->
+        <button id="generateLinkButton" class="toggle-button">Générer le plan de vol</button>
+        <button id="resetSelectionButton" class="toggle-button">Réinitialiser les aéroports</button>
+        <div id="distanceBox" class="info-box" style="display:none;">
+            Distance: <span id="distance">0</span> milles nautiques
+            <br>
+            Temps de vol: <span id="flightTime">0</span> heures
+        </div>
+
+        <h3>Afficher par catégorie</h3>
+        <div id="categoryCheckboxes" class="checkbox-group"></div>
+    </div>
+
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        const callsignSelect = document.getElementById('callsign');
+        const customFields = document.getElementById('customCallsignFields');
+        const customAirline = document.getElementById('customAirline');
+        const customNumber = document.getElementById('customNumber');
+        const callsignDisplayPrefix = document.getElementById('callsignDisplayPrefix');
+        const callsignDisplayNumber = document.getElementById('callsignDisplayNumber');
+
+        callsignSelect.addEventListener('change', function () {
+            if (this.value === 'other') {
+                customFields.style.display = 'flex';  // Affiche les champs sur une même ligne
+                customAirline.focus();
+                callsignDisplayPrefix.innerText = ''; // Ne rien afficher pour le préfixe
+                callsignDisplayNumber.innerText = ''; // Ne rien afficher pour le numéro
+            } else {
+                customFields.style.display = 'none';
+                callsignDisplayPrefix.innerText = "AZH"; // Affiche le préfixe
+                callsignDisplayNumber.innerText = this.value; // Affiche le numéro sélectionné
+            }
+        });
+
+        function getCallsignFinal() {
+            if (callsignSelect.value === 'other') {
+                const prefix = customAirline.value.trim().toUpperCase();
+                const number = customNumber.value.trim();
+                return prefix && number ? prefix + number : "";
+            } else {
+                return "AZH" + callsignSelect.value;
+            }
+        }
+
+        function updateCallsign() {
+            const finalCallsign = getCallsignFinal();
+            if (finalCallsign) {
+                const prefix = finalCallsign.slice(0, 3); // Les 3 premiers caractères sont le préfixe
+                const number = finalCallsign.slice(3); // Le reste est le numéro
+                callsignDisplayPrefix.innerText = prefix;
+                callsignDisplayNumber.innerText = number;
+            }
+        }
+
+        customAirline.addEventListener('input', updateCallsign);
+        customNumber.addEventListener('input', updateCallsign);
+
+        const map = L.map('map').setView([20, 0], 2);
+        L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributeurs'
+        }).addTo(map);
+
+        const layers = {}; // Chaque catégorie sera un layer distinct
+        let departureMarker = null;
+        let arrivalMarker = null;
+        let currentSelection = ''; // Suivi de la sélection Départ/Arrivée
+        let routeLine = null;  // Variable pour stocker la ligne tracée
+
+        // Fonction pour gérer l'entrée manuelle d'aéroport
+        function handleAirportInput(inputId, markerType) {
+            const input = document.getElementById(inputId);
+            const name = input.value.trim();
+            if (name) {
+                // Recherche de l'aéroport via OpenStreetMap API
+                fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${name}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.length > 0) {
+                            const lat = parseFloat(data[0].lat);
+                            const lon = parseFloat(data[0].lon);
+                            const popupMessage = `${name}<br>Latitude: ${lat}<br>Longitude: ${lon}`;
+                            
+                            // En fonction de l'aéroport de départ ou d'arrivée, on place le marqueur
+                            if (markerType === 'departure') {
+                                if (departureMarker) {
+                                    map.removeLayer(departureMarker); // Retirer le précédent marqueur
+                                }
+                                departureMarker = L.marker([lat, lon]).addTo(map)
+                                    .bindPopup(popupMessage)
+                                    .openPopup();
+                                document.getElementById('departure').innerText = name;
+                            } else if (markerType === 'arrival') {
+                                if (arrivalMarker) {
+                                    map.removeLayer(arrivalMarker); // Retirer le précédent marqueur
+                                }
+                                arrivalMarker = L.marker([lat, lon]).addTo(map)
+                                    .bindPopup(popupMessage)
+                                    .openPopup();
+                                document.getElementById('arrival').innerText = name;
+                            }
+
+                            // Fermer le champ de texte après la saisie
+                            input.style.display = 'none';
+
+                            // Si un départ et une arrivée sont sélectionnés, on calcule la distance
+                            if (departureMarker && arrivalMarker) {
+                                calculateDistanceAndTime(departureMarker.getLatLng(), arrivalMarker.getLatLng());
+                            }
+                        } else {
+                            alert("Aéroport introuvable, veuillez vérifier le nom.");
+                        }
+                    })
+                    .catch(error => {
+                        alert("Erreur lors de la recherche de l'aéroport.");
+                        console.error(error);
+                    });
+            }
+        }
+
+        // Fonction pour calculer la distance et le temps de vol
+        function calculateDistanceAndTime(departureLatLng, arrivalLatLng) {
+            const distance = departureLatLng.distanceTo(arrivalLatLng) / 1852;  // Convertir la distance en milles nautiques
+            const flightTime = (distance / 500).toFixed(2);  // Temps de vol estimé (500 knots)
+            
+            document.getElementById('distance').innerText = distance.toFixed(2);
+            document.getElementById('flightTime').innerText = flightTime;
+            document.getElementById('distanceBox').style.display = 'block'; // Afficher les infos de distance/temps
+        }
+
+        // Ajouter des événements pour chaque champ d'aéroport
+        document.getElementById('departure').addEventListener('click', () => {
+            currentSelection = 'departure';  // Indiquer qu'on sélectionne l'aéroport de départ
+            document.getElementById('departureInput').style.display = 'block';  // Afficher le champ de saisie
+            document.getElementById('arrivalInput').style.display = 'none';     // Cacher l'autre champ
+        });
+
+        document.getElementById('arrival').addEventListener('click', () => {
+            currentSelection = 'arrival';  // Indiquer qu'on sélectionne l'aéroport d'arrivée
+            document.getElementById('arrivalInput').style.display = 'block';     // Afficher le champ de saisie
+            document.getElementById('departureInput').style.display = 'none';    // Cacher l'autre champ
+        });
+
+        // Ajouter des événements pour la saisie manuelle d'aéroport (quand on sort du champ de texte)
+        document.getElementById('departureInput').addEventListener('blur', () => {
+            handleAirportInput('departureInput', 'departure');
+        });
+
+        document.getElementById('arrivalInput').addEventListener('blur', () => {
+            handleAirportInput('arrivalInput', 'arrival');
+        });
+
+        // URLs pour les fichiers CSV
+        const sheetURL1 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRk5HwoX9-ZlzVnEdobeUU795qpeZk2cP7BLfw9hOQVBV8WSJmsE4wV9oja_ey7vwetOvif9FB7o2cw/pub?gid=1380793282&single=true&output=csv';
+        const sheetURL2 = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRrK9WOo7izCpLFpXSG2oW0XKMO-uFO2cWmiZ-p4AFsj3n2x4SGvZltXtg8M49pZNpd2I9kEgstzPlw/pub?gid=241660980&single=true&output=csv';
+
+        // Fonction pour charger les marqueurs depuis les CSV
+        async function chargerMarqueurs(sheetURL, categories) {
+            const response = await fetch(sheetURL);
+            const text = await response.text();
+            const rows = text.split('\n').slice(1); // Ignorer la première ligne
+
+            rows.forEach(row => {
+                const cols = row.split(',');
+                const lat = parseFloat(cols[1].trim().replace(',', '.'));
+                const lng = parseFloat(cols[2].trim().replace(',', '.'));
+                const name = cols[0].trim();
+                const iconURL = cols[3].trim();  // Colonne D pour l'icône
+                const info = [cols[4].trim(), cols[5].trim(), cols[6].trim()].join(' '); // Informations supplémentaires
+                const category = cols[7].trim(); // Catégorie dans la colonne H
+                
+                if (categories.includes(category) && !isNaN(lat) && !isNaN(lng)) {
+                    // Créer une icône personnalisée
+                    const icon = L.icon({
+                        iconUrl: iconURL,
+                        iconSize: [30, 30],  // Taille de l'icône (ajustez si nécessaire)
+                        iconAnchor: [15, 30], // Position de l'ancre de l'icône
+                    });
+
+                    const marker = L.marker([lat, lng], { icon: icon })
+                        .bindPopup(`<strong>${name}</strong><br>${info}`);
+
+                    // Ajouter le marqueur au layer de la catégorie correspondante
+                    if (!layers[category]) {
+                        layers[category] = L.layerGroup(); // Créer un layer pour cette catégorie si nécessaire
+                    }
+                    layers[category].addLayer(marker);
+
+                    // Ajouter un gestionnaire de clic sur chaque marqueur
+                    marker.on('click', function() {
+                        if (currentSelection === 'departure') {
+                            document.getElementById('departure').innerText = name;
+                            if (departureMarker) {
+                                map.removeLayer(departureMarker); // Supprimer le marqueur précédent
+                            }
+                            departureMarker = marker;
+                            if (arrivalMarker) {
+                                calculateDistanceAndTime(departureMarker.getLatLng(), arrivalMarker.getLatLng());
+                            }
+                        } else if (currentSelection === 'arrival') {
+                            document.getElementById('arrival').innerText = name;
+                            if (arrivalMarker) {
+                                map.removeLayer(arrivalMarker); // Supprimer le marqueur précédent
+                            }
+                            arrivalMarker = marker;
+                            if (departureMarker) {
+                                calculateDistanceAndTime(departureMarker.getLatLng(), arrivalMarker.getLatLng());
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+        // Fonction pour calculer la distance et le temps de vol
+        function calculateDistanceAndTime(depCoords, arrCoords) {
+            const distanceInKm = depCoords.distanceTo(arrCoords) / 1000; // Convertir en kilomètres
+            const distanceInNauticalMiles = distanceInKm * 0.53996; // Conversion en milles nautiques
+
+            // Calcul du temps de vol en heures
+            const flightTimeInHours = distanceInKm / 600; // Vitesse de 800 km/h
+            const flightTimeInMinutes = Math.round(flightTimeInHours * 60); // Convertir en minutes
+
+            document.getElementById('distance').innerText = distanceInNauticalMiles.toFixed(2);
+            document.getElementById('flightTime').innerText = (flightTimeInMinutes / 60).toFixed(2);
+
+            document.getElementById('distanceBox').style.display = 'block';
+
+            // Si une ligne existe déjà, on la retire avant de dessiner la nouvelle
+            if (routeLine) {
+                map.removeLayer(routeLine);
+            }
+
+            // Tracer la ligne entre le Départ et l'Arrivée
+            routeLine = L.polyline([depCoords, arrCoords], {color: 'blue'}).addTo(map);
+        }
+
+        // Fonction pour récupérer les catégories à partir du Sheet (colonne H)
+        async function chargerCategories(sheetURL) {
+            const response = await fetch(sheetURL);
+            const text = await response.text();
+            const rows = text.split('\n').slice(1); // Ignorer la première ligne
+
+            const categories = new Set();
+            rows.forEach(row => {
+                const cols = row.split(',');
+                if (cols[7]) categories.add(cols[7].trim()); // Colonne H pour les catégories
+            });
+
+            console.log('Catégories chargées:', categories);
+
+            // Organiser les catégories par premier mot
+            const categoryGroups = {};
+            categories.forEach(category => {
+                const firstWord = category.split(' ')[0];
+                if (!categoryGroups[firstWord]) {
+                    categoryGroups[firstWord] = [];
+                }
+                categoryGroups[firstWord].push(category);
+            });
+
+            // Créer l'HTML pour les catégories triées et espacées
+            const categoryCheckboxes = document.getElementById('categoryCheckboxes');
+            Object.keys(categoryGroups).sort().forEach(group => {
+                const groupDiv = document.createElement('div');
+                groupDiv.classList.add('category-group');
+
+                // Ajouter un titre pour chaque groupe (avec un bouton pour ouvrir/fermer)
+                const groupTitle = document.createElement('h4');
+                groupTitle.innerText = group;
+                groupTitle.addEventListener('click', () => {
+                    groupDiv.classList.toggle('open');
+                });
+                groupDiv.appendChild(groupTitle);
+
+                // Ajouter un div pour les cases à cocher de chaque catégorie
+                const checkboxDiv = document.createElement('div');
+                checkboxDiv.classList.add('category-checkboxes');
+
+                // Ajouter les cases à cocher pour chaque catégorie du groupe
+                categoryGroups[group].forEach(category => {
+                    const label = document.createElement('label');
+                    label.innerHTML = `<input type="checkbox" class="categoryCheckbox" value="${category}"> ${category}`;
+                    checkboxDiv.appendChild(label);
+                });
+
+                groupDiv.appendChild(checkboxDiv);
+                
+                // Ajouter chaque groupe au conteneur principal
+                categoryCheckboxes.appendChild(groupDiv);
+            });
+
+            // Ajouter l'événement de changement sur chaque case à cocher
+            document.querySelectorAll('.categoryCheckbox').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const category = this.value;
+                    console.log(`Case cochée pour la catégorie: ${category}`);
+
+                    if (this.checked) {
+                        // Si la case est cochée, ajouter le layer
+                        if (layers[category]) {
+                            console.log(`Ajout du layer pour ${category}`);
+                            map.addLayer(layers[category]);
+                        }
+                    } else {
+                        // Si la case est décochée, retirer le layer
+                        if (layers[category]) {
+                            console.log(`Retrait du layer pour ${category}`);
+                            map.removeLayer(layers[category]);
+                        }
+                    }
+                });
+            });
+
+            // Charger les marqueurs pour les catégories
+            chargerMarqueurs(sheetURL, Array.from(categories));
+        }
+
+        // Charger les catégories du Sheet 1
+        chargerCategories(sheetURL1);
+
+        // Charger les catégories du Sheet 2
+        chargerCategories(sheetURL2);
+
+        // Fonction pour générer le plan de vol (SimBrief)
+document.getElementById('generateLinkButton').addEventListener('click', () => {
+    const departure = document.getElementById('departure').innerText.trim();
+    const arrival = document.getElementById('arrival').innerText.trim();
+    const callsignSelect = document.getElementById('callsign');
+    let airlinePrefix = "AZH";  // Valeur par défaut pour le préfixe
+    let flightNumber = "";      // Numéro de vol par défaut vide
+
+    // Si un callsign personnalisé est saisi
+    if (callsignSelect.value === 'other') {
+        airlinePrefix = document.getElementById('customAirline').value.trim().toUpperCase();
+        flightNumber = document.getElementById('customNumber').value.trim();
+    } else {
+        // Si une option est sélectionnée dans la liste
+        flightNumber = callsignSelect.value;
+    }
+
+    // Vérifie si tous les champs sont remplis
+    if (departure !== "Non sélectionné" && arrival !== "Non sélectionné" && airlinePrefix && flightNumber) {
+        // Crée l'URL correcte avec le préfixe (Airline), le numéro de vol et les autres paramètres
+        const simBriefURL = `https://dispatch.simbrief.com/options/custom?airline=${airlinePrefix}&fltnum=${flightNumber}&orig=${departure}&dest=${arrival}`;
+        
+        console.log("URL générée : ", simBriefURL);  // Affiche l'URL générée dans la console
+        
+        // Ouvre le lien dans une nouvelle fenêtre
+        window.open(simBriefURL, '_blank');
+    } else {
+        alert('Veuillez entrer un callsign, un départ et une arrivée.');
+    }
+});
+
+
+
+        // Réinitialiser la sélection des aéroports
+        document.getElementById('resetSelectionButton').addEventListener('click', () => {
+            departureMarker = null;
+            arrivalMarker = null;
+            document.getElementById('departure').innerText = 'Non sélectionné';
+            document.getElementById('arrival').innerText = 'Non sélectionné';
+            map.removeLayer(routeLine);
+            routeLine = null;
+            document.getElementById('distanceBox').style.display = 'none';
+        });
+
+        // Fonction pour gérer le mode de sélection (Départ ou Arrivée)
+        document.getElementById('departure').addEventListener('click', () => {
+            currentSelection = 'departure';
+            document.getElementById('departureInput').style.display = 'block';
+            document.getElementById('arrivalInput').style.display = 'none';
+        });
+
+        document.getElementById('arrival').addEventListener('click', () => {
+            currentSelection = 'arrival';
+            document.getElementById('arrivalInput').style.display = 'block';
+            document.getElementById('departureInput').style.display = 'none';
+        });
+    </script>
 </body>
 </html>
