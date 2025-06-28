@@ -89,18 +89,8 @@
     <script>
         //affichage de la map en fond
         const map = L.map('map').setView([20, 0], 2);
-        L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributeurs'
-        }).addTo(map);
-
-        //bouton selection ligne
-        <form>
-            <label><input type="checkbox" name="fruit" value="pomme"> Pomme</label><br>
-            <label><input type="checkbox" name="fruit" value="banane"> Banane</label><br>
-            <label><input type="checkbox" name="fruit" value="raisin"> Raisin</label><br>
-        </form>
-
-        
+        L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {attribution: '&copy; OpenStreetMap contributeurs'}).addTo(map);
+       
         // URLs pour les fichiers CSV
         //https://docs.google.com/spreadsheets/d/1nNhDL40J7DBGDDG7ISrCC0TzyW1d2sDh5MNGSkolfz8/edit?usp=sharing
         const sheetURL = 'https://docs.google.com/spreadsheets/d/1nNhDL40J7DBGDDG7ISrCC0TzyW1d2sDh5MNGSkolfz8/export?format=csv';
