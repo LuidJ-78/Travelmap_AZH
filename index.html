@@ -81,11 +81,10 @@
                 const name = cols[1]; //colonne B
                 const lat = parseFloat(cols[2]); //colonne C
                 const lng = parseFloat(cols[3]); //colonne D
+                const markerPositions = [lat,lng];
                 // Create marker here using name, lat, lng
                 const marker = L.marker([lat, lng], { icon: customIcon }).bindPopup(name);
                 AZH501.addLayer(marker)
-                // Store the position
-                markerPositions[row]([lat, lng]);
             });
              
             if (markerPositions.length > 1) {
