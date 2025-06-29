@@ -57,32 +57,19 @@
         L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {attribution: '&copy; OpenStreetMap contributeurs'}).addTo(map);
 
         // Create a custom icon using marker.png
-        function getIconSize(zoom) { // Adjust the numbers as needed for your preferred scaling
-            const base = 16; // minimum size
-            const scale = 2; // increase per zoom level
-            const size = base + scale * (zoom - map.getMinZoom());
-            return [size, size];
-        }
-        function createProportionalIcon(zoom) { 
-            const size = getIconSize(zoom);
-            return L.icon({
-            iconUrl: 'marker.png',
-            iconSize: size,
-            iconAnchor: [size[0] / 2, size[1]], // adjust as needed
-            popupAnchor: [0, -size[1] / 2]
-            });
-        }
+        const customIcon = L.icon({
+            iconUrl: 'marker.png',      // Make sure marker.png is in the same directory as index.html
+            iconSize: [32, 32],         // Adjust size as needed
+            iconAnchor: [16, 32],       // The point of the icon which will correspond to marker's location
+            popupAnchor: [0, -32]       // Point from which the popup should open relative to the iconAnchor
+        });
 
-
-        
         //google sheet url
         const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTjulAyJlAG5smNj1FHKrfqWijHp8asBRfrDAGhB94HF5udtGl3_dWC3bIkEyce6b-5jwsbFI20PFci/pub?gid=1768006993&single=true&output=csv";
 
-        
         //layergroup
         const AZH501 = L.layerGroup([ ]);
 
-        
         //get marker data from the google sheet
         fetch(sheetURL)
           .then(response => response.text())
@@ -95,14 +82,16 @@
                 const lat = parseFloat(cols[2]);
                 const lng = parseFloat(cols[3]);
                 // Create marker here using name, lat, lng
-                const marker = L.marker([lat, lng], { icon: icon: createProportionalIcon(map.getZoom()) }).bindPopup(name);
+                const marker = L.marker([lat, lng], { icon: customIcon }).bindPopup(name);
                 AZH501.addLayer(marker)
             });
           });
-        
+
+
         //display layer
         let azh501LayerVisible = false;
         const toggleBtn_AZH501 = document.getElementById('toggle_AZH501');
+
         if (toggleBtn_AZH501) {
             toggleBtn_AZH501.onclick = function() {
                 if (azh501LayerVisible) {
