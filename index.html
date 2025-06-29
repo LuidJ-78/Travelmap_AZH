@@ -67,6 +67,9 @@
         //google sheet url
         const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTjulAyJlAG5smNj1FHKrfqWijHp8asBRfrDAGhB94HF5udtGl3_dWC3bIkEyce6b-5jwsbFI20PFci/pub?gid=1768006993&single=true&output=csv";
 
+        //layergroup
+        const AZH501 = L.layerGroup([ ]).addTo(map);
+
         //get marker data from the google sheet
         fetch(sheetURL)
           .then(response => response.text())
@@ -74,15 +77,17 @@
             const rows = csvText.split('\n');
             // Assuming first row is header
             rows.slice(1).forEach(row => {
-              const cols = row.split(',');
-              const name = cols[1];
-              const lat = parseFloat(cols[2]);
-              const lng = parseFloat(cols[3]);
-              // Create marker here using name, lat, lng
-              L.marker([lat, lng], { icon: customIcon }).addTo(map).bindPopup(name);
+                const cols = row.split(',');
+                const name = cols[1];
+                const lat = parseFloat(cols[2]);
+                const lng = parseFloat(cols[3]);
+                // Create marker here using name, lat, lng
+                L.marker([lat, lng], { icon: customIcon }).addto(AZH501).bindPopup(name);
             });
           });
 
+
+        
         
         // Create a marker at the provided coordinates
         const marker_1 = L.marker([45.6, 5.8], { icon: customIcon }).bindPopup('LFLB');
