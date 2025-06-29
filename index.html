@@ -45,7 +45,7 @@
         <h2>Travel Map </h2>
         <h2>Azgharie Airlines </h2>
 
-        <button id="toggle_AZH501" class="toggle-button">Afficher/masquer le marqueur</button>
+        <button id="toggle_AZH501" class="toggle-button">Afficher le voyage de AZH501</button>
     </div>
     
     <div id="map"></div>
@@ -89,17 +89,17 @@
 
 
         //display layer
-        let azh501LayerVisible = true;
+        let azh501LayerVisible = false;
         const toggleBtn_AZH501 = document.getElementById('toggle_AZH501');
 
         if (toggleBtn_AZH501) {
             toggleBtn_AZH501.onclick = function() {
                 if (azh501LayerVisible) {
                     map.removeLayer(AZH501);
-                    toggleBtn_AZH501.textContent = "Afficher le layer AZH501"; // Optional: update button text
+                    toggleBtn_AZH501.textContent = "Afficher le voyage de AZH501"; // Optional: update button text
                 } else {
                     map.addLayer(AZH501);
-                    toggleBtn_AZH501.textContent = "Masquer le layer AZH501"; // Optional: update button text
+                    toggleBtn_AZH501.textContent = "Masquer le voyage de AZH501"; // Optional: update button text
                 }
                 azh501LayerVisible = !azh501LayerVisible;
             };
