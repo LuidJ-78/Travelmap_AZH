@@ -57,11 +57,24 @@
         L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {attribution: '&copy; OpenStreetMap contributeurs'}).addTo(map);
 
         // Create a custom icon using marker.png
-        const customIcon = L.icon({
-            iconUrl: 'marker.png',      // Make sure marker.png is in the same directory as index.html
-            iconSize: [32, 32],         // Adjust size as needed
-            iconAnchor: [16, 32],       // The point of the icon which will correspond to marker's location
-            popupAnchor: [0, -32]       // Point from which the popup should open relative to the iconAnchor
+        function getIconSize(zoom) { // Adjust the numbers as needed for your preferred scaling
+            const base = 16; // minimum size
+            const scale = 2; // increase per zoom level
+            const size = base + scale * (zoom - map.getMinZoom());
+            return [size, size];
+        }
+        function createProportionalIcon(zoom) { 
+            const size = getIconSize(zoom);
+            return L.icon({
+            iconUrl: 'marker.png',
+            iconSize: size,
+            iconAnchor: [size[0] / 2, size[1]], // adjust as needed
+            popupAnchor: [0, -size[1] / 2]
+            });
+        }
+        map.on('zoomend', function() {
+            const newIcon = createProportionalIcon(map.getZoom());
+            markers.forEach(marker => marker.setIcon(newIcon));
         });
 
         //google sheet url
@@ -82,7 +95,7 @@
                 const lat = parseFloat(cols[2]);
                 const lng = parseFloat(cols[3]);
                 // Create marker here using name, lat, lng
-                const marker = L.marker([lat, lng], { icon: customIcon }).bindPopup(name);
+                const marker = L.marker([lat, lng], { icon: icon: createProportionalIcon(map.getZoom()) }).bindPopup(name);
                 AZH501.addLayer(marker)
             });
           });
