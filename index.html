@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -46,9 +46,6 @@
         <h2>Azgharie Airlines </h2>
 
         <button id="toggle_AZH501" class="toggle-button">Afficher le voyage de AZH501</button>
-        <button id="toggle_AZH502" class="toggle-button">Afficher le voyage de AZH502</button>
-        <button id="toggle_AZH503" class="toggle-button">Afficher le voyage de AZH503</button>
-        
     </div>
     
     <div id="map"></div>
@@ -71,9 +68,7 @@
         const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTjulAyJlAG5smNj1FHKrfqWijHp8asBRfrDAGhB94HF5udtGl3_dWC3bIkEyce6b-5jwsbFI20PFci/pub?gid=1768006993&single=true&output=csv";
 
         //layergroup
-        const AZH501 = L.layerGroup([ ]);
-        const AZH502 = L.layerGroup([ ]);
-        const AZH503 = L.layerGroup([ ]);        
+        const AZH501 = L.layerGroup([ ]);       
 
         //get marker data from the google sheet
         const markerPositions = [];
@@ -92,9 +87,11 @@
                 // Store the position
                 markerPositions.push([lat, lng]);
             });
+            if (markerPositions.length > 1) {
+               const polyline_AZH501 = L.polyline(markerPositions, { color: 'blue' }).addTo(map);
             }
+            AZH501.addLayer(polyline_AZH501)
           });
-
         
         //display layer AZH501
         let azh501LayerVisible = false;
@@ -111,7 +108,7 @@
                 azh501LayerVisible = !azh501LayerVisible;
             };
         }
-        
+               
     </script>
 </body>
 </html>
