@@ -74,20 +74,20 @@
         fetch(sheetURL)
           .then(response => response.text())
           .then(csvText => {
-            var markerPositions = []; 
+            //var markerPositions = []; 
             const rows = csvText.split('\n');
             rows.slice(1).forEach(row => { // first row is header
                 const cols = row.split(',');
                 const name = cols[1]; //colonne B
                 const lat = parseFloat(cols[2]); //colonne C
                 const lng = parseFloat(cols[3]); //colonne D
-                markerPositions.push([lat, lng]);
+                //markerPositions.push([lat, lng]);
                 // Create marker here using name, lat, lng
                 const marker = L.marker([lat, lng], { icon: customIcon }).bindPopup(name);
                 AZH501.addLayer(marker)
             });
             
-            var polyline_AZH501 = L.polyline(markerPositions, { color: 'blue' }).addTo(map);
+            //var polyline_AZH501 = L.polyline(markerPositions, { color: 'blue' }).addTo(map);
             //AZH501.addLayer(polyline_AZH501); // Add polyline to the same layer group
               
           });
