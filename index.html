@@ -71,7 +71,6 @@
         const AZH501 = L.layerGroup([ ]);       
 
         //get marker data from the google sheet
-        const markerPositions = [];
         fetch(sheetURL)
           .then(response => response.text())
           .then(csvText => {
