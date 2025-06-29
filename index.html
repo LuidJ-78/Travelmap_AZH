@@ -45,7 +45,7 @@
         <h2>Travel Map </h2>
         <h2>Azgharie Airlines </h2>
 
-        <button id="toggleMarkerLayerBtn" class="toggle-button">Afficher/masquer le marqueur</button>
+        <button id="toggle_AZH501" class="toggle-button">Afficher/masquer le marqueur</button>
     </div>
     
     <div id="map"></div>
@@ -88,23 +88,13 @@
           });
 
 
-        
-        
-        // Create a marker at the provided coordinates
-        const marker_1 = L.marker([45.6, 5.8], { icon: customIcon }).bindPopup('LFLB');
-        const marker_2 = L.marker([47.6, 7.5], { icon: customIcon }).bindPopup('LFSB');
-        const marker_3 = L.marker([50.6, 5.4], { icon: customIcon }).bindPopup('EBLG');
-
-        // Add the marker to a layer group and add it to the map
-        const markerLayer_1 = L.layerGroup([marker_1, marker_2, marker_3]).addTo(map);
-
         //display layer
         let markerLayerVisible = true;
-            document.getElementById('toggleMarkerLayerBtn').onclick = function() {
+            document.getElementById('toggle_AZH501').onclick = function() {
             if (markerLayerVisible) {
-                map.removeLayer(markerLayer_1);
+                map.removeLayer(AZH501);
             } else {
-                map.addLayer(markerLayer_1);
+                map.addLayer(AZH501);
             }
             markerLayerVisible = !markerLayerVisible;
         };
