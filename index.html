@@ -48,6 +48,8 @@
         <button id="toggle_AZH501" class="toggle-button">Afficher le voyage de AZH501</button>
         <button id="toggle_AZH502" class="toggle-button">Afficher le voyage de AZH502</button>
         <button id="toggle_AZH503" class="toggle-button">Afficher le voyage de AZH503</button>
+        <div id="markerPositionsDisplay"></div>
+        
     </div>
     
     <div id="map"></div>
@@ -92,6 +94,7 @@
                 markerPositions.push([lat, lng]);
             });
             polyline_AZH501 = L.polyline(markerPositions, { color: 'blue' }).addTo(map);
+            displayMarkerPositions();
             //AZH501.addLayer(polyline_AZH501)
           });
         
@@ -110,7 +113,15 @@
                 azh501LayerVisible = !azh501LayerVisible;
             };
         }
-               
+
+        function displayMarkerPositions() {
+            const container = document.getElementById('markerPositionsDisplay');
+            container.innerHTML = '<h3>Positions des marqueurs :</h3>';
+            container.innerHTML += '<ul>' + markerPositions.map(pos =>
+                `<li>Lat: ${pos[0]}, Lng: ${pos[1]}</li>`
+            ).join('') + '</ul>';
+        }
+        
     </script>
 </body>
 </html>
