@@ -91,10 +91,8 @@
                 // Store the position
                 markerPositions.push([lat, lng]);
             });
-            if (markerPositions.length > 1) {
-                const polyline_AZH501 = L.polyline(markerPositions, { color: 'blue' });
-                }
-                AZH501.addLayer(polyline_AZH501)
+            const polyline_AZH501 = L.polyline(markerPositions, { color: 'blue' });
+            AZH501.addLayer(polyline_AZH501)
           });
         
         //display layer AZH501
