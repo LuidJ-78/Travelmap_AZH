@@ -89,15 +89,21 @@
 
 
         //display layer
-        let markerLayerVisible = true;
-            document.getElementById('toggle_AZH501').onclick = function() {
-            if (markerLayerVisible) {
-                map.removeLayer(AZH501);
-            } else {
-                map.addLayer(AZH501);
-            }
-            markerLayerVisible = !markerLayerVisible;
-        };
+        let azh501LayerVisible = true;
+        const toggleBtn_AZH501 = document.getElementById('toggle_AZH501');
+
+        if (toggleBtn_AZH501) {
+            toggleBtn_AZH501.onclick = function() {
+                if (azh501LayerVisible) {
+                    map.removeLayer(AZH501);
+                    toggleBtn_AZH501.textContent = "Afficher le layer AZH501"; // Optional: update button text
+                } else {
+                    map.addLayer(AZH501);
+                    toggleBtn_AZH501.textContent = "Masquer le layer AZH501"; // Optional: update button text
+                }
+                azh501LayerVisible = !azh501LayerVisible;
+            };
+        }
                
     </script>
 </body>
