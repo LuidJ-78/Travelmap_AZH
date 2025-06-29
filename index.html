@@ -72,17 +72,17 @@
             popupAnchor: [0, -size[1] / 2]
             });
         }
-        map.on('zoomend', function() {
-            const newIcon = createProportionalIcon(map.getZoom());
-            markers.forEach(marker => marker.setIcon(newIcon));
-        });
 
+
+        
         //google sheet url
         const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTjulAyJlAG5smNj1FHKrfqWijHp8asBRfrDAGhB94HF5udtGl3_dWC3bIkEyce6b-5jwsbFI20PFci/pub?gid=1768006993&single=true&output=csv";
 
+        
         //layergroup
         const AZH501 = L.layerGroup([ ]);
 
+        
         //get marker data from the google sheet
         fetch(sheetURL)
           .then(response => response.text())
@@ -99,12 +99,10 @@
                 AZH501.addLayer(marker)
             });
           });
-
-
+        
         //display layer
         let azh501LayerVisible = false;
         const toggleBtn_AZH501 = document.getElementById('toggle_AZH501');
-
         if (toggleBtn_AZH501) {
             toggleBtn_AZH501.onclick = function() {
                 if (azh501LayerVisible) {
