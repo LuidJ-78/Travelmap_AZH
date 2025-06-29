@@ -46,6 +46,8 @@
         <h2>Azgharie Airlines </h2>
 
         <button id="toggle_AZH501" class="toggle-button">Afficher le voyage de AZH501</button>
+        <button id="toggle_AZH502" class="toggle-button">Afficher le voyage de AZH502</button>
+        <button id="toggle_AZH503" class="toggle-button">Afficher le voyage de AZH503</button>
     </div>
     
     <div id="map"></div>
@@ -68,9 +70,11 @@
         const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTjulAyJlAG5smNj1FHKrfqWijHp8asBRfrDAGhB94HF5udtGl3_dWC3bIkEyce6b-5jwsbFI20PFci/pub?gid=1768006993&single=true&output=csv";
 
         //layergroup
-        const AZH501 = L.layerGroup([ ]);       
+        const AZH501 = L.layerGroup([ ]);
+        const AZH502 = L.layerGroup([ ]);
+        const AZH503 = L.layerGroup([ ]);
 
-        //get marker data from the google sheet
+        //get marker data from the google sheet for AZH501
         fetch(sheetURL)
           .then(response => response.text())
           .then(csvText => {
@@ -81,7 +85,6 @@
                 const name = cols[1]; //colonne B
                 const lat = parseFloat(cols[2]); //colonne C
                 const lng = parseFloat(cols[3]); //colonne D
-                //markerPositions.push([lat, lng]);
                 // Create marker here using name, lat, lng
                 if (!isNaN(lat) && !isNaN(lng)) {
                     markerPositions.push([lat, lng]);
@@ -95,7 +98,59 @@
                 AZH501.addLayer(polyline_AZH501); // Add polyline to the same layer group
             }
           });
+        
+        //get marker data from the google sheet for AZH502
+        fetch(sheetURL)
+          .then(response => response.text())
+          .then(csvText => {
+            const markerPositions = []; 
+            const rows = csvText.split('\n');
+            rows.slice(1).forEach(row => { // first row is header
+                const cols = row.split(',');
+                const name = cols[5]; //colonne B
+                const lat = parseFloat(cols[6]); //colonne C
+                const lng = parseFloat(cols[7]); //colonne D
+                // Create marker here using name, lat, lng
+                if (!isNaN(lat) && !isNaN(lng)) {
+                    markerPositions.push([lat, lng]);
+                    const marker = L.marker([lat, lng], { icon: customIcon }).bindPopup(name);
+                    AZH502.addLayer(marker);
+                }
+            });
+            
+            if (markerPositions.length >= 2) {
+                const polyline_AZH502 = L.polyline(markerPositions, { color: 'blue' });
+                AZH502.addLayer(polyline_AZH502); // Add polyline to the same layer group
+            }
+          });
+        
+        //get marker data from the google sheet for AZH503
+        fetch(sheetURL)
+          .then(response => response.text())
+          .then(csvText => {
+            const markerPositions = []; 
+            const rows = csvText.split('\n');
+            rows.slice(1).forEach(row => { // first row is header
+                const cols = row.split(',');
+                const name = cols[9]; //colonne B
+                const lat = parseFloat(cols[10]); //colonne C
+                const lng = parseFloat(cols[11]); //colonne D
+                // Create marker here using name, lat, lng
+                if (!isNaN(lat) && !isNaN(lng)) {
+                    markerPositions.push([lat, lng]);
+                    const marker = L.marker([lat, lng], { icon: customIcon }).bindPopup(name);
+                    AZH503.addLayer(marker);
+                }
+            });
+            
+            if (markerPositions.length >= 2) {
+                const polyline_AZH503 = L.polyline(markerPositions, { color: 'blue' });
+                AZH503.addLayer(polyline_AZH503); // Add polyline to the same layer group
+            }
+          });
 
+
+        
         //display layer AZH501
         let azh501LayerVisible = false;
         const toggleBtn_AZH501 = document.getElementById('toggle_AZH501');
@@ -109,6 +164,36 @@
                     toggleBtn_AZH501.textContent = "Masquer le voyage de AZH501"; // Optional: update button text
                 }
                 azh501LayerVisible = !azh501LayerVisible;
+            };
+        }
+         //display layer AZH502
+        let azh501LayerVisible = false;
+        const toggleBtn_AZH501 = document.getElementById('toggle_AZH502');
+        if (toggleBtn_AZH502) {
+            toggleBtn_AZH502.onclick = function() {
+                if (azh502LayerVisible) {
+                    map.removeLayer(AZH502);
+                    toggleBtn_AZH502.textContent = "Afficher le voyage de AZH502"; // Optional: update button text
+                } else {
+                    map.addLayer(AZH502);
+                    toggleBtn_AZH502.textContent = "Masquer le voyage de AZH502"; // Optional: update button text
+                }
+                azh502LayerVisible = !azh502LayerVisible;
+            };
+        }
+         //display layer AZH503
+        let azh501LayerVisible = false;
+        const toggleBtn_AZH501 = document.getElementById('toggle_AZH503');
+        if (toggleBtn_AZH503) {
+            toggleBtn_AZH503.onclick = function() {
+                if (azh503LayerVisible) {
+                    map.removeLayer(AZH503);
+                    toggleBtn_AZH503.textContent = "Afficher le voyage de AZH503"; // Optional: update button text
+                } else {
+                    map.addLayer(AZH503);
+                    toggleBtn_AZH503.textContent = "Masquer le voyage de AZH503"; // Optional: update button text
+                }
+                azh503LayerVisible = !azh503LayerVisible;
             };
         }
                
