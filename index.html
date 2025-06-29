@@ -46,6 +46,8 @@
         <h2>Azgharie Airlines </h2>
 
         <button id="toggle_AZH501" class="toggle-button">Afficher le voyage de AZH501</button>
+
+        <p id="debug"></p>
     </div>
     
     <div id="map"></div>
@@ -92,7 +94,7 @@
             }
             AZH501.addLayer(polyline_AZH501)
           });
-        
+
         //display layer AZH501
         let azh501LayerVisible = false;
         const toggleBtn_AZH501 = document.getElementById('toggle_AZH501');
@@ -108,6 +110,8 @@
                 azh501LayerVisible = !azh501LayerVisible;
             };
         }
+
+        document.getElementById("demo").innerHTML = markerPositions;
                
     </script>
 </body>
