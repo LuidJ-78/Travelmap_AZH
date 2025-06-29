@@ -82,7 +82,8 @@
                 const lat = parseFloat(cols[2]);
                 const lng = parseFloat(cols[3]);
                 // Create marker here using name, lat, lng
-                L.marker([lat, lng], { icon: customIcon }).addto(AZH501).bindPopup(name);
+                const marker = L.marker([lat, lng], { icon: customIcon }).bindPopup(name);
+                AZH501.addLayer(marker)
             });
           });
 
