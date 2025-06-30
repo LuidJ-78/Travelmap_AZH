@@ -152,7 +152,7 @@
                                 const lastairportCode = lastcols[4 * v + 1] ? lastcols[4 * v + 1].trim() : "";
                                 const lastlat = parseFloat(lastcols[4 * v + 2]);
                                 const lastlng = parseFloat(lastcols[4 * v + 3]);
-                                const lastmarker = L.marker([lastlat[, lastlng], {icon: lastIcon,}).bindPopup(lastairportCode);
+                                const lastmarker = L.marker([lastlat, lastlng], {icon: lastIcon,}).bindPopup(lastairportCode);
                                 voyageLayer.addLayer(lastmarker);
                             }
 
