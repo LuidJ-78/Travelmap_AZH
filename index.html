@@ -136,7 +136,6 @@
 
                         // Parcourir les données du CSV pour ce voyage et ajouter les marqueurs et polylines
                         const markerPositions = [];
-                        const markerInfos = [];
                         for (let i = 1; i < rows.length; i++) {
                             // Commencer à la troisième ligne (index 2)
                             const row = rows[i];
@@ -149,15 +148,9 @@
                             const lng = parseFloat(cols[4 * v + 3]);
                             if (!isNaN(lat) && !isNaN(lng) && airportCode) {
                                 markerPositions.push([lat, lng]);
-                                markerInfos.push({lat, lng, airportCode});
+                                const marker = L.marker([lat, lng], {icon: customIcon,}).bindPopup(airportCode);
+                                voyageLayer.addLayer(marker);
                             }
-                        }
-                        // On ajoute les markers avec la bonne icône
-                        for (let m = 0; m < markerInfos.length; m++) {
-                            const info = markerInfos[m];
-                            const correct_icon = (m === markerInfos.length - 1) ? lastIcon : customIcon;
-                            const marker = L.marker([info.lat, info.lng], {correct_icon}).bindPopup(info.airportCode);
-                            voyageLayer.addLayer(marker);
                         }
                         // Ajouter la polyline si au moins 2 points
                         if (markerPositions.length >= 2) {
