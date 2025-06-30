@@ -147,14 +147,10 @@
                             if (!cols[4 * v].trim()) continue; //------
                             const airportCode = cols[4 * v + 1] ? cols[4 * v + 1].trim() : "";
                             const lat = parseFloat(cols[4 * v + 2]);
-                            const lng = parseFloat(cols[4 * v + 3]);
-
-                             const nextrow = rows[i+1];
-                             const nextcol = nextrow.split(",");                            
-                            
+                            const lng = parseFloat(cols[4 * v + 3]);                          
                             if (!isNaN(lat) && !isNaN(lng) && airportCode) {
                                 markerPositions.push([lat, lng]);
-                                if (nextcol[v].trim()) { //i === rows.length - 1
+                                if (i === rows.length - 1) {
                                     const marker = L.marker([lat, lng], {icon: lastIcon,}).bindPopup(airportCode);
                                     voyageLayer.addLayer(marker);
                                 } else {
