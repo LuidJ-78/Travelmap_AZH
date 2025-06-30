@@ -115,36 +115,6 @@
                 azh501LayerVisible = !azh501LayerVisible;
             };
         }
-         //display layer AZH502
-        let azh501LayerVisible = false;
-        const toggleBtn_AZH502 = document.getElementById('toggle_AZH502');
-        if (toggleBtn_AZH502) {
-            toggleBtn_AZH502.onclick = function() {
-                if (azh502LayerVisible) {
-                    map.removeLayer(AZH502);
-                    toggleBtn_AZH502.textContent = "Afficher le voyage de AZH502"; // Optional: update button text
-                } else {
-                    map.addLayer(AZH502);
-                    toggleBtn_AZH502.textContent = "Masquer le voyage de AZH502"; // Optional: update button text
-                }
-                azh502LayerVisible = !azh502LayerVisible;
-            };
-        }
-         //display layer AZH503
-        let azh501LayerVisible = false;
-        const toggleBtn_AZH503 = document.getElementById('toggle_AZH503');
-        if (toggleBtn_AZH503) {
-            toggleBtn_AZH503.onclick = function() {
-                if (azh503LayerVisible) {
-                    map.removeLayer(AZH503);
-                    toggleBtn_AZH503.textContent = "Afficher le voyage de AZH503"; // Optional: update button text
-                } else {
-                    map.addLayer(AZH503);
-                    toggleBtn_AZH503.textContent = "Masquer le voyage de AZH503"; // Optional: update button text
-                }
-                azh503LayerVisible = !azh503LayerVisible;
-            };
-        }
                
     </script>
 </body>
