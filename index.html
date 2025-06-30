@@ -153,17 +153,17 @@
                             const lng = parseFloat(cols[4 * v + 3]);
                             if (!isNaN(lat) && !isNaN(lng) && airportCode) {
                                 markerPositions.push([lat, lng]);
-                                const marker = L.marker([lat, lng], {
-                                    icon: customIcon,
-                                }).bindPopup(airportCode);
+                                if (i == rows.length){
+                                    const marker = L.marker([lat, lng], {icon: lastIcon,}).bindPopup(airportCode);
+                                } else {
+                                    const marker = L.marker([lat, lng], {icon: customIcon,}).bindPopup(airportCode);
+                                }
                                 voyageLayer.addLayer(marker);
                             }
                         }
                         // Ajouter la polyline si au moins 2 points
                         if (markerPositions.length >= 2) {
-                            const polyline = L.polyline(markerPositions, {
-                                color: "green",
-                            });
+                            const polyline = L.polyline(markerPositions, {color: "green"});
                             voyageLayer.addLayer(polyline);
                         }
                     }
