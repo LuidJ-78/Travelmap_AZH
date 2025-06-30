@@ -92,63 +92,12 @@
                     AZH501.addLayer(marker);
                 }
             });
-            
             if (markerPositions.length >= 2) {
                 const polyline_AZH501 = L.polyline(markerPositions, { color: 'blue' });
                 AZH501.addLayer(polyline_AZH501); // Add polyline to the same layer group
             }
           });
         
-        //get marker data from the google sheet for AZH502
-        fetch(sheetURL)
-          .then(response => response.text())
-          .then(csvText => {
-            const markerPositions = []; 
-            const rows = csvText.split('\n');
-            rows.slice(1).forEach(row => { // first row is header
-                const cols = row.split(',');
-                const name = cols[5]; //colonne B
-                const lat = parseFloat(cols[6]); //colonne C
-                const lng = parseFloat(cols[7]); //colonne D
-                // Create marker here using name, lat, lng
-                if (!isNaN(lat) && !isNaN(lng)) {
-                    markerPositions.push([lat, lng]);
-                    const marker = L.marker([lat, lng], { icon: customIcon }).bindPopup(name);
-                    AZH502.addLayer(marker);
-                }
-            });
-            
-            if (markerPositions.length >= 2) {
-                const polyline_AZH502 = L.polyline(markerPositions, { color: 'blue' });
-                AZH502.addLayer(polyline_AZH502); // Add polyline to the same layer group
-            }
-          });
-        
-        //get marker data from the google sheet for AZH503
-        fetch(sheetURL)
-          .then(response => response.text())
-          .then(csvText => {
-            const markerPositions = []; 
-            const rows = csvText.split('\n');
-            rows.slice(1).forEach(row => { // first row is header
-                const cols = row.split(',');
-                const name = cols[9]; //colonne B
-                const lat = parseFloat(cols[10]); //colonne C
-                const lng = parseFloat(cols[11]); //colonne D
-                // Create marker here using name, lat, lng
-                if (!isNaN(lat) && !isNaN(lng)) {
-                    markerPositions.push([lat, lng]);
-                    const marker = L.marker([lat, lng], { icon: customIcon }).bindPopup(name);
-                    AZH503.addLayer(marker);
-                }
-            });
-            
-            if (markerPositions.length >= 2) {
-                const polyline_AZH503 = L.polyline(markerPositions, { color: 'blue' });
-                AZH503.addLayer(polyline_AZH503); // Add polyline to the same layer group
-            }
-          });
-
 
         
         //display layer AZH501
