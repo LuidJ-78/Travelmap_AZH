@@ -149,13 +149,12 @@
                             const lat = parseFloat(cols[4 * v + 2]);
                             const lng = parseFloat(cols[4 * v + 3]);
 
-                            console.log(i)
-                            console.log(rows.length)
-                            console.log(v)
+                             const nextrow = rows[i+1];
+                             const nextcol = nextrow.split(",");                            
                             
                             if (!isNaN(lat) && !isNaN(lng) && airportCode) {
                                 markerPositions.push([lat, lng]);
-                                if (i === rows.length - 1) {
+                                if (nextcol[v].trim()) { //i === rows.length - 1
                                     const marker = L.marker([lat, lng], {icon: lastIcon,}).bindPopup(airportCode);
                                     voyageLayer.addLayer(marker);
                                 } else {
