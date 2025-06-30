@@ -144,6 +144,7 @@
                             const row = rows[i];
                             if (!row.trim()) continue;
                             const cols = row.split(",");
+                            if (!cols[4 * v].trim()) continue; //------
                             const airportCode = cols[4 * v + 1] ? cols[4 * v + 1].trim() : "";
                             const lat = parseFloat(cols[4 * v + 2]);
                             const lng = parseFloat(cols[4 * v + 3]);
