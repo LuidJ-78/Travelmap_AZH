@@ -150,10 +150,11 @@
                                 markerPositions.push([lat, lng]);
                                 if (i === rows.length - 1) {
                                     const marker = L.marker([lat, lng], {icon: lastIcon,}).bindPopup(airportCode);
+                                    voyageLayer.addLayer(marker);
                                 } else {
                                     const marker = L.marker([lat, lng], {icon: customIcon,}).bindPopup(airportCode);
+                                    voyageLayer.addLayer(marker);
                                 }
-                                voyageLayer.addLayer(marker);
                             }
                         }
                         // Ajouter la polyline si au moins 2 points
