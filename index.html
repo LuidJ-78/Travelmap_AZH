@@ -130,7 +130,7 @@
 
                         // Parcourir les données du CSV pour ce voyage et ajouter les marqueurs et polylines
                         const markerPositions = [];
-                        for (let i = 2; i < rows.length; i++) {
+                        for (let i = 1; i < rows.length; i++) {
                             // Commencer à la troisième ligne (index 2)
                             const row = rows[i];
                             if (!row.trim()) continue;
