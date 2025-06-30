@@ -144,28 +144,27 @@
                             const row = rows[i];
                             if (!row.trim()) continue;
                             const cols = row.split(",");
-                            if (!cols[4 * v].trim()) continue; //------
+                            
+                            //marker unique pour le dernier point
+                            if (cols[4 * v].trim()) {
+                                const lastrow = rows[i-1];
+                                const lastcols = lastrow.split(",");
+                                const lastairportCode = lastcols[4 * v + 1] ? lastcols[4 * v + 1].trim() : "";
+                                const lastlat = parseFloat(lastcols[4 * v + 2]);
+                                const lastlng = parseFloat(lastcols[4 * v + 3]);
+                                const lastmarker = L.marker([lastlat[, lastlng], {icon: lastIcon,}).bindPopup(lastairportCode);
+                                voyageLayer.addLayer(lastmarker);
+                            }
+
+                            //marker pour tout les points
+                            if (!cols[4 * v].trim()) continue;
                             const airportCode = cols[4 * v + 1] ? cols[4 * v + 1].trim() : "";
                             const lat = parseFloat(cols[4 * v + 2]);
                             const lng = parseFloat(cols[4 * v + 3]);
-                            
-                            //const nextrow = rows[i+1];
-                            //const nextcols = nextrow.split(",");
-                            
-                            //console.log(rows.length)
-                            //console.log(i)
-                            //console.log(v)
-                            //console.log(nextcols[4 * v + 1])
-                            
                             if (!isNaN(lat) && !isNaN(lng) && airportCode) {
                                 markerPositions.push([lat, lng]);
-                                if (i === rows.length - 1) {
-                                    const marker = L.marker([lat, lng], {icon: lastIcon,}).bindPopup(airportCode);
-                                    voyageLayer.addLayer(marker);
-                                } else {
-                                    const marker = L.marker([lat, lng], {icon: customIcon,}).bindPopup(airportCode);
-                                    voyageLayer.addLayer(marker);
-                                }
+                                const marker = L.marker([lat, lng], {icon: customIcon,}).bindPopup(airportCode);
+                                voyageLayer.addLayer(marker);
                             }
                         }
                         // Ajouter la polyline si au moins 2 points
