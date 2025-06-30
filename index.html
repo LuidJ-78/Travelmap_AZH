@@ -1,122 +1,167 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Map Azgharie Airlines</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-measure/dist/leaflet-measure.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
-        #sidebar {
-            width: 250px;
-            background: #f4f4f4;
-            padding: 10px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-            overflow-y: auto;
-        }
-        #map {
-            flex-grow: 1;
-            height: 100vh;
-            min-width: 500px;
-        }
-        .toggle-button {
-            background: #007BFF;
-            color: white;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 5px;
-        }
-        .toggle-button:hover {
-            background: #0056b3;
-        }
-    </style>
-</head>
-    
-<body>
-    <div id="sidebar">
-        <h2>Travel Map </h2>
-        <h2>Azgharie Airlines </h2>
-
-        <button id="toggle_AZH501" class="toggle-button">Afficher le voyage de AZH501</button>
-        <button id="toggle_AZH502" class="toggle-button">Afficher le voyage de AZH502</button>
-        <button id="toggle_AZH503" class="toggle-button">Afficher le voyage de AZH503</button>
-        
-    </div>
-    
-    <div id="map"></div>
-
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script>
-        //affichage de la map en fond
-        const map = L.map('map').setView([20, 0], 2);
-        L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {attribution: '&copy; OpenStreetMap contributeurs'}).addTo(map);
-
-        // Create a custom icon using marker.png
-        const customIcon = L.icon({
-            iconUrl: 'marker.png',      // Make sure marker.png is in the same directory as index.html
-            iconSize: [24, 24],         // Adjust size as needed
-            iconAnchor: [16, 32],       // The point of the icon which will correspond to marker's location
-            popupAnchor: [0, -32]       // Point from which the popup should open relative to the iconAnchor
-        });
-
-        //google sheet url
-        const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTjulAyJlAG5smNj1FHKrfqWijHp8asBRfrDAGhB94HF5udtGl3_dWC3bIkEyce6b-5jwsbFI20PFci/pub?gid=1768006993&single=true&output=csv";
-
-        //layergroup
-        const AZH501 = L.layerGroup([ ]);
-        const AZH502 = L.layerGroup([ ]);
-        const AZH503 = L.layerGroup([ ]);
-
-        //get marker data from the google sheet
-        fetch(sheetURL)
-          .then(response => response.text())
-          .then(csvText => {
-            const markerPositions = []; 
-            const rows = csvText.split('\n');
-            rows.slice(1).forEach(row => { // first row is header
-                const cols = row.split(',');
-                const name = cols[1]; //colonne B
-                const lat = parseFloat(cols[2]); //colonne C
-                const lng = parseFloat(cols[3]); //colonne D
-                //markerPositions.push([lat, lng]);
-                // Create marker here using name, lat, lng
-                if (!isNaN(lat) && !isNaN(lng)) {
-                    markerPositions.push([lat, lng]);
-                    const marker = L.marker([lat, lng], { icon: customIcon }).bindPopup(name);
-                    AZH501.addLayer(marker);
-                }
-            });
-            
-            if (markerPositions.length >= 2) {
-                const polyline_AZH501 = L.polyline(markerPositions, { color: 'blue' });
-                AZH501.addLayer(polyline_AZH501); // Add polyline to the same layer group
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Travel Map Azgharie Airlines</title>
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/leaflet-measure/dist/leaflet-measure.css"
+        />
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                display: flex;
             }
-          });
+            #sidebar {
+                width: 250px;
+                background: #f4f4f4;
+                padding: 10px;
+                box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+                overflow-y: auto;
+            }
+            #map {
+                flex-grow: 1;
+                height: 100vh;
+                min-width: 500px;
+            }
+            .toggle-button {
+                background: #007bff;
+                color: white;
+                padding: 10px;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+                margin-top: 5px;
+            }
+            .toggle-button:hover {
+                background: #0056b3;
+            }
+        </style>
+    </head>
 
-        //display layer AZH501
-        let azh501LayerVisible = false;
-        const toggleBtn_AZH501 = document.getElementById('toggle_AZH501');
-        if (toggleBtn_AZH501) {
-            toggleBtn_AZH501.onclick = function() {
-                if (azh501LayerVisible) {
-                    map.removeLayer(AZH501);
-                    toggleBtn_AZH501.textContent = "Afficher le voyage de AZH501"; // Optional: update button text
-                } else {
-                    map.addLayer(AZH501);
-                    toggleBtn_AZH501.textContent = "Masquer le voyage de AZH501"; // Optional: update button text
-                }
-                azh501LayerVisible = !azh501LayerVisible;
-            };
-        }
-               
-    </script>
-</body>
+    <body>
+        <div id="sidebar">
+            <h2>Travel Map</h2>
+            <h2>Azgharie Airlines</h2>
+            <div id="voyages-buttons"></div>
+        </div>
+
+        <div id="map"></div>
+
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <script>
+            //affichage de la map en fond
+            const map = L.map("map").setView([20, 0], 2);
+            L.tileLayer(
+                "https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",
+                { attribution: "&copy; OpenStreetMap contributeurs" },
+            ).addTo(map);
+
+            // Create a custom icon using marker.png
+            const customIcon = L.icon({
+                iconUrl: "marker.png", // Make sure marker.png is in the same directory as index.html
+                iconSize: [24, 24], // Adjust size as needed
+                iconAnchor: [16, 32], // The point of the icon which will correspond to marker's location
+                popupAnchor: [0, -32], // Point from which the popup should open relative to the iconAnchor
+            });
+
+            //google sheet url
+            const sheetURL =
+                "https://docs.google.com/spreadsheets/d/e/2PACX-1vTjulAyJlAG5smNj1FHKrfqWijHp8asBRfrDAGhB94HF5udtGl3_dWC3bIkEyce6b-5jwsbFI20PFci/pub?gid=1768006993&single=true&output=csv";
+
+            // Pour stocker les groupes LayerGroup de chaque voyage
+            const voyageLayers = {};
+            // Pour suivre la visibilité de chaque voyage
+            const voyageVisibility = {};
+
+            // Récupérer les données du CSV et créer un bouton par voyage
+            fetch(sheetURL)
+                .then((response) => response.text())
+                .then((csvText) => {
+                    const rows = csvText.split("\n");
+                    if (rows.length < 3) return; // Pas de données (on ignore la première ligne)
+
+                    // On suppose que chaque groupe de 4 colonnes est un voyage
+                    const header = rows[1].split(",");
+                    const voyageCount = Math.floor(header.length / 4);
+
+                    const voyagesButtonsDiv =
+                        document.getElementById("voyages-buttons");
+
+                    // Pour chaque voyage, créer un bouton et afficher ce qui correspond au voyage
+                    for (let v = 0; v < voyageCount; v++) {
+                        // Nom du voyage (on prend la première colonne du groupe, donc 4*v)
+                        const voyageName = header[4 * v]
+                            ? header[4 * v].trim()
+                            : `Voyage ${v + 1}`;
+                        const voyageId = `voyage_${v}`;
+
+                        // Créer le bouton
+                        const btn = document.createElement("button");
+                        btn.className = "toggle-button";
+                        btn.id = `toggle_${voyageId}`;
+                        btn.textContent = `Afficher le voyage ${voyageName}`;
+                        voyagesButtonsDiv.appendChild(btn);
+
+                        // Créer le LayerGroup pour ce voyage
+                        const voyageLayer = L.layerGroup([]);
+                        voyageLayers[voyageId] = voyageLayer;
+                        voyageVisibility[voyageId] = false;
+
+                        // Ajouter l'événement de toggle
+                        btn.onclick = function () {
+                            if (voyageVisibility[voyageId]) {
+                                map.removeLayer(voyageLayer);
+                                btn.textContent = `Afficher le voyage ${voyageName}`;
+                            } else {
+                                map.addLayer(voyageLayer);
+                                btn.textContent = `Masquer le voyage ${voyageName}`;
+                            }
+                            voyageVisibility[voyageId] =
+                                !voyageVisibility[voyageId];
+                        };
+
+                        // Parcourir les données du CSV pour ce voyage et ajouter les marqueurs et polylines
+                        const markerPositions = [];
+                        for (let i = 2; i < rows.length; i++) {
+                            // Commencer à la troisième ligne (index 2)
+                            const row = rows[i];
+                            if (!row.trim()) continue;
+                            const cols = row.split(",");
+                            // Pour ce voyage, les colonnes sont :
+                            // 4*v : nom du voyage (non utilisé ici)
+                            // 4*v+1 : code aéroport
+                            // 4*v+2 : latitude
+                            // 4*v+3 : longitude
+                            const airportCode = cols[4 * v + 1]
+                                ? cols[4 * v + 1].trim()
+                                : "";
+                            const lat = parseFloat(cols[4 * v + 2]);
+                            const lng = parseFloat(cols[4 * v + 3]);
+                            if (!isNaN(lat) && !isNaN(lng) && airportCode) {
+                                markerPositions.push([lat, lng]);
+                                const marker = L.marker([lat, lng], {
+                                    icon: customIcon,
+                                }).bindPopup(airportCode);
+                                voyageLayer.addLayer(marker);
+                            }
+                        }
+                        // Ajouter la polyline si au moins 2 points
+                        if (markerPositions.length >= 2) {
+                            const polyline = L.polyline(markerPositions, {
+                                color: "blue",
+                            });
+                            voyageLayer.addLayer(polyline);
+                        }
+                    }
+                });
+        </script>
+    </body>
 </html>
