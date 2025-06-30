@@ -43,6 +43,10 @@
             .toggle-button:hover {
                 background: #0056b3;
             }
+            .toggle-button.active {
+                background: #28a745; /* Choose the color you want for the active state */
+                color: white;
+            }
         </style>
     </head>
 
@@ -124,12 +128,13 @@
                             if (voyageVisibility[voyageId]) {
                                 map.removeLayer(voyageLayer);
                                 btn.textContent = `Afficher le voyage ${voyageName}`;
+                                btn.classList.remove("active");
                             } else {
                                 map.addLayer(voyageLayer);
                                 btn.textContent = `Masquer le voyage ${voyageName}`;
+                                btn.classList.add("active");
                             }
-                            voyageVisibility[voyageId] =
-                                !voyageVisibility[voyageId];
+                            voyageVisibility[voyageId] = !voyageVisibility[voyageId];
                         };
 
                         // Parcourir les données du CSV pour ce voyage et ajouter les marqueurs et polylines
