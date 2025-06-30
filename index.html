@@ -147,7 +147,16 @@
                             if (!cols[4 * v].trim()) continue; //------
                             const airportCode = cols[4 * v + 1] ? cols[4 * v + 1].trim() : "";
                             const lat = parseFloat(cols[4 * v + 2]);
-                            const lng = parseFloat(cols[4 * v + 3]);                          
+                            const lng = parseFloat(cols[4 * v + 3]);
+                            
+                            const nextrow = rows[i+1];
+                            const nextcols = nextrow.split(",");
+                            
+                            console.log(rows.length)
+                            console.log(i)
+                            console.log(v)
+                            console.log(nextcols[1])
+                            
                             if (!isNaN(lat) && !isNaN(lng) && airportCode) {
                                 markerPositions.push([lat, lng]);
                                 if (i === rows.length - 1) {
