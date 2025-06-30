@@ -149,13 +149,13 @@
                             const lat = parseFloat(cols[4 * v + 2]);
                             const lng = parseFloat(cols[4 * v + 3]);
                             
-                            const nextrow = rows[i+1];
-                            const nextcols = nextrow.split(",");
+                            //const nextrow = rows[i+1];
+                            //const nextcols = nextrow.split(",");
                             
-                            console.log(rows.length)
-                            console.log(i)
-                            console.log(v)
-                            console.log(nextcols[4 * v + 1])
+                            //console.log(rows.length)
+                            //console.log(i)
+                            //console.log(v)
+                            //console.log(nextcols[4 * v + 1])
                             
                             if (!isNaN(lat) && !isNaN(lng) && airportCode) {
                                 markerPositions.push([lat, lng]);
