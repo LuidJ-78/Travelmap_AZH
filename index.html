@@ -104,9 +104,7 @@
                     // Pour chaque voyage, créer un bouton et afficher ce qui correspond au voyage
                     for (let v = 0; v < voyageCount; v++) {
                         // Nom du voyage (on prend la première colonne du groupe, donc 4*v)
-                        const voyageName = header[4 * v]
-                            ? header[4 * v].trim()
-                            : `Voyage ${v + 1}`;
+                        const voyageName = header[4 * v] ? header[4 * v].trim() : `Voyage ${v + 1}`;
                         const voyageId = `voyage_${v}`;
 
                         // Créer le bouton
@@ -141,9 +139,7 @@
                             const row = rows[i];
                             if (!row.trim()) continue;
                             const cols = row.split(",");
-                            const airportCode = cols[4 * v + 1]
-                                ? cols[4 * v + 1].trim()
-                                : "";
+                            const airportCode = cols[4 * v + 1] ? cols[4 * v + 1].trim() : "";
                             const lat = parseFloat(cols[4 * v + 2]);
                             const lng = parseFloat(cols[4 * v + 3]);
                             if (!isNaN(lat) && !isNaN(lng) && airportCode) {
