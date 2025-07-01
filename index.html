@@ -152,8 +152,10 @@
                                 const lastairportName = lastcols[8 * v + 4] ? lastcols[8 * v + 4].trim() : "";
                                 const lastdate = parseFloat(lastcols[8 * v + 5]);
                                 const lastplayer = parseFloat(lastcols[8 * v + 6]);
+                                const lastPopupContent = <b>${lastairportName}</b><br> 
+                                                         ${lastairportCode} | ${lastdate} | ${lastplayer};
                                 if (!isNaN(lastlat) && !isNaN(lastlng) && lastairportCode) {
-                                    const lastmarker = L.marker([lastlat, lastlng], {icon: lastIcon,}).bindPopup(lastairportCode);
+                                    const lastmarker = L.marker([lastlat, lastlng], {icon: lastIcon,}).bindPopup(lastPopupContent);
                                     voyageLayer.addLayer(lastmarker);
                                 }
                             }
