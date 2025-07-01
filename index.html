@@ -98,9 +98,9 @@
                     const rows = csvText.split("\n");
                     if (rows.length < 3) return; // Pas de données (on ignore la première ligne)
 
-                    // On suppose que chaque groupe de 4 colonnes est un voyage
+                    // On suppose que chaque groupe de 8 colonnes est un voyage
                     const header = rows[1].split(",");
-                    const voyageCount = Math.floor(header.length / 4);
+                    const voyageCount = Math.floor(header.length / 8);
 
                     const voyagesButtonsDiv =
                         document.getElementById("voyages-buttons");
@@ -108,7 +108,7 @@
                     // Pour chaque voyage, créer un bouton et afficher ce qui correspond au voyage
                     for (let v = 0; v < voyageCount; v++) {
                         // Nom du voyage (on prend la première colonne du groupe, donc 4*v)
-                        const voyageName = header[4 * v] ? header[4 * v].trim() : `Voyage ${v + 1}`;
+                        const voyageName = header[8 * v] ? header[4 * v].trim() : `Voyage ${v + 1}`;
                         const voyageId = `voyage_${v}`;
 
                         // Créer le bouton
@@ -145,22 +145,22 @@
                             if (!row.trim()) continue;
                             const cols = row.split(",");
                             //marker unique pour le dernier point
-                            if (!cols[4 * v]) {
+                            if (!cols[8 * v]) {
                                 const lastrow = rows[i-1];
                                 const lastcols = lastrow.split(",");
-                                const lastairportCode = lastcols[4 * v + 1] ? lastcols[4 * v + 1].trim() : "";
-                                const lastlat = parseFloat(lastcols[4 * v + 2]);
-                                const lastlng = parseFloat(lastcols[4 * v + 3]);
+                                const lastairportCode = lastcols[8 * v + 1] ? lastcols[8 * v + 1].trim() : "";
+                                const lastlat = parseFloat(lastcols[8 * v + 2]);
+                                const lastlng = parseFloat(lastcols[8 * v + 3]);
                                 if (!isNaN(lastlat) && !isNaN(lastlng) && lastairportCode) {
                                     const lastmarker = L.marker([lastlat, lastlng], {icon: lastIcon,}).bindPopup(lastairportCode);
                                     voyageLayer.addLayer(lastmarker);
                                 }
                             }
                             //marker pour tout les points
-                            if (!cols[4 * v].trim()) continue;
-                            const airportCode = cols[4 * v + 1] ? cols[4 * v + 1].trim() : "";
-                            const lat = parseFloat(cols[4 * v + 2]);
-                            const lng = parseFloat(cols[4 * v + 3]);
+                            if (!cols[8 * v].trim()) continue;
+                            const airportCode = cols[8 * v + 1] ? cols[8 * v + 1].trim() : "";
+                            const lat = parseFloat(cols[8 * v + 2]);
+                            const lng = parseFloat(cols[8 * v + 3]);
                             if (!isNaN(lat) && !isNaN(lng) && airportCode) {
                                 markerPositions.push([lat, lng]);
                                 const marker = L.marker([lat, lng], {icon: customIcon,}).bindPopup(airportCode);
