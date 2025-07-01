@@ -152,8 +152,10 @@
                                 const lastairportName = lastcols[8 * v + 4] ? lastcols[8 * v + 4].trim() : "";
                                 const lastdate = parseFloat(lastcols[8 * v + 5]);
                                 const lastplayer = parseFloat(lastcols[8 * v + 6]);
-                                const lastPopupContent = <b>${lastairportName}<br> 
-                                                         ${lastairportCode} | ${lastdate} | ${lastplayer};
+                                const lastPopupContent = `
+                                                        <b>${lastairportName}</b><br>
+                                                        ${lastairportCode} | ${lastdate} | ${lastplayer}
+                                                        `;
                                 if (!isNaN(lastlat) && !isNaN(lastlng) && lastairportCode) {
                                     const lastmarker = L.marker([lastlat, lastlng], {icon: lastIcon,}).bindPopup(lastPopupContent);
                                     voyageLayer.addLayer(lastmarker);
@@ -169,8 +171,10 @@
                             const airportName = cols[8 * v + 4] ? lastcols[8 * v + 4].trim() : "";
                             const date = parseFloat(cols[8 * v + 5]);
                             const player = parseFloat(cols[8 * v + 6]);
-                            const PopupContent = <b>${airportName}<br> 
-                                                    ${airportCode} | ${date} | ${player};
+                            const PopupContent = `
+                                                 <b>${airportName}</b><br>
+                                                 ${airportCode} | ${date} | ${player}
+                                                 `;
                             if (!isNaN(lat) && !isNaN(lng) && airportCode) {
                                 markerPositions.push([lat, lng]);
                                 const marker = L.marker([lat, lng], {icon: customIcon,}).bindPopup(PopupContent);
