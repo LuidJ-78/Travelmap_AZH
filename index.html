@@ -84,7 +84,7 @@
 
             //google sheet url
             const sheetURL =
-                "https://docs.google.com/spreadsheets/d/e/2PACX-1vTjulAyJlAG5smNj1FHKrfqWijHp8asBRfrDAGhB94HF5udtGl3_dWC3bIkEyce6b-5jwsbFI20PFci/pub?gid=1768006993&single=true&output=csv";
+                "https://docs.google.com/spreadsheets/d/e/2PACX-1vTjulAyJlAG5smNj1FHKrfqWijHp8asBRfrDAGhB9HF5udtGl3_dWC3bIkEyce6b-5jwsbFI20PFci/pub?gid=1768006993&single=true&output=csv";
 
             // Pour stocker les groupes LayerGroup de chaque voyage
             const voyageLayers = {};
@@ -107,8 +107,8 @@
 
                     // Pour chaque voyage, créer un bouton et afficher ce qui correspond au voyage
                     for (let v = 0; v < voyageCount; v++) {
-                        // Nom du voyage (on prend la première colonne du groupe, donc 4*v)
-                        const voyageName = header[8 * v] ? header[4 * v].trim() : `Voyage ${v + 1}`;
+                        // Nom du voyage (on prend la première colonne du groupe, donc 8*v)
+                        const voyageName = header[8 * v] ? header[8 * v].trim() : `Voyage ${v + 1}`;
                         const voyageId = `voyage_${v}`;
 
                         // Créer le bouton
