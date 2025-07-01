@@ -144,6 +144,7 @@
                             const cols = row.split(",");
                             //icon unique pour le dernier point
                             if (!cols[8 * v]) {
+                                if (i != 1) continue;
                                 const lastrow = rows[i-1];
                                 const lastcols = lastrow.split(",");
                                 const lastairportCode = lastcols[8 * v + 1] ? lastcols[8 * v + 1].trim() : "";
