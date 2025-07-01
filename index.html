@@ -157,19 +157,11 @@
                             // }
                             //continue si des valeurs sont présentes
                             if (!row.trim()) continue;
-                            //if (!cols[8 * v].trim()) continue;
+                            if (!cols[8 * v].trim()) continue;
                             //marker pour tout les points                            
                             const airportCode = cols[8 * v + 1] ? cols[8 * v + 1].trim() : "";
                             const lat = parseFloat(cols[8 * v + 2]);
-                            const lng = parseFloat(cols[8 * v + 3]);
-
-                            console.log(v)
-                            console.log(i)
-                            console.log(airportCode)
-                            console.log(lat)
-                            console.log(lng)
-                            console.log(row)
-                            
+                            const lng = parseFloat(cols[8 * v + 3]);                           
                             if (!isNaN(lat) && !isNaN(lng) && airportCode) {
                                 markerPositions.push([lat, lng]);
                                 const marker = L.marker([lat, lng], {icon: customIcon,}).bindPopup(airportCode);
