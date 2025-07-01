@@ -150,8 +150,8 @@
                                 const lastlat = parseFloat(lastcols[8 * v + 2]);
                                 const lastlng = parseFloat(lastcols[8 * v + 3]);
                                 const lastairportName = lastcols[8 * v + 4] ? lastcols[8 * v + 4].trim() : "";
-                                const lastdate = parseFloat(lastcols[8 * v + 5]);
-                                const lastplayer = parseFloat(lastcols[8 * v + 6]);
+                                const lastdate = lastcols[8 * v + 5] ? lastcols[8 * v + 5].trim() : "";
+                                const lastplayer = lastcols[8 * v + 6] ? lastcols[8 * v + 6].trim() : "";
                                 const lastPopupContent = `
                                                         <b>${lastairportName}</b><br>
                                                         ${lastairportCode} | ${lastdate} | ${lastplayer}
@@ -169,8 +169,8 @@
                             const lat = parseFloat(cols[8 * v + 2]);
                             const lng = parseFloat(cols[8 * v + 3]);
                             const airportName = cols[8 * v + 4] ? cols[8 * v + 4].trim() : "";
-                            const date = parseFloat(cols[8 * v + 5]);
-                            const player = parseFloat(cols[8 * v + 6]);
+                            const date = cols[8 * v + 5] ? cols[8 * v + 5].trim() : "";
+                            const player = cols[8 * v + 6] ? cols[8 * v + 6].trim() : "";
                             const PopupContent = `
                                                  <b>${airportName}</b><br>
                                                  ${airportCode} | ${date} | ${player}
