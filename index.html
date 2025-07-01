@@ -166,15 +166,17 @@
                             const airportCode = cols[8 * v + 1] ? cols[8 * v + 1].trim() : "";
                             const lat = parseFloat(cols[8 * v + 2]);
                             const lng = parseFloat(cols[8 * v + 3]);
-                            const airportName = lastcols[8 * v + 4] ? lastcols[8 * v + 4].trim() : "";
-                            const date = parseFloat(lastcols[8 * v + 5]);
-                            const player = parseFloat(lastcols[8 * v + 6]);
+                            const airportName = cols[8 * v + 4] ? lastcols[8 * v + 4].trim() : "";
+                            const date = parseFloat(cols[8 * v + 5]);
+                            const player = parseFloat(cols[8 * v + 6]);
+                            const PopupContent = <b>${airportName}</b><br> 
+                                                    ${airportCode} | ${date} | ${player};
                             if (!isNaN(lat) && !isNaN(lng) && airportCode) {
                                 markerPositions.push([lat, lng]);
-                                const marker = L.marker([lat, lng], {icon: customIcon,}).bindPopup(airportCode);
+                                const marker = L.marker([lat, lng], {icon: customIcon,}).bindPopup(PopupContent);
                                 voyageLayer.addLayer(marker);
                                 if (i === rows.length - 1) { //dernier point
-                                    const marker = L.marker([lat, lng], {icon: lastIcon,}).bindPopup(airportCode);
+                                    const marker = L.marker([lat, lng], {icon: lastIcon,}).bindPopup(PopupContent);
                                     voyageLayer.addLayer(marker);
                                 }
                             }
