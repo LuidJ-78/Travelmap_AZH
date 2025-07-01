@@ -25,6 +25,7 @@
                 padding: 10px;
                 box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
                 overflow-y: auto;
+                texte-align: center;
             }
             #map {
                 flex-grow: 1;
@@ -52,9 +53,15 @@
 
     <body>
         <div id="sidebar">
-            <h2>Travel Map</h2>
             <h2>Azgharie Airlines</h2>
+            <h2>Travel Map</h2>
+            <br>
             <a href="https://d1git4l.github.io/mapAirbus/" target="_blank"> - Planificateur de vol - </a><br>
+            <br>
+            <div style="display: flex; align-items: center;">
+                <img src="Point avion.svg" alt="dernière position de l'avion" style="height: 24px; margin-right: 8px;">
+                <span>dernière position de l'avion</span>
+                </div>
             <br>
             <div id="voyages-buttons"></div>
         </div>
