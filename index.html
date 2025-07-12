@@ -17,21 +17,28 @@
                 font-family: Arial, sans-serif;
                 margin: 0;
                 padding: 0;
-                display: flex;
             }
             #sidebar {
-                width: 250px;
-                background: #f4f4f4;
-                padding: 10px;
-                box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-                overflow-y: auto;
-                texte-align: center;
+                    position: fixed;
+                    left: 0;
+                    top: 0;
+                    width: 250px;
+                    height: 100vh;
+                    background: #f4f4f4;
+                    padding: 10px;
+                    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+                    overflow-y: auto;
+                    text-align: center;
+                    z-index: 2;
             }
             #map {
                 position: fixed;
-                flex-grow: 1;
-                height: 100%;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                width: calc(100vw - 250px); /* Adjust for sidebar width */
                 min-width: 500px;
+                z-index: 1;
             }
             .toggle-button {
                 background: #007bff;
