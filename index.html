@@ -94,6 +94,19 @@
               max-width: 100%;
               height: auto;
             }
+            .modal-bouton {
+              background-color: #007bff;
+              color: white;
+              border-radius: 8px;
+              padding: 10px;
+              border: none;
+              cursor: pointer;
+              width: 100%;
+              margin-top: 5px;
+            }
+            .modal-bouton:hover {
+              background-color: #218838;
+            }
         </style>
     </head>
 
@@ -115,14 +128,14 @@
                 <span>point de passage de l'avion</span>
                 </div>
             <br>
-            <button id="openPopup">Afficher les avions possibles par lignes</button>
+            <button id="openPopup" class="modal-bouton">Afficher les avions possibles par lignes</button>
+            <br>
             <div id="myModal" class="modal">
                 <div class="modal-content">
                   <span class="close" id="closeModal">&times;</span>
                   <img src="liste_avion_possible.png" alt="liste avion possible" />
                 </div>
             </div>
-            <br>
             <div id="voyages-buttons"></div>
         </div>
 
