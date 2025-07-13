@@ -199,9 +199,17 @@
                             voyageVisibility[voyageId] = !voyageVisibility[voyageId];
                         };
 
+                        //nombre de point affiché
+                        var nbpointaffiche = 1;
+                         console.log(nbpointaffiche);
+                        if (nbpointaffiche < 1){
+                            nbpointaffiche = 1
+                            console.log(nbpointaffiche);
+                        }
+
                         // Parcourir les données du CSV pour ce voyage et ajouter les marqueurs et polylines
                         const markerPositions = [];
-                        for (let i = 1; i < rows.length; i++) {
+                        for (let i = nbpointaffiche; i < rows.length; i++) {
                             const row = rows[i];
                             const cols = row.split(",");
                             //icon unique pour le dernier point
