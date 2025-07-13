@@ -151,24 +151,24 @@
         // popup pour afficher les avions possibles
         <script>
             // Récupération des éléments
-            var modal = document.getElementById('myModal');
-            var btn = document.getElementById('openPopup');
-            var span = document.getElementById('closeModal');
+            var liste_avion_modal = document.getElementById('myModal');
+            var liste_avion_btn = document.getElementById('openPopup');
+            var liste_avion_span = document.getElementById('closeModal');
 
             // Quand on clique sur le bouton, on affiche la modal
-            btn.onclick = function() {
-              modal.style.display = "block";
+            liste_avion_btn.onclick = function() {
+              liste_avion_modal.style.display = "block";
             }
 
             // Quand on clique sur la croix, on ferme la modal
-            span.onclick = function() {
-              modal.style.display = "none";
+            liste_avion_span.onclick = function() {
+              liste_avion_modal.style.display = "none";
             }
 
             // Fermer la modal si on clique en dehors du contenu
             window.onclick = function(event) {
               if (event.target == modal) {
-                modal.style.display = "none";
+                liste_avion_modal.style.display = "none";
               }
             }
         </script>
@@ -177,10 +177,7 @@
         <script>
             //affichage de la map en fond
             const map = L.map("map").setView([20, 0], 2);
-            L.tileLayer(
-                "https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",
-                { attribution: "&copy; OpenStreetMap contributeurs" },
-            ).addTo(map);
+            L.tileLayer("https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",{ attribution: "&copy; OpenStreetMap contributeurs" },).addTo(map);
 
             // Create a custom icon 
             const customIcon = L.icon({
@@ -197,8 +194,7 @@
             });
 
             //google sheet url
-            const sheetURL =
-                "https://docs.google.com/spreadsheets/d/e/2PACX-1vTjulAyJlAG5smNj1FHKrfqWijHp8asBRfrDAGhB94HF5udtGl3_dWC3bIkEyce6b-5jwsbFI20PFci/pub?gid=1768006993&single=true&output=csv";
+            const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTjulAyJlAG5smNj1FHKrfqWijHp8asBRfrDAGhB94HF5udtGl3_dWC3bIkEyce6b-5jwsbFI20PFci/pub?gid=1768006993&single=true&output=csv";
 
             // Pour stocker les groupes LayerGroup de chaque voyage
             const voyageLayers = {};
@@ -216,8 +212,7 @@
                     const header = rows[1].split(",");
                     const voyageCount = Math.floor(header.length / 8);
 
-                    const voyagesButtonsDiv =
-                        document.getElementById("voyages-buttons");
+                    const voyagesButtonsDiv = document.getElementById("voyages-buttons");
 
                     // Pour chaque voyage, créer un bouton et afficher ce qui correspond au voyage
                     for (let v = 0; v < voyageCount; v++) {
