@@ -39,6 +39,10 @@
                 width: calc(99vw - 250px); /* Adjust for sidebar width */
                 z-index: 1;
             }
+            .sidebar-large {
+                width: 350px; /* ou la largeur désirée */
+                transition: width 0.3s;
+            }
             .toggle-button {
                 background: #007bff;
                 color: white;
@@ -84,6 +88,31 @@
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
         <script>
+            function checkSidebarScrollbar() {
+                const sidebar = document.getElementById('sidebar');
+                if (!sidebar) return;
+
+            // Vérifie si la sidebar déborde (scroll)
+                if (sidebar.scrollHeight > sidebar.clientHeight) {
+                    sidebar.classList.add('sidebar-large');
+                } else {
+                    sidebar.classList.remove('sidebar-large');
+                }
+            }
+
+            // Vérifie au chargement et à chaque redimensionnement
+            window.addEventListener('load', checkSidebarScrollbar);
+            window.addEventListener('resize', checkSidebarScrollbar);
+
+            // (Optionnel) Si le contenu de la sidebar change dynamiquement :
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar) {
+                new MutationObserver(checkSidebarScrollbar).observe(sidebar, {childList: true, subtree: true});
+            }
+        </script>
+
+        //affichage liste ligne
+        <script>
             document.addEventListener("DOMContentLoaded", function () {
                 var toggleHeader = document.getElementById("toggle-voyages");
                 var voyagesButtons = document.getElementById("voyages-buttons");
@@ -98,7 +127,8 @@
                 }
             });
         </script>
-        
+
+        //affichage map et pointer sur la map
         <script>
             //affichage de la map en fond
             const map = L.map("map").setView([20, 0], 2);
