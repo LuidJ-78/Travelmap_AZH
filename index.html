@@ -69,7 +69,7 @@
             <br>
             <a href="https://d1git4l.github.io/mapAirbus/" target="_blank" style="color:#007BFF;font-weight:bold;"> - Planificateur de vol - </a><br>
             <br>
-            <h2 id="toggle-voyages" style="cursor:pointer;">Travel Map</h2>
+            <h2>Travel Map</h2>
             <div style="display: flex; align-items: center;">
                 <img src="Point avion.svg" alt="dernière position de l'avion" style="height: 24px; margin-right: 8px;">
                 <span>dernière position de l'avion</span>
@@ -102,23 +102,6 @@
         // Vérifie au chargement et à chaque redimensionnement
         window.addEventListener('load', checkSidebarScrollbar);
         window.addEventListener('resize', checkSidebarScrollbar);
-        </script>
-
-        //affichage liste ligne
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                var toggleHeader = document.getElementById("toggle-voyages");
-                var voyagesButtons = document.getElementById("voyages-buttons");
-                if (toggleHeader && voyagesButtons) {
-                    toggleHeader.addEventListener("click", function () {
-                        if (voyagesButtons.style.display === "none" || voyagesButtons.style.display === "") {
-                            voyagesButtons.style.display = "block";
-                        } else {
-                            voyagesButtons.style.display = "none";
-                        }
-                    });
-                }
-            });
         </script>
 
         //affichage map et pointer sur la map
