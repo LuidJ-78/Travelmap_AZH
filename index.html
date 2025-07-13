@@ -200,16 +200,17 @@
                         };
 
                         //nombre de point affiché
-                        var nbpointaffiche = 1;
-                         console.log(nbpointaffiche);
-                        if (nbpointaffiche < 1){
-                            nbpointaffiche = 1
-                            console.log(nbpointaffiche);
+                        var pointafficher = 50;
+                        var pointdepart = rows.length - pointafficher;
+                        console.log(pointdepart);
+                        if (pointdepart < 1){
+                            pointdepart = 1
+                            console.log(pointdepart);
                         }
 
                         // Parcourir les données du CSV pour ce voyage et ajouter les marqueurs et polylines
                         const markerPositions = [];
-                        for (let i = nbpointaffiche; i < rows.length; i++) {
+                        for (let i = pointdepart; i < rows.length; i++) {
                             const row = rows[i];
                             const cols = row.split(",");
                             //icon unique pour le dernier point
