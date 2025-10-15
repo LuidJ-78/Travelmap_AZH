@@ -146,27 +146,8 @@
 
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
-        // décalage sidebar pour le barre de déffilement 
-        <script async>
-        function checkSidebarScrollbar() {
-            const sidebar = document.getElementById('sidebar');
-            if (!sidebar) return;
-
-            // Vérifie si la sidebar déborde (scroll)
-            if (sidebar.scrollHeight > sidebar.clientHeight) {
-                sidebar.classList.add('sidebar-large');
-            } else {
-                sidebar.classList.remove('sidebar-large');
-            }
-        }
-
-        // Vérifie au chargement et à chaque redimensionnement
-        window.addEventListener('load', checkSidebarScrollbar);
-        window.addEventListener('resize', checkSidebarScrollbar);
-        </script>
-
         // popup pour afficher les avions possibles
-        <script async>
+        <script>
             // Récupération des éléments
             const liste_avion_modal = document.getElementById('myModal');
             const liste_avion_btn = document.getElementById('openPopup');
@@ -188,7 +169,7 @@
                 liste_avion_modal.style.display = "none";
               }
             }
-        </script>
+        </script> 
 
         //affichage map et pointer sur la map
         <script>
@@ -344,5 +325,25 @@
                     }
                 });
         </script>
+        
+        // décalage sidebar pour le barre de déffilement 
+        <script>
+        function checkSidebarScrollbar() {
+            const sidebar = document.getElementById('sidebar');
+            if (!sidebar) return;
+
+            // Vérifie si la sidebar déborde (scroll)
+            if (sidebar.scrollHeight > sidebar.clientHeight) {
+                sidebar.classList.add('sidebar-large');
+            } else {
+                sidebar.classList.remove('sidebar-large');
+            }
+        }
+
+        // Vérifie au chargement et à chaque redimensionnement
+        window.addEventListener('load', checkSidebarScrollbar);
+        window.addEventListener('resize', checkSidebarScrollbar);
+        </script>
+        
     </body>
 </html>
