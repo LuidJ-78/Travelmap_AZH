@@ -147,7 +147,7 @@
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
         // décalage sidebar pour le barre de déffilement 
-        <script>
+        <script async>
         function checkSidebarScrollbar() {
             const sidebar = document.getElementById('sidebar');
             if (!sidebar) return;
@@ -166,7 +166,7 @@
         </script>
 
         // popup pour afficher les avions possibles
-        <script>
+        <script async>
             // Récupération des éléments
             const liste_avion_modal = document.getElementById('myModal');
             const liste_avion_btn = document.getElementById('openPopup');
