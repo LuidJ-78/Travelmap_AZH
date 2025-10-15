@@ -192,7 +192,8 @@
         //affichage map et pointer sur la map
         <script>
             //affichage de la map en fond
-            const map = L.map("map").setView([20, 0], 2);
+            const map = L.map("map", {zoomControl: false}).setView([20, 0], 2);
+            L.control.zoom({position: 'bottomright'}).addTo(map);
             L.tileLayer("https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",{ attribution: "&copy; OpenStreetMap contributeurs" },).addTo(map);
 
             // Create a custom icon 
