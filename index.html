@@ -194,7 +194,20 @@
             //affichage de la map en fond
             const map = L.map("map", {zoomControl: false}).setView([20, 0], 2);
             L.control.zoom({position: 'bottomright'}).addTo(map);
-            L.tileLayer("https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",{ attribution: "&copy; OpenStreetMap contributeurs" },).addTo(map);
+            //L.tileLayer("https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",{ attribution: "&copy; OpenStreetMap contributeurs" },).addTo(map);
+            // Grouper les layers de base
+            const clair = L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', { attribution: 'clair' });
+            const sombre = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.{ext}', { attribution: 'sombre' });
+            const topographique = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', { attribution: 'topographique' });
+            const satellite = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}', { attribution: 'Satellite' });
+            const baseLayers = {
+                "clair": clair,
+                "sombre": sombre,
+                "topographique": topographique,
+                "Satellite": satellite
+            };
+            // Ajouter le contrôle à la carte
+            L.control.layers(baseLayers, {position: 'bottomright'}).addTo(map);
 
             // Create a custom icon 
             const customIcon = L.icon({
