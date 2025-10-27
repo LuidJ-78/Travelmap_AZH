@@ -115,9 +115,6 @@
 
     <body>
         <div id="sidebar">
-            <div style="display: flex; align-items: center;">
-                <img src="azgharie_airlines.png" alt="azgharie_airlines.png" style="height: 250px;">
-                </div>
             <br>
             <a href="https://d1git4l.github.io/mapAirbus/" target="_blank" style="color:#007BFF;font-weight:bold;"> - Planificateur de vol - </a><br>
             <br>
@@ -130,9 +127,6 @@
                 <img src="Green_dot_icon.png" alt="point de passage de l'avion" style="height: 12px; margin-right: 14px; margin-left: 6px;">
                 <span>point de passage de l'avion</span>
                 </div>
-            <br>
-            <button id="openPopup" class="modal-bouton">Afficher les avions possibles par lignes</button>
-            <br>
             <div id="myModal" class="modal">
                 <div class="modal-content">
                   <span class="close" id="closeModal">&times;</span>
@@ -146,31 +140,6 @@
         <div id="map"></div>
 
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-
-        // popup pour afficher les avions possibles
-        <script>
-            // Récupération des éléments
-            const liste_avion_modal = document.getElementById('myModal');
-            const liste_avion_btn = document.getElementById('openPopup');
-            const liste_avion_span = document.getElementById('closeModal');
-
-            // Quand on clique sur le bouton, on affiche la modal
-            liste_avion_btn.onclick = function() {
-              liste_avion_modal.style.display = "block";
-            }
-
-            // Quand on clique sur la croix, on ferme la modal
-            liste_avion_span.onclick = function() {
-              liste_avion_modal.style.display = "none";
-            }
-
-            // Fermer la modal si on clique en dehors du contenu
-            window.onclick = function(event) {
-              if (event.target == modal) {
-                liste_avion_modal.style.display = "none";
-              }
-            }
-        </script> 
 
         //affichage map et pointer sur la map
         <script>
