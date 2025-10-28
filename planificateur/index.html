@@ -244,10 +244,10 @@
         customAirline.addEventListener('input', updateCallsign);
         customNumber.addEventListener('input', updateCallsign);
 
-        const map = L.map('map').setView([20, 0], 2);
-        L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributeurs'
-        }).addTo(map);
+        // const map = L.map('map').setView([20, 0], 2);
+        //L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+        //    attribution: '&copy; OpenStreetMap contributeurs'
+        //}).addTo(map);
 
         const layers = {}; // Chaque catégorie sera un layer distinct
         let departureMarker = null;
