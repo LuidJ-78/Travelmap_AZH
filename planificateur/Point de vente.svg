@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(0.0390914,0,0,0.0390914,-1.02938,-25.8055)">
+        <g transform="matrix(20.993,0,-19.3126,16.7143,1304.54,1980.11)">
+            <path d="M13.311,16.641C13.193,15.971 13.132,15.281 13.132,14.578C13.132,8.027 18.45,2.709 25,2.709C31.55,2.709 36.868,8.027 36.868,14.578C36.868,15.281 36.807,15.971 36.689,16.641C36.536,17.516 36.286,18.358 35.952,19.156L25,40.377L14.048,19.156C13.714,18.358 13.464,17.516 13.311,16.641Z" style="fill-opacity:0.29;"/>
+        </g>
+        <g transform="matrix(51.5887,0,0,51.5887,-240.141,571.987)">
+            <path d="M13.311,16.641C13.193,15.971 13.132,15.281 13.132,14.578C13.132,8.027 18.45,2.709 25,2.709C31.55,2.709 36.868,8.027 36.868,14.578C36.868,15.281 36.807,15.971 36.689,16.641C36.536,17.516 36.286,18.358 35.952,19.156L25,40.377L14.048,19.156C13.714,18.358 13.464,17.516 13.311,16.641Z" style="fill:rgb(53,132,178);"/>
+        </g>
+        <g transform="matrix(51.5887,0,0,51.5887,-240.141,571.987)">
+            <path d="M13.311,16.641C13.193,15.971 13.132,15.281 13.132,14.578C13.132,8.027 18.45,2.709 25,2.709C31.55,2.709 36.868,8.027 36.868,14.578C36.868,15.281 36.807,15.971 36.689,16.641C36.536,17.516 36.286,18.358 35.952,19.156L25,40.377L14.048,19.156C13.714,18.358 13.464,17.516 13.311,16.641Z" style="fill:url(#_Linear1);"/>
+        </g>
+        <g transform="matrix(0.892372,0,0,0.892372,112.964,142.503)">
+            <g transform="matrix(38.5977,0,0,38.5977,13.635,576.106)">
+                <circle cx="26.839" cy="19.377" r="13.887" style="fill:white;"/>
+            </g>
+            <g transform="matrix(18.6493,0,0,22.0854,109.451,769.951)">
+                <g transform="matrix(22,0,0,22,73.8847,32.6669)">
+                </g>
+                <text x="26.211px" y="32.667px" style="font-family:'AvenirNext-Bold', 'Avenir Next', sans-serif;font-weight:700;font-size:22px;">HUB</text>
+            </g>
+        </g>
+    </g>
+    <defs>
+        <linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(34.8618,-0.166282,0.166282,34.8618,7.77491,18.5848)"><stop offset="0" style="stop-color:rgb(178,53,53);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(120,14,14);stop-opacity:1"/></linearGradient>
+    </defs>
+</svg>

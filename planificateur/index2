@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte avec marqueurs</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-measure/dist/leaflet-measure.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="sidebar">
+        <h2>Sélection des aéroports</h2>
+        <div class="info-box">
+            Départ: <span id="departure" class="clickable">Non sélectionné</span>
+            <input type="text" id="departureInput" style="display:none" placeholder="Entrez un aéroport">
+        </div>
+        <div class="info-box">
+            Arrivée: <span id="arrival" class="clickable">Non sélectionné</span>
+            <input type="text" id="arrivalInput" style="display:none" placeholder="Entrez un aéroport">
+        </div>
+
+        <h3>Sélectionner un callsign</h3>
+        <select id="callsignSelect">
+            <option value="">Sélectionner un callsign</option>
+            <option value="AZH201">AZH201</option>
+            <option value="AZH202">AZH202</option>
+            <option value="AZH203">AZH203</option>
+            <option value="AZH204">AZH204</option>
+            <option value="AZH205">AZH205</option>
+            <option value="AZH206">AZH206</option>
+            <option value="AZHFR">AZHFR</option>
+            <option value="AZHUS">AZHUS</option>
+            <option value="AZHACC">AZHACC</option>
+            <option value="AZH501">AZH501</option>
+            <option value="AZH502">AZH502</option>
+            <option value="AZH503">AZH503</option>
+            <option value="AZH504">AZH504</option>
+            <option value="AZH505">AZH505</option>
+            <option value="AZH506">AZH506</option>
+            <option value="AZH507">AZH507</option>
+        </select>
+        <input type="text" id="callsignInput" placeholder="Ou entrez un callsign">
+
+        <button id="generateLinkButton" class="toggle-button">Générer le plan de vol</button>
+        <button id="resetSelectionButton" class="toggle-button">Réinitialiser les aéroports</button>
+
+        <div id="distanceBox" class="info-box" style="display:none;">
+            Distance: <span id="distance">0</span> milles nautiques
+            <br>
+            Temps de vol: <span id="flightTime">0</span> heures
+        </div>
+    </div>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="main2.js"></script>
+</body>
+</html>
