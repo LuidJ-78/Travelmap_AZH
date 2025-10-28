@@ -112,6 +112,28 @@
         #customCallsignFields input {
             width: 80px;
         }
+
+            .topnav {
+                overflow: hidden;
+                background-color: #333;
+            }
+            .topnav a {
+              float: left;
+              color: #f2f2f2;
+              text-align: center;
+              padding: 14px 16px;
+              text-decoration: none;
+              font-size: 17px;
+            }
+            .topnav a:hover {
+              background-color: #ddd;
+              color: black;
+            }
+            .topnav a.active {
+              background-color: #04AA6D;
+              color: white;
+            }
+        
     </style>
 </head>
 <body>
@@ -173,15 +195,12 @@
         <div id="categoryCheckboxes" class="checkbox-group"></div>
     </div>
 
-    <div id="header">
-        <a href="https://luidj-78.github.io/Travelmap_AZH/" target="_blank" style="color:#007BFF;font-weight:bold;"> Acceuil </a>
-        <a> | </a>
-        <a href="https://luidj-78.github.io/Travelmap_AZH/planificateur/" style="color:#007BFF;font-weight:bold;"> Planificateur de vol </a>
-        <a> | </a>
-        <a href="https://luidj-78.github.io/Travelmap_AZH/passager/" style="color:#007BFF;font-weight:bold;"> Passager </a>
-        <a> | </a>
-        <a href="https://luidj-78.github.io/Travelmap_AZH/cargo/" style="color:#007BFF;font-weight:bold;"> cargo </a>
-    </div>
+        <div id="header" class="topnav">
+            <a href="https://luidj-78.github.io/Travelmap_AZH/" target="_blank" style="color:#007BFF;font-weight:bold;"> Acceuil </a>
+            <a href="https://luidj-78.github.io/Travelmap_AZH/planificateur/" style="color:#007BFF;font-weight:bold;"> Planificateur de vol </a>
+            <a href="https://luidj-78.github.io/Travelmap_AZH/passager/" style="color:#007BFF;font-weight:bold;"> Passager </a>
+            <a href="https://luidj-78.github.io/Travelmap_AZH/cargo/" style="color:#007BFF;font-weight:bold;"> cargo </a>
+        </div>
     
     <div id="map"></div>
 
