@@ -319,7 +319,7 @@
                                 markerPositions.push([lat, lng]);
                                 const marker = L.marker([lat, lng], {icon: customIcon,}).bindPopup(PopupContent);
                                 voyageLayer.addLayer(marker);
-                                if (i = derniereLigneAvecContenu ) { //dernier point
+                                if (i == derniereLigneAvecContenu ) { //dernier point
                                     const marker = L.marker([lat, lng], {icon: lastIcon,}).bindPopup(PopupContent);
                                     voyageLayer.addLayer(marker);
                                     console.log(i);
