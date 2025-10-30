@@ -238,7 +238,7 @@
                     const rows = csvText.split("\n");
                     if (rows.length < 3) return; // Pas de données (on ignore la première ligne)
 
-                    console.log(rows);
+                    //console.log(rows);
 
                     // On suppose que chaque groupe de 8 colonnes est un voyage
                     const header = rows[1].split(",");
@@ -289,7 +289,7 @@
                         //WIP
 
                         let tmp_lastRow = 1;
-                        while (rows.getRange(tmp_lastRow, 8 * v).getValue() !== "") {
+                        while (csvText.getRange(tmp_lastRow, 8 * v).getValue() !== "") {
                             tmp_lastRow++;
                         }
                         cols_lastrow = tmp_lastRow -1;
