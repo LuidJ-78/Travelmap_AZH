@@ -37,25 +37,34 @@
                 min-width: 280px;
                 height: 50px;
                 background: #f4f4f4;
-                padding: 10px;
+                padding: 0 10px;
+                box-sizing: border-box; 
                 box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
                 border-radius: 10px;
                 overflow-y: auto;
                 text-align: left;
+                overflow: hidden;
                 z-index: 2;
             }
             .topnav {
                 display: flex;
-                overflow: hidden;
                 background-color: #333;
+                align-items: center;
+                white-space: nowrap;
             }
             .topnav a {
-              float: none;
               color: #f2f2f2;
               text-align: center;
-              padding: 14px 16px;
+              padding: 0 12px;
               text-decoration: none;
               font-size: 17px;
+              display: inline-flex;
+              align-items: center;
+              height: 100%;
+            }
+            .topnav a img {
+              display: block;
+              height: 40px;
             }
             .topnav a:hover {
               background-color: #ddd;
