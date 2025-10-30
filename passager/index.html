@@ -252,6 +252,17 @@
                         const voyageName = header[8 * v] ? header[8 * v].trim() : `Voyage ${v + 1}`;
                         const voyageId = `voyage_${v}`;
 
+                        let derniereLigneAvecContenu = -1;
+                        for (let i = rows.length - 1; i >= 2; i--) { // On commence à la dernière ligne et on ignore les deux premières lignes (en-tête)
+                            const colonnes = rows[i].split(",");
+                            if (colonnes.length > 8 * v && colonnes[8 * v].trim() !== "") {
+                                derniereLigneAvecContenu = i;
+                                break;
+                            }
+                        }
+                        console.log(`Dernière ligne avec du contenu pour le voyage ${voyageName} (colonne ${8 * v}) : ${derniereLigneAvecContenu}`);
+                        
+
                         // Créer le bouton
                         const btn = document.createElement("button");
                         btn.className = "toggle-button";
@@ -287,13 +298,6 @@
                             //console.log(pointdepart);
                         }
                         //WIP
-
-                        let tmp_lastRow = 1;
-                        while (csvText.getRange(tmp_lastRow, 8 * v).getValue() !== "") {
-                            tmp_lastRow++;
-                        }
-                        cols_lastrow = tmp_lastRow -1;
-                        console.log(cols_lastrow);
                         
                         // Parcourir les données du CSV pour ce voyage et ajouter les marqueurs et polylines
                         const markerPositions = [];
