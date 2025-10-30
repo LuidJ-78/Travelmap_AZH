@@ -289,11 +289,11 @@
                         //WIP
 
                         let tmp_lastRow = 1;
-                        //while (sheet.getRange(tmp_lastRow, 8 * v).getValue() !== "") {
-                        //    tmp_lastRow++;
-                        //}
-                        //cols_lastrow = tmp_lastRow -1;
-                        //console.log(cols_lastrow);
+                        while (rows.getRange(tmp_lastRow, 8 * v).getValue() !== "") {
+                            tmp_lastRow++;
+                        }
+                        cols_lastrow = tmp_lastRow -1;
+                        console.log(cols_lastrow);
                         
                         // Parcourir les données du CSV pour ce voyage et ajouter les marqueurs et polylines
                         const markerPositions = [];
