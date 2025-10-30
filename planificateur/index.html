@@ -1,129 +1,139 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carte avec marqueurs</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-measure/dist/leaflet-measure.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        #sidebar {
+    <head>
+         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Carte avec marqueurs</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-measure/dist/leaflet-measure.css">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+            #sidebar {
+                    position: fixed;
+                    left: 10px;
+                    top: 10px;
+                    width: 250px;
+                    height: 95vh;
+                    background: #f4f4f4;
+                    padding: 10px;
+                    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+                    border-radius: 10px;
+                    overflow-y: auto;
+                    text-align: left;
+                    z-index: 2;
+            }
+            #header {
                 position: fixed;
-                left: 10px;
                 top: 10px;
-                width: 250px;
-                height: 95vh;
+                left: 50%;
+                transform: translateX(-50%);
+                width: auto;
+                max-width: calc(100% - 40px);
+                min-width: 280px;
+                height: 50px;
                 background: #f4f4f4;
-                padding: 10px;
+                padding: 0 10px;
+                box-sizing: border-box; 
                 box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
                 border-radius: 10px;
                 overflow-y: auto;
                 text-align: left;
-                z-index: 2;
-        }
-        #header {
-            position: fixed;
-            left: 300px;
-            top: 10px;
-            width: 1000px;
-            height: 50px;
-            background: #f4f4f4;
-            padding: 10px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            overflow-y: auto;
-            text-align: center;
-            z-index: 2;
-        }
-        #map {
-                position: fixed;
-                top: 0;
-                right: 0;
-                height: 100%;
-                width: 100%;
-                z-index: 1;
-        }
-        .sidebar-large {
-            width: 265px !important; /* ou la largeur désirée */
-         }
-        .info-box {
-            margin-bottom: 10px;
-            padding: 10px;
-            background: white;
-            border: 1px solid #ccc;
-        }
-        .toggle-button {
-            background: #007BFF;
-            color: white;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 5px;
-            border-radius: 5px;
-        }
-        .toggle-button:hover {
-            background: #0056b3;
-        }
-        .checkbox-group {
-            margin-top: 20px;
-        }
-        .category-group {
-            margin-top: 20px;
-        }
-        .category-group h4 {
-            font-size: 16px;
-            font-weight: bold;
-        }
-        .category-checkboxes {
-            display: none;
-            margin-left: 20px;
-        }
-        .category-checkboxes label {
-            display: block;
-        }
-        .category-group.open .category-checkboxes {
-            display: block;
-        }
-        .leaflet-popup-content {
-            word-break: break-word;
-            white-space: normal;
-            max-width: 1500px;
-            min-width: 70px;
-            width: 70;
-            text-wrap: nowrap;
-        }
-        .toggle-large-popup {
-            width: 250px !important;
-        }
-
-        /* Ajouter les styles pour aligner préfixe et numéro sur la même ligne */
-        #customCallsignFields {
-            display: flex;
-            gap: 10px;
-            margin-top: 5px;
-        }
-
-        #customCallsignFields input {
-            width: 80px;
-        }
-
-            .topnav {
                 overflow: hidden;
+                z-index: 2;
+            }
+            #map {
+                    position: fixed;
+                    top: 0;
+                    right: 0;
+                    height: 100%;
+                    width: 100%;
+                    z-index: 1;
+            }
+            .sidebar-large {
+                width: 265px !important; /* ou la largeur désirée */
+               }
+            .info-box {
+                margin-bottom: 10px;
+                padding: 10px;
+                background: white;
+                border: 1px solid #ccc;
+            }
+            .toggle-button {
+                background: #007BFF;
+                color: white;
+                padding: 10px;
+                border: none;
+                cursor: pointer;
+                width: 100%;
+                margin-top: 5px;
+                border-radius: 5px;
+            }
+            .toggle-button:hover {
+                background: #0056b3;
+            }
+            .checkbox-group {
+                margin-top: 20px;
+            }
+            .category-group {
+                margin-top: 20px;
+            }
+            .category-group h4 {
+                font-size: 16px;
+                font-weight: bold;
+            }
+            .category-checkboxes {
+                display: none;
+                margin-left: 20px;
+            }
+            .category-checkboxes label {
+                display: block;
+            }
+            .category-group.open .category-checkboxes {
+                display: block;
+            }
+            .leaflet-popup-content {
+                word-break: break-word;
+                white-space: normal;
+                max-width: 1500px;
+                min-width: 70px;
+                width: 70;
+                text-wrap: nowrap;
+            }
+            .toggle-large-popup {
+                width: 250px !important;
+            }
+            /* Ajouter les styles pour aligner préfixe et numéro sur la même ligne */
+            #customCallsignFields {
+                display: flex;
+                gap: 10px;
+                margin-top: 5px;
+            }
+            #customCallsignFields input {
+                width: 80px;
+            }
+            .topnav {
+                display: flex;
                 background-color: #333;
+                align-items: center;
+                white-space: nowrap;
             }
             .topnav a {
-              float: left;
               color: #f2f2f2;
               text-align: center;
-              padding: 14px 16px;
+              padding: 0 12px;
               text-decoration: none;
               font-size: 17px;
+              display: inline-flex;
+              align-items: center;
+              height: 100%;
+            }
+            .topnav a img {
+              display: block;
+              height: 40px;
             }
             .topnav a:hover {
               background-color: #ddd;
@@ -196,6 +206,7 @@
     </div>
 
         <div id="header" class="topnav">
+            <a href="https://www.azgharie.net/"> <img src="azgharie-removebg-preview.png" alt="azgharie-removebg-preview.png" style="height: 50px">  </a>
             <a href="https://luidj-78.github.io/Travelmap_AZH/" target="_blank" style="color:#007BFF;font-weight:bold;"> Acceuil </a>
             <a href="https://luidj-78.github.io/Travelmap_AZH/planificateur/" style="color:#007BFF;font-weight:bold;"> Planificateur de vol </a>
             <a href="https://luidj-78.github.io/Travelmap_AZH/passager/" style="color:#007BFF;font-weight:bold;"> Passager </a>
