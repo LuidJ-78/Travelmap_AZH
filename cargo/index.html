@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="fr">
     <head>
@@ -174,12 +173,6 @@
                 <img src="Green_dot_icon.png" alt="point de passage de l'avion" style="height: 12px; margin-right: 14px; margin-left: 6px;">
                 <span>point de passage de l'avion</span>
                 </div>
-            <div id="myModal" class="modal">
-                <div class="modal-content">
-                  <span class="close" id="closeModal">&times;</span>
-                  <img src="liste_avion_possible.png" alt="liste avion possible" />
-                </div>
-            </div>
             <br>
             <div id="voyages-buttons"></div>
         </div>
@@ -244,31 +237,39 @@
                 .then((csvText) => {
                     const rows = csvText.split("\n");
                     if (rows.length < 3) return; // Pas de données (on ignore la première ligne)
+                    //console.log(rows);
 
                     // On suppose que chaque groupe de 8 colonnes est un voyage
                     const header = rows[1].split(",");
                     const voyageCount = Math.floor(header.length / 8);
 
                     const voyagesButtonsDiv = document.getElementById("voyages-buttons");
-
+                    
                     // Pour chaque voyage, créer un bouton et afficher ce qui correspond au voyage
                     for (let v = 0; v < voyageCount; v++) {
                         // Nom du voyage (on prend la première colonne du groupe, donc 8*v)
                         const voyageName = header[8 * v] ? header[8 * v].trim() : `Voyage ${v + 1}`;
                         const voyageId = `voyage_${v}`;
-
+                        let derniereLigneAvecContenu = -1;
+                        for (let i = rows.length - 1; i >= 1; i--) {
+                            const colonnes = rows[i].split(",");
+                            if (colonnes.length > 8 * v && colonnes[8 * v].trim() !== "") {
+                                derniereLigneAvecContenu = i+1;
+                                break;
+                            }
+                         }
+                        //console.log(`Dernière ligne avec du contenu pour le voyage ${voyageName} (colonne ${8 * v}) : ${derniereLigneAvecContenu}`);
+                        
                         // Créer le bouton
                         const btn = document.createElement("button");
                         btn.className = "toggle-button";
                         btn.id = `toggle_${voyageId}`;
                         btn.textContent = `Afficher le voyage ${voyageName}`;
                         voyagesButtonsDiv.appendChild(btn);
-
                         // Créer le LayerGroup pour ce voyage
                         const voyageLayer = L.layerGroup([]);
                         voyageLayers[voyageId] = voyageLayer;
                         voyageVisibility[voyageId] = false;
-
                         // Ajouter l'événement de toggle
                         btn.onclick = function () {
                             if (voyageVisibility[voyageId]) {
@@ -283,7 +284,7 @@
                             voyageVisibility[voyageId] = !voyageVisibility[voyageId];
                         };
 
-                        //nombre de point affiché
+                        //WIP nombre de point affiché
                         var pointafficher = 50;
                         var pointdepart = rows.length - pointafficher;
                         //console.log(pointdepart);
@@ -291,36 +292,16 @@
                             pointdepart = 1
                             //console.log(pointdepart);
                         }
-
+                        //WIP
+                        
                         // Parcourir les données du CSV pour ce voyage et ajouter les marqueurs et polylines
                         const markerPositions = [];
                         for (let i = pointdepart; i < rows.length; i++) {
                             const row = rows[i];
                             const cols = row.split(",");
-                            //icon unique pour le dernier point
-                            if (!cols[8 * v]) {
-                                const lastrow = rows[i-1];
-                                const lastcols = lastrow.split(",");
-                                const lastairportCode = lastcols[8 * v + 1] ? lastcols[8 * v + 1].trim() : "";
-                                const lastlat = parseFloat(lastcols[8 * v + 2]);
-                                const lastlng = parseFloat(lastcols[8 * v + 3]);
-                                const lastairportName = lastcols[8 * v + 4] ? lastcols[8 * v + 4].trim() : "";
-                                const lastdate = lastcols[8 * v + 5] ? lastcols[8 * v + 5].trim() : "";
-                                const lastplayer = lastcols[8 * v + 6] ? lastcols[8 * v + 6].trim() : "";
-                                const lastPopupContent = `
-                                                        <b>${lastairportName}</b><br>
-                                                        ${lastairportCode} | ${lastdate} | ${lastplayer}
-                                                        `;
-                                if (!isNaN(lastlat) && !isNaN(lastlng) && lastairportCode) {
-                                    const lastmarker = L.marker([lastlat, lastlng], {icon: lastIcon,}).bindPopup(lastPopupContent);
-                                    voyageLayer.addLayer(lastmarker);
-                                }
-                            }
-                            console.log[row];
-                            
-                            //continue si des valeurs sont présentes
-                            if (!row.trim()) continue;
-                            if (!cols[8 * v].trim()) continue;
+                            //console.log(i);
+                            //console.log(derniereLigneAvecContenu);
+
                             //marker pour tout les points                            
                             const airportCode = cols[8 * v + 1] ? cols[8 * v + 1].trim() : "";
                             const lat = parseFloat(cols[8 * v + 2]);
@@ -336,10 +317,11 @@
                                 markerPositions.push([lat, lng]);
                                 const marker = L.marker([lat, lng], {icon: customIcon,}).bindPopup(PopupContent);
                                 voyageLayer.addLayer(marker);
-                                if (i === rows.length - 1) { //dernier point
-                                    const marker = L.marker([lat, lng], {icon: lastIcon,}).bindPopup(PopupContent);
-                                    voyageLayer.addLayer(marker);
-                                }
+                            }
+                            if (i == derniereLigneAvecContenu-1 ) { //dernier point
+                                const marker = L.marker([lat, lng], {icon: lastIcon,}).bindPopup(PopupContent);
+                                voyageLayer.addLayer(marker);
+                                break;
                             }
                         }
                         // Ajouter la polyline si au moins 2 points
