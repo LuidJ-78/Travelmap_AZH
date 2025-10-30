@@ -31,7 +31,7 @@
                 position: fixed;
                 top: 10px;
                 left: 50%;
-                transform: translate(-50%);
+                transform: translateX(-50%);
                 width: auto;
                 max-width: calc(100% - 40px);
                 min-width: 280px;
@@ -45,11 +45,12 @@
                 z-index: 2;
             }
             .topnav {
+                display: flex;
                 overflow: hidden;
                 background-color: #333;
             }
             .topnav a {
-              float: left;
+              float: none;
               color: #f2f2f2;
               text-align: center;
               padding: 14px 16px;
@@ -70,9 +71,7 @@
 
     <body>
         <div id="header" class="topnav">
-            <a href="https://www.azgharie.net/" title="Azgharie">
-                <img src="azgharie-removebg-preview.png" alt="azgharie-removebg-preview.png" style="height: 40px;>
-            </a>
+            <a href="https://www.azgharie.net/"> <img src="azgharie-removebg-preview.png" alt="azgharie-removebg-preview.png" style="height: 40px;>  </a>
             <a href="https://luidj-78.github.io/Travelmap_AZH/test/" style="color:#007BFF;font-weight:bold;"> Acceuil </a>
             <a href="https://luidj-78.github.io/Travelmap_AZH/planificateur/" style="color:#007BFF;font-weight:bold;"> Planificateur de vol </a>
             <a href="https://luidj-78.github.io/Travelmap_AZH/passager/" style="color:#007BFF;font-weight:bold;"> Passager </a>
