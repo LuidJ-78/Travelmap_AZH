@@ -307,10 +307,10 @@
                                 if (!isNaN(lastlat) && !isNaN(lastlng) && lastairportCode) {
                                     const lastmarker = L.marker([lastlat, lastlng], {icon: lastIcon,}).bindPopup(lastPopupContent);
                                     voyageLayer.addLayer(lastmarker);
-                                    console.log["!cols[8*v]"]
+                                    console.log("!cols[8*v]");
                                 }
                             }
-                            console.log(row);
+                            //console.log(row);
                             
                             //continue si des valeurs sont présentes
                             if (!row.trim()) continue;
@@ -333,6 +333,7 @@
                                 if (i === rows.length - 1) { //dernier point
                                     const marker = L.marker([lat, lng], {icon: lastIcon,}).bindPopup(PopupContent);
                                     voyageLayer.addLayer(marker);
+                                    console.log(v; i);
                                 }
                             }
                         }
