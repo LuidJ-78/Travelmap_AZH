@@ -276,7 +276,7 @@
                             voyageVisibility[voyageId] = !voyageVisibility[voyageId];
                         };
 
-                        //nombre de point affiché
+                        //WIP nombre de point affiché
                         var pointafficher = 50;
                         var pointdepart = rows.length - pointafficher;
                         //console.log(pointdepart);
@@ -284,7 +284,15 @@
                             pointdepart = 1
                             //console.log(pointdepart);
                         }
+                        //WIP
 
+                        let tmp_lastRow = 1;
+                        while (sheet.getRange(tmp_lastRow, 8 * v).getValue() !== "") {
+                            tmp_lastRow++;
+                        }
+                        cols_lastrow = tmp_lastRow -1;
+                        console.log(cols_lastrow);
+                        
                         // Parcourir les données du CSV pour ce voyage et ajouter les marqueurs et polylines
                         const markerPositions = [];
                         for (let i = pointdepart; i < rows.length; i++) {
@@ -307,7 +315,6 @@
                                 if (!isNaN(lastlat) && !isNaN(lastlng) && lastairportCode) {
                                     const lastmarker = L.marker([lastlat, lastlng], {icon: lastIcon,}).bindPopup(lastPopupContent);
                                     voyageLayer.addLayer(lastmarker);
-                                    console.log("!cols[8*v]");
                                 }
                             }
                             //console.log(row);
@@ -333,7 +340,6 @@
                                 if (i === rows.length - 1) { //dernier point
                                     const marker = L.marker([lat, lng], {icon: lastIcon,}).bindPopup(PopupContent);
                                     voyageLayer.addLayer(marker);
-                                    console.log(airportName);
                                 }
                             }
                         }
