@@ -238,7 +238,7 @@
                     const rows = csvText.split("\n");
                     if (rows.length < 3) return; // Pas de données (on ignore la première ligne)
 
-                    //console.log(rows);
+                    console.log(rows);
 
                     // On suppose que chaque groupe de 8 colonnes est un voyage
                     const header = rows[1].split(",");
@@ -303,6 +303,7 @@
                             const row = rows[i];
                             const cols = row.split(",");
                             console.log(i);
+                            console.log(derniereLigneAvecContenu);
 
                             //marker pour tout les points                            
                             const airportCode = cols[8 * v + 1] ? cols[8 * v + 1].trim() : "";
@@ -323,8 +324,6 @@
                             if (i == derniereLigneAvecContenu ) { //dernier point
                                 const marker = L.marker([lat, lng], {icon: lastIcon,}).bindPopup(PopupContent);
                                 voyageLayer.addLayer(marker);
-                                console.log(i);
-                                console.log(derniereLigneAvecContenu);
                                 break;
                             }
                         }
