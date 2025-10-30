@@ -237,21 +237,19 @@
                 .then((csvText) => {
                     const rows = csvText.split("\n");
                     if (rows.length < 3) return; // Pas de données (on ignore la première ligne)
-
-                    console.log(rows);
+                    //console.log(rows);
 
                     // On suppose que chaque groupe de 8 colonnes est un voyage
                     const header = rows[1].split(",");
                     const voyageCount = Math.floor(header.length / 8);
 
                     const voyagesButtonsDiv = document.getElementById("voyages-buttons");
-
+                    
                     // Pour chaque voyage, créer un bouton et afficher ce qui correspond au voyage
                     for (let v = 0; v < voyageCount; v++) {
                         // Nom du voyage (on prend la première colonne du groupe, donc 8*v)
                         const voyageName = header[8 * v] ? header[8 * v].trim() : `Voyage ${v + 1}`;
                         const voyageId = `voyage_${v}`;
-
                         let derniereLigneAvecContenu = -1;
                         for (let i = rows.length - 1; i >= 1; i--) {
                             const colonnes = rows[i].split(",");
@@ -262,7 +260,6 @@
                          }
                         //console.log(`Dernière ligne avec du contenu pour le voyage ${voyageName} (colonne ${8 * v}) : ${derniereLigneAvecContenu}`);
                         
-
                         // Créer le bouton
                         const btn = document.createElement("button");
                         btn.className = "toggle-button";
@@ -302,8 +299,8 @@
                         for (let i = pointdepart; i < rows.length; i++) {
                             const row = rows[i];
                             const cols = row.split(",");
-                            console.log(i);
-                            console.log(derniereLigneAvecContenu);
+                            //console.log(i);
+                            //console.log(derniereLigneAvecContenu);
 
                             //marker pour tout les points                            
                             const airportCode = cols[8 * v + 1] ? cols[8 * v + 1].trim() : "";
