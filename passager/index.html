@@ -253,7 +253,7 @@
                         const voyageId = `voyage_${v}`;
 
                         let derniereLigneAvecContenu = -1;
-                        for (let i = 1; i <= rows.length ; i++) {
+                        for (let i = 1; i < rows.length ; i++) {
                             const colonnes = rows[i].split(",");
                             if (colonnes.length > 8 * v && colonnes[8 * v].trim() !== "") {
                                 derniereLigneAvecContenu = i;
