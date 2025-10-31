@@ -116,13 +116,22 @@
                 position: fixed;
                 top: 380px;
                 left: 50%;
-                transform: translateX(-50%);
-                width: 700px;
+                transform: translateX(-150%);
+                width: 250px;
                 height: 250px;
                 background: #f4f4f4;
                 box-sizing: border-box; 
                 text-align: justify;
                 text-justify: inter-word;
+                z-index: 3;
+            }
+            #infographie_azh{
+                position: fixed;
+                top: 3800px;
+                left: 50%;
+                transform: translateX(-15%);
+                width: 435px;
+                height: auto;
                 z-index: 3;
             }
         </style>
@@ -167,17 +176,17 @@
         
         <div id="description_2">
             <p> 
-                Ce planificateur de vol permet de choisir un aéroport de départ et d'arrivée et de créer un plan de vol simbrief pour : <br> 
-                - faire du vol libre <br>
-                - fabriquer des croquettes franco-européenne <br>
-                - fabriquer du sirop d'hérable canadien <br>
-                - fabriquer et livrer des Airbus A320 <br>
-                - transporter des passagers via les lignes AZH500 <br>
-                - transporter des marchandises via les lignes AZH1000 
+                Ce planificateur de vol permet de choisir un aéroport de départ et d'arrivée et de créer un plan de vol simbrief pour réaliser différentes activités comme le transport de pâssager ou la fabrication de croquette 
             </p>
             <p> 
-                Une carte de voyage permet aussi de visualizer le trajet réalisé par les lignes AZH500 et AZH1000
+                Une carte de voyage permet aussi de visualizer le trajet réalisé par les différentes lignes de la compagnie
             </p>
+        </div>
+
+        <div id="infographie_azh">
+            <div style="display: flex; align-items: center;">
+                <img src="infographie_azh" alt="infographie_azh" style=" width: 435px;">
+            </div>
         </div>
         
         <div id="map"></div>
