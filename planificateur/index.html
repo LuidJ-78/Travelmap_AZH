@@ -540,22 +540,6 @@
                 const checkboxDiv = document.createElement('div');
                 checkboxDiv.classList.add('category-checkboxes');
 
-                if (group === "Airlines") {
-                    // Bouton pour afficher l'image dans une popup
-                    const imgButton = document.createElement('button');
-                    imgButton.innerText = "Afficher les avions possible";
-                    imgButton.className = "toggle-button";
-                    imgButton.onclick = function() {
-                    // Afficher l'image dans une popup au centre de la carte
-                    const popupContent = `<div style="text-align:center; margin:0; padding:0;"> <img src="liste_avion_possible.png" alt="Flotte Airlines" style="max-width:1400px; display:block; margin:auto;"> </div>`;
-                    L.popup({ maxWidth: 1400, minWidth: 1400 })
-                        .setLatLng([-80, 0] )
-                        .setContent(popupContent)
-                        .openOn(map);
-                    };
-                    checkboxDiv.appendChild(imgButton); 
-                }
-
                 // Tri alphanumérique naturel avec prise en compte des chiffres
                 categoryGroups[group].sort((a, b) => {
                 return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
