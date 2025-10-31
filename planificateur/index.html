@@ -217,23 +217,6 @@
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     
-    // décalage sidebar pour le barre de déffilement 
-    <script>
-    function checkSidebarScrollbar() {
-        const sidebar = document.getElementById('sidebar');
-        if (!sidebar) return;
-        // Vérifie si la sidebar déborde (scroll)
-        if (sidebar.scrollHeight > sidebar.clientHeight) {
-            sidebar.classList.add('sidebar-large');
-        } else {
-            sidebar.classList.remove('sidebar-large');
-        }
-    }
-    // Vérifie au chargement et à chaque redimensionnement
-    window.addEventListener('load', checkSidebarScrollbar);
-    window.addEventListener('resize', checkSidebarScrollbar);
-    </script>
-
     <script>
             //affichage de la map en fond
             const map = L.map("map", {zoomControl: false}).setView([20, 0], 2);
@@ -684,5 +667,22 @@ document.getElementById('generateLinkButton').addEventListener('click', () => {
         });
     </script>
 
+    // décalage sidebar pour le barre de déffilement 
+    <script>
+    function checkSidebarScrollbar() {
+        const sidebar = document.getElementById('sidebar');
+        if (!sidebar) return;
+        // Vérifie si la sidebar déborde (scroll)
+        if (sidebar.scrollHeight > sidebar.clientHeight) {
+            sidebar.classList.add('sidebar-large');
+        } else {
+            sidebar.classList.remove('sidebar-large');
+        }
+    }
+    // Vérifie au chargement et à chaque redimensionnement
+    window.addEventListener('load', checkSidebarScrollbar);
+    window.addEventListener('resize', checkSidebarScrollbar);
+    </script>
+    
 </body>
 </html>
