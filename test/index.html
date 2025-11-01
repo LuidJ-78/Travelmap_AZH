@@ -30,7 +30,10 @@
                 text-align: left;
                 overflow: hidden;
                 z-index: 25;
-            }         
+            }
+            #map {
+                z-index: 1;
+            }
             .topnav {
                 display: flex;
                 background-color: #333;
@@ -177,14 +180,14 @@
             <a href="https://luidj-78.github.io/Travelmap_AZH/cargo/" style="color:#007BFF;font-weight:bold;"> cargo </a>
         </div>
 
-       <div id="mapid" style="position: absolute; top: 0px; left: 0; bottom: 0; right: 0;"></div>
+       <div id="map" style="position: absolute; top: 0px; left: 0; bottom: 0; right: 0;"></div>
 
         <script>
             //affichage de la map en fond
             //var map = L.map("map", {zoomControl: false}).setView([20, 0], 2);
             //L.tileLayer("https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",{ attribution: "&copy; OpenStreetMap contributeurs" },).addTo(map);
             
-            var map = L.map('mapid').setView([48.8566, 2.3522], 4);
+            var map = L.map('map').setView([48.8566, 2.3522], 4);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attributions: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'}).addTo(map);
 
             /** RainViewer radar animation part * @type {number[]} */
