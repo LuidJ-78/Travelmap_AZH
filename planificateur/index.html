@@ -144,7 +144,7 @@
                 bottom: 20px;
                 left: 50%;
                 transform: translateX(-50%);
-                width: 900;
+                width: 900px;
                 height: auto;
                 background: #f4f4f4;
                 padding: 0 10px;
@@ -231,7 +231,7 @@
     <div id="map" style="position: absolute; top: 0px; left: 0; bottom: 0; right: 0;"></div>
 
     <div id="radar_control">
-        <ul style="height: 50px;">
+        <ul>
             <li><input type="radio" name="kind" onchange="setKind('sansradar')">sans radar</li><input type="radio" name="kind" checked="checked" onchange="setKind('radar')">Radar (Past + Future) <input type="radio" name="kind" onchange="setKind('satellite')">Infrared Satellite</li>
 
             <li><input type="button" onclick="stop(); showFrame(animationPosition - 1); return;" value="&lt;" /></li>
