@@ -138,6 +138,24 @@
               background-color: #04AA6D;
               color: white;
             }
+
+            #radar_control {
+                position: fixed;
+                bottom: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: auto;
+                max-width: calc(100% - 40px);
+                min-width: 280px;
+                height: auto;
+                background: #f4f4f4;
+                padding: 0 10px;
+                box-sizing: border-box; 
+                box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+                border-radius: 10px;
+                text-align: center;
+                z-index: 2;
+            }
         
     </style>
 </head>
@@ -209,6 +227,10 @@
         </div>
     
     <div id="map" style="position: absolute; top: 0px; left: 0; bottom: 0; right: 0;"></div>
+
+    <div id="radar_control">
+        
+    </div>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     
