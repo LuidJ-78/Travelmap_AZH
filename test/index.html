@@ -90,6 +90,9 @@
                 text-align: center;
                 z-index: 2;
             }
+            .main_body-large {
+                width: 895px !important; /* ou la largeur désirée */
+            }
             #logo_azh_airline{
                 position: fixed;
                 top: 30px;
@@ -209,9 +212,12 @@
                 if (!main_body) return;
                 // Vérifie si la sidebar déborde (scroll)
                 if (main_body.scrollHeight+70 > window.innerHeight) {
-                    console.log("resize");
-                    console.log(main_body.scrollHeight+70);
-                    console.log(window.innerHeight);
+                    //console.log("resize");
+                    //console.log(main_body.scrollHeight+70);
+                    //console.log(window.innerHeight);
+                    main_body.classList.add('main_body-large');
+                } else {
+                    main_body.classList.remove('main_body-large');
                 }
             }
             // Vérifie au chargement et à chaque redimensionnement
