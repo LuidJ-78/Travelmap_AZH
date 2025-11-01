@@ -205,7 +205,12 @@
                 // décalage sidebar pour le barre de déffilement 
         <script>
             function checkSidebarScrollbar() {
-                console.log("resize");
+                const main_body = document.getElementById('main_body');
+                if (!main_body) return;
+                // Vérifie si la sidebar déborde (scroll)
+                if (sidebar.scrollHeight+70 > sidebar.clientHeight) {
+                    console.log("resize");
+                }
             }
             // Vérifie au chargement et à chaque redimensionnement
             window.addEventListener('load', checkSidebarScrollbar);
