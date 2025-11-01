@@ -144,7 +144,7 @@
                 bottom: 20px;
                 left: 50%;
                 transform: translateX(-50%);
-                width: 900px;
+                width: 750px;
                 height: 75px;
                 background: #f4f4f4;
                 padding: 0 10px;
@@ -232,7 +232,7 @@
 
     <div id="radar_control">
         <ul>
-            <li><input type="radio" name="kind" onchange="setKind('sansradar')">sans radar</li><input type="radio" name="kind" checked="checked" onchange="setKind('radar')">Radar <input type="radio" name="kind" onchange="setKind('satellite')">Satellite</li>
+            <li><input type="radio" name="kind" onchange="setKind('sansradar')">désactivé</li><input type="radio" name="kind" checked="checked" onchange="setKind('radar')">Radar <input type="radio" name="kind" onchange="setKind('satellite')">Satellite</li>
 
             <li><input type="button" onclick="stop(); showFrame(animationPosition - 1); return;" value="&lt;" /></li>
             <li><input type="button" onclick="playStop();" value="Play / Stop" /></li>
@@ -501,11 +501,6 @@
 
         customAirline.addEventListener('input', updateCallsign);
         customNumber.addEventListener('input', updateCallsign);
-
-        // const map = L.map('map').setView([20, 0], 2);
-        //L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-        //    attribution: '&copy; OpenStreetMap contributeurs'
-        //}).addTo(map);
 
         const layers = {}; // Chaque catégorie sera un layer distinct
         let departureMarker = null;
