@@ -183,12 +183,9 @@
        <div id="map" style="position: absolute; top: 0px; left: 0; bottom: 0; right: 0;"></div>
 
         <script>
-            //affichage de la map en fond
-            //var map = L.map("map", {zoomControl: false}).setView([20, 0], 2);
-            //L.tileLayer("https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",{ attribution: "&copy; OpenStreetMap contributeurs" },).addTo(map);
-            
+            //affichage de la map en fond           
             var map = L.map('map', {zoomControl: false}).setView([48.8566, 2.3522], 4);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: "&copy; OpenStreetMap contributeurs" }).addTo(map);
+            L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', { attribution: "&copy; OpenStreetMap contributeurs" }).addTo(map);
 
             /** RainViewer radar animation part * @type {number[]} */
             var apiData = {};
