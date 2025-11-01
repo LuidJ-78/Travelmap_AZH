@@ -90,9 +90,6 @@
                 text-align: center;
                 z-index: 2;
             }
-            .main_body-large {
-                width: 895px !important; /* ou la largeur désirée */
-            }
             #logo_azh_airline{
                 position: fixed;
                 top: 30px;
@@ -206,22 +203,5 @@
             L.tileLayer("https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",{ attribution: "&copy; OpenStreetMap contributeurs" },).addTo(map);
         </script>
         
-        // décalage sidebar pour le barre de déffilement 
-        <script>
-        function checkSidebarScrollbar() {
-            const main_body = document.getElementById('main_body');
-            if (!main_body) return;
-
-            // Vérifie si la sidebar déborde (scroll)
-            if ((main_body.scrollHeight + 70) > main_body.clientHeight) {
-                main_body.classList.add('main_body-large');
-            } else {
-                main_body.classList.remove('main_body-large');
-            }
-        }
-        // Vérifie au chargement et à chaque redimensionnement
-        window.addEventListener('load', checkSidebarScrollbar);
-        window.addEventListener('resize', checkSidebarScrollbar);
-        </script>
     </body>
 </html>
