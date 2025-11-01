@@ -654,7 +654,7 @@ document.getElementById('generateLinkButton').addEventListener('click', () => {
         console.log(sidebar.scrollHeight);
         console.log(window.innerHeight);
         // Vérifie si la sidebar déborde (scroll)
-        if (sidebar.scrollHeight > window.innerHeight-20) {
+        if (sidebar.scrollHeight+31 > window.innerHeight) {
             console.log(sidebar.scrollHeight);
             console.log(window.innerHeight);
             sidebar.classList.add('sidebar-large');
