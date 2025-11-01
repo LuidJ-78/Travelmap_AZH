@@ -234,7 +234,7 @@
 
     <div id="radar_control">
         <ul style="height: 50px;">
-            <li><input type="radio" name="kind" checked="checked" onchange="setKind('radar')">Radar (Past + Future) <input type="radio" name="kind" onchange="setKind('satellite')">Infrared Satellite</li>
+            <li><input type="radio" name="kind" onchange="setKind('sansradar')">sans radar</li><input type="radio" name="kind" checked="checked" onchange="setKind('radar')">Radar (Past + Future) <input type="radio" name="kind" onchange="setKind('satellite')">Infrared Satellite</li>
 
             <li><input type="button" onclick="stop(); showFrame(animationPosition - 1); return;" value="&lt;" /></li>
             <li><input type="button" onclick="playStop();" value="Play / Stop" /></li>
