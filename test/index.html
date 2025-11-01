@@ -208,7 +208,7 @@
                 const main_body = document.getElementById('main_body');
                 if (!main_body) return;
                 // Vérifie si la sidebar déborde (scroll)
-                if (sidebar.scrollHeight+70 > sidebar.clientHeight) {
+                if (main_body.scrollHeight+70 > main_body.clientHeight) {
                     console.log("resize");
                 }
             }
