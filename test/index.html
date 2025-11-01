@@ -202,6 +202,15 @@
             const map = L.map("map", {zoomControl: false}).setView([20, 0], 2);
             L.tileLayer("https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",{ attribution: "&copy; OpenStreetMap contributeurs" },).addTo(map);
         </script>
+                // décalage sidebar pour le barre de déffilement 
+        <script>
+            function checkSidebarScrollbar() {
+                console.log(resize);
+            }
+            // Vérifie au chargement et à chaque redimensionnement
+            window.addEventListener('load', checkSidebarScrollbar);
+            window.addEventListener('resize', checkSidebarScrollbar);
+        </script>
         
     </body>
 </html>
