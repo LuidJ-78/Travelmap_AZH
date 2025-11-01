@@ -651,6 +651,8 @@ document.getElementById('generateLinkButton').addEventListener('click', () => {
         const sidebar = document.getElementById('sidebar');
         if (!sidebar) return;
         console.log("resize");
+        console.log(sidebar.scrollHeight);
+        console.log(window.Height);
         // Vérifie si la sidebar déborde (scroll)
         if (sidebar.scrollHeight > window.Height) {
             console.log(sidebar.scrollHeight);
