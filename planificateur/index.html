@@ -145,7 +145,7 @@
                 left: 50%;
                 transform: translateX(-50%);
                 width: 900px;
-                height: auto;
+                height: 75px;
                 background: #f4f4f4;
                 padding: 0 10px;
                 box-sizing: border-box; 
@@ -232,7 +232,7 @@
 
     <div id="radar_control">
         <ul>
-            <li><input type="radio" name="kind" onchange="setKind('sansradar')">sans radar</li><input type="radio" name="kind" checked="checked" onchange="setKind('radar')">Radar (Past + Future) <input type="radio" name="kind" onchange="setKind('satellite')">Infrared Satellite</li>
+            <li><input type="radio" name="kind" onchange="setKind('sansradar')">sans radar</li><input type="radio" name="kind" checked="checked" onchange="setKind('radar')">Radar <input type="radio" name="kind" onchange="setKind('satellite')">Satellite</li>
 
             <li><input type="button" onclick="stop(); showFrame(animationPosition - 1); return;" value="&lt;" /></li>
             <li><input type="button" onclick="playStop();" value="Play / Stop" /></li>
