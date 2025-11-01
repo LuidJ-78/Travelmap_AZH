@@ -144,9 +144,7 @@
                 bottom: 20px;
                 left: 50%;
                 transform: translateX(-50%);
-                width: auto;
-                max-width: calc(100% - 40px);
-                min-width: 280px;
+                width: 900;
                 height: auto;
                 background: #f4f4f4;
                 padding: 0 10px;
@@ -420,6 +418,14 @@
             /**  Change map options */
             function setKind(kind) {
                 optionKind = kind;
+                if (kind === 'sansradar') {// Supprimer tous les layers radar existants
+                    for (var i in radarLayers) {
+                    map.removeLayer(radarLayers[i]);
+                    }
+                radarLayers = [];
+                document.getElementById("timestamp").innerHTML = "Radar désactivé";
+                return; // On sort de la fonction sans initialiser les layers radar
+                }
                 initialize(apiData, optionKind);
             }
             function setColors() {
