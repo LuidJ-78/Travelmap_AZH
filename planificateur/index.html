@@ -652,6 +652,8 @@ document.getElementById('generateLinkButton').addEventListener('click', () => {
         if (!sidebar) return;
         // Vérifie si la sidebar déborde (scroll)
         if (sidebar.scrollHeight > window.Height) {
+            console.log(sidebar.scrollHeight);
+            console.log(window.Height);
             sidebar.classList.add('sidebar-large');
         } else {
             sidebar.classList.remove('sidebar-large');
