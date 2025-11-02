@@ -259,7 +259,7 @@
                                 break;
                             }
                          }
-                        //console.log(`Dernière ligne avec du contenu pour le voyage ${voyageName} (colonne ${8 * v}) : ${derniereLigneAvecContenu}`);
+                        console.log(`Dernière ligne avec du contenu pour le voyage ${voyageName} (colonne ${8 * v}) : ${derniereLigneAvecContenu}`);
                         
                         // Créer le bouton
                         const btn = document.createElement("button");
@@ -286,13 +286,12 @@
                         };
 
                         //WIP nombre de point affiché
-                        var pointafficher = 25;
+                        var pointafficher = 10;
                         var pointdepart = derniereLigneAvecContenu - pointafficher;
-                        //console.log(pointdepart);
                         if (pointdepart < 1){
                             pointdepart = 1
-                            console.log(pointdepart);
                         }
+                        console.log(pointdepart);
                         
                         // Parcourir les données du CSV pour ce voyage et ajouter les marqueurs et polylines
                         const markerPositions = [];
