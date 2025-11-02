@@ -250,6 +250,7 @@
                         // Nom du voyage (on prend la première colonne du groupe, donc 8*v)
                         const voyageName = header[8 * v] ? header[8 * v].trim() : `Voyage ${v + 1}`;
                         const voyageId = `voyage_${v}`;
+                        
                         let derniereLigneAvecContenu = -1;
                         for (let i = rows.length - 1; i >= 1; i--) {
                             const colonnes = rows[i].split(",");
@@ -285,14 +286,13 @@
                         };
 
                         //WIP nombre de point affiché
-                        var pointafficher = 50;
-                        var pointdepart = rows.length - pointafficher;
+                        var pointafficher = 25;
+                        var pointdepart = derniereLigneAvecContenu - pointafficher;
                         //console.log(pointdepart);
                         if (pointdepart < 1){
                             pointdepart = 1
-                            //console.log(pointdepart);
+                            console.log(pointdepart);
                         }
-                        //WIP
                         
                         // Parcourir les données du CSV pour ce voyage et ajouter les marqueurs et polylines
                         const markerPositions = [];
