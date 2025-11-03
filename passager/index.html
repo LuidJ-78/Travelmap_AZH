@@ -239,8 +239,9 @@
                 .then((response) => response.text())
                 .then((csvText) => {
                     rows = csvText.split("\n");
-                    if (rows.length < 3) return; // Pas de données (on ignore la première ligne)
-                    //console.log(rows);
+            };
+            if (rows.length < 3) return; // Pas de données (on ignore la première ligne)
+            //console.log(rows);
 
                     // On suppose que chaque groupe de 8 colonnes est un voyage
                     const header = rows[1].split(",");
@@ -332,7 +333,7 @@
                             voyageLayer.addLayer(polyline);
                         }
                     }
-                });
+                );
         </script>
         
         // décalage sidebar pour le barre de déffilement 
