@@ -239,7 +239,7 @@
                 .then((response) => response.text())
                 .then((csvText) => {
                     rows = csvText.split("\n");
-            };
+            });
             if (rows.length < 3) return; // Pas de données (on ignore la première ligne)
             //console.log(rows);
 
@@ -333,7 +333,7 @@
                             voyageLayer.addLayer(polyline);
                         }
                     }
-                );
+
         </script>
         
         // décalage sidebar pour le barre de déffilement 
