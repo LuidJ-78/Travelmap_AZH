@@ -240,7 +240,10 @@
                 .then((csvText) => {
                     rows = csvText.split("\n");
             });
-            if (rows.length < 3) return; // Pas de données (on ignore la première ligne)
+            if (rows.length < 2){ // Pas de données (on ignore la première ligne)
+                console.log("pas assez de données");
+                console.log(rows);
+            };
             //console.log(rows);
 
                     // On suppose que chaque groupe de 8 colonnes est un voyage
