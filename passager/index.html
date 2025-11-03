@@ -241,12 +241,15 @@
                 .then((csvText) => {
                     rows_csvbrut = csvText;
             });
-            console.log(rows_csvbrut);
-            rows = rows_csvbrut.split("\n");
-            if (rows.length < 2){ // Pas de données (on ignore la première ligne)
-                console.log("pas assez de données");
-            };
-            console.log(rows);
+
+            .then(() => {
+                console.log(rows_csvbrut);
+                rows = rows_csvbrut.split("\n");
+                if (rows.length < 2){ // Pas de données (on ignore la première ligne)
+                    console.log("pas assez de données");
+                };
+                console.log(rows);
+            });
 
             // On suppose que chaque groupe de 8 colonnes est un voyage
             const header = rows[1].split(",");
