@@ -241,8 +241,7 @@
                 .then((csvText) => {
                     rows_csvbrut = csvText;
             });
-
-            .then(() => {
+            then(() => {
                 console.log(rows_csvbrut);
                 rows = rows_csvbrut.split("\n");
                 if (rows.length < 2){ // Pas de données (on ignore la première ligne)
