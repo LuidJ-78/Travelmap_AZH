@@ -233,16 +233,18 @@
             const voyageVisibility = {};
 
             let rows;
+            let rows_csvbrut;
 
             // Récupérer les données du CSV et créer un bouton par voyage
             fetch(sheetURL)
                 .then((response) => response.text())
                 .then((csvText) => {
-                    rows = csvText.split("\n");
+                    rows_csvbrut = csvText;
             });
+            console.log(rows_csvbrut);
+            rows = rows_csvbrut.split("\n");
             if (rows.length < 2){ // Pas de données (on ignore la première ligne)
                 console.log("pas assez de données");
-                console.log(rows);
             };
             console.log(rows);
 
