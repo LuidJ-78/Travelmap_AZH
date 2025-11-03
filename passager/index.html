@@ -190,7 +190,7 @@
 
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
-        <!--//affichage map et pointer sur la map-->
+        //affichage map et pointer sur la map
         <script>
             //affichage de la map en fond
             const map = L.map("map", {zoomControl: false}).setView([20, 0], 2);
@@ -232,41 +232,35 @@
             // Pour suivre la visibilité de chaque voyage
             const voyageVisibility = {};
 
-            var rows  = {};
-
             // Récupérer les données du CSV et créer un bouton par voyage
             fetch(sheetURL)
                 .then((response) => response.text())
                 .then((csvText) => {
-                    rows = csvText.split("\n");
-            });
-            if (rows.length < 2){ // Pas de données (on ignore la première ligne)
-                console.log("pas assez de données");
-                console.log(rows);
-            };
-            console.log(rows);
+                    const rows = csvText.split("\n");
+                    if (rows.length < 3) return; // Pas de données (on ignore la première ligne)
+                    //console.log(rows);
 
-            // On suppose que chaque groupe de 8 colonnes est un voyage
-            const header = rows[1].split(",");
-            const voyageCount = Math.floor(header.length / 8);
-            
-            const voyagesButtonsDiv = document.getElementById("voyages-buttons");
+                    // On suppose que chaque groupe de 8 colonnes est un voyage
+                    const header = rows[1].split(",");
+                    const voyageCount = Math.floor(header.length / 8);
 
-            // Pour chaque voyage, créer un bouton et afficher ce qui correspond au voyage
-            for (let v = 0; v < voyageCount; v++) {
-                // Nom du voyage (on prend la première colonne du groupe, donc 8*v)
-                const voyageName = header[8 * v] ? header[8 * v].trim() : `Voyage ${v + 1}`;
-                const voyageId = `voyage_${v}`;
+                    const voyagesButtonsDiv = document.getElementById("voyages-buttons");
+                    
+                    // Pour chaque voyage, créer un bouton et afficher ce qui correspond au voyage
+                    for (let v = 0; v < voyageCount; v++) {
+                        // Nom du voyage (on prend la première colonne du groupe, donc 8*v)
+                        const voyageName = header[8 * v] ? header[8 * v].trim() : `Voyage ${v + 1}`;
+                        const voyageId = `voyage_${v}`;
                         
-                let derniereLigneAvecContenu = -1;
-                for (let i = rows.length - 1; i >= 1; i--) {
-                    const colonnes = rows[i].split(",");
-                    if (colonnes.length > 8 * v && colonnes[8 * v].trim() !== "") {
-                        derniereLigneAvecContenu = i+1;
-                        break;
-                    }
-                }
-            console.log(`Dernière ligne avec du contenu pour le voyage ${voyageName} (colonne ${8 * v}) : ${derniereLigneAvecContenu}`);
+                        let derniereLigneAvecContenu = -1;
+                        for (let i = rows.length - 1; i >= 1; i--) {
+                            const colonnes = rows[i].split(",");
+                            if (colonnes.length > 8 * v && colonnes[8 * v].trim() !== "") {
+                                derniereLigneAvecContenu = i+1;
+                                break;
+                            }
+                         }
+                        console.log(`Dernière ligne avec du contenu pour le voyage ${voyageName} (colonne ${8 * v}) : ${derniereLigneAvecContenu}`);
                         
                         // Créer le bouton
                         const btn = document.createElement("button");
@@ -336,10 +330,10 @@
                             voyageLayer.addLayer(polyline);
                         }
                     }
-
+                });
         </script>
         
-        <!-- décalage sidebar pour le barre de déffilement  -->
+        // décalage sidebar pour le barre de déffilement 
         <script>
         function checkSidebarScrollbar() {
             const sidebar = document.getElementById('sidebar');
