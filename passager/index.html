@@ -207,8 +207,7 @@
                 "topographique": topographique,
                 "Satellite": satellite
             };
-            // Ajouter le contrôle à la carte
-            L.control.layers(baseLayers).addTo(map);
+            L.control.layers(baseLayers).addTo(map); // Ajouter le contrôle à la carte
 
             // Create a custom icon 
             const customIcon = L.icon({
@@ -224,13 +223,10 @@
                 popupAnchor: [0, -32], // Point from which the popup should open relative to the iconAnchor
             });
 
-            //google sheet url
-            const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTjulAyJlAG5smNj1FHKrfqWijHp8asBRfrDAGhB94HF5udtGl3_dWC3bIkEyce6b-5jwsbFI20PFci/pub?gid=1768006993&single=true&output=csv";
-
-            // Pour stocker les groupes LayerGroup de chaque voyage
-            const voyageLayers = {};
-            // Pour suivre la visibilité de chaque voyage
-            const voyageVisibility = {};
+            const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTjulAyJlAG5smNj1FHKrfqWijHp8asBRfrDAGhB94HF5udtGl3_dWC3bIkEyce6b-5jwsbFI20PFci/pub?gid=1768006993&single=true&output=csv";//google sheet url
+            const voyageLayers = {}; // Pour stocker les groupes LayerGroup de chaque voyage
+            const voyageVisibility = {}; // Pour suivre la visibilité de chaque voyage
+            
 
             // Récupérer les données du CSV et créer un bouton par voyage
             fetch(sheetURL)
@@ -245,6 +241,8 @@
                     const voyageCount = Math.floor(header.length / 8);
 
                     const voyagesButtonsDiv = document.getElementById("voyages-buttons");
+
+                    const cols = {};
                     
                     // Pour chaque voyage, créer un bouton et afficher ce qui correspond au voyage
                     for (let v = 0; v < voyageCount; v++) {
@@ -298,7 +296,7 @@
                         const markerPositions = [];
                         for (let i = pointdepart; i < rows.length; i++) {
                             const row = rows[i];
-                            const cols = row.split(",");
+                            cols = row.split(",");
                             //console.log(i);
                             //console.log(derniereLigneAvecContenu);
 
