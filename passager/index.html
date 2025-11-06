@@ -246,7 +246,8 @@
                     //WIP
                     var cols_TMP = {};
                     for (let y =  0; y >= rows.length; y++) {
-                            cols_TMP[y] = rows.split(",");
+                        cols_TMP[y] = rows.split(",");
+                        console.log(cols_TMP);
                     }
                     console.log(cols_TMP);
                     
@@ -266,7 +267,7 @@
                                 break;
                             }
                          }
-                        console.log(`Dernière ligne avec du contenu pour le voyage ${voyageName} (colonne ${8 * v}) : ${derniereLigneAvecContenu}`);
+                        //console.log(`Dernière ligne avec du contenu pour le voyage ${voyageName} (colonne ${8 * v}) : ${derniereLigneAvecContenu}`);
                         
                         // Créer le bouton
                         const btn = document.createElement("button");
