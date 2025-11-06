@@ -241,8 +241,16 @@
                     const voyageCount = Math.floor(header.length / 8);
 
                     const voyagesButtonsDiv = document.getElementById("voyages-buttons");
+                    
 
-                    var cols = {};
+                    //WIP
+                    var cols_TMP = {};
+                    for (let y =  0; y >= rows.length; y++) {
+                            cols_TMP[y] = rows.split(",");
+                    }
+                    console.log(cols_TMP);
+                    
+                    //WIP
                     
                     // Pour chaque voyage, créer un bouton et afficher ce qui correspond au voyage
                     for (let v = 0; v < voyageCount; v++) {
@@ -296,7 +304,7 @@
                         const markerPositions = [];
                         for (let i = pointdepart; i < rows.length; i++) {
                             const row = rows[i];
-                            cols = row.split(",");
+                            const cols = row.split(",");
                             //console.log(i);
                             //console.log(derniereLigneAvecContenu);
 
@@ -328,7 +336,6 @@
                             voyageLayer.addLayer(polyline);
                         }
                     }
-                    console.log(cols);
                 });
         </script>
         
