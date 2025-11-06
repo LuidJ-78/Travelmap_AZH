@@ -236,10 +236,9 @@
                     if (rows.length < 3) return; // Pas de données (on ignore la première ligne)
                     //console.log(rows);
 
-                    // On suppose que chaque groupe de 8 colonnes est un voyage
-                    const nombre_voyage = 8;
+                    const nb_cols_voyage = 8; // On suppose que chaque groupe de 8 colonnes est un voyage
                     const header = rows[1].split(",");
-                    const voyageCount = Math.floor(header.length / nombre_voyage);
+                    const voyageCount = Math.floor(header.length / nb_cols_voyage);
                     const voyagesButtonsDiv = document.getElementById("voyages-buttons");
 
                     //WIP
