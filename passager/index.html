@@ -299,15 +299,13 @@
                         if (pointdepart < 1){
                             pointdepart = 1
                         }
-                        console.log(pointdepart);
+                        //console.log(pointdepart);
                         
                         // Parcourir les données du CSV pour ce voyage et ajouter les marqueurs et polylines
                         const markerPositions = [];
                         for (let i = pointdepart; i < rows.length; i++) {
                             const row = rows[i];
                             const cols = row.split(",");
-                            //console.log(i);
-                            //console.log(derniereLigneAvecContenu);
 
                             //marker pour tout les points                            
                             const airportCode = cols[8 * v + 1] ? cols[8 * v + 1].trim() : "";
