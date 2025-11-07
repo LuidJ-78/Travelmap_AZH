@@ -175,6 +175,7 @@
             </div>
             <br>
             <div>
+                <button onclick="incrementPointafficher()" class="toggle-button">+10 points</button>
             </div>
             <br>
             <div id="voyages-buttons"></div>
@@ -271,7 +272,12 @@
             const voyageLayers = {}; // Pour stocker les groupes LayerGroup de chaque voyage
             const voyageVisibility = {}; // Pour suivre la visibilité de chaque voyage
 
-             var pointafficher = 10;            
+            var pointafficher = 10;
+
+            function incrementPointafficher() {
+                pointafficher += 10;
+                console.log( pointafficher);
+            }
 
             // Récupérer les données du CSV et créer un bouton par voyage
             fetch(sheetURL)
