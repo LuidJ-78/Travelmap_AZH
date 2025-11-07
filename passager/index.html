@@ -250,8 +250,13 @@
                     //console.table(table_voyage);
                     //console.log(table_voyage[25][60]);
 
-                    // Création bouton
+                    // Création voyage et bouton
                      for (let v = 0; v < voyageCount; v++) {
+                         //nom voyage
+                        const voyageName = header[nb_cols_voyage * v] ? header[nb_cols_voyage * v].trim() : `Voyage ${v + 1}`;
+                        const voyageId = `voyage_${v}`;
+
+                        //bouton
                         const btn = document.createElement("button");
                         btn.className = "toggle-button";
                         btn.id = `toggle_${voyageId}`;
@@ -281,10 +286,7 @@
                     
  /*                   // Pour chaque voyage, créer un bouton et afficher ce qui correspond au voyage
                     for (let v = 0; v < voyageCount; v++) {
-                        // Nom du voyage (on prend la première colonne du groupe, donc 8*v)
-                        const voyageName = header[8 * v] ? header[8 * v].trim() : `Voyage ${v + 1}`;
-                        const voyageId = `voyage_${v}`;
-                        
+                    
                         let derniereLigneAvecContenu = -1;
                         for (let i = rows.length - 1; i >= 1; i--) {
                             const colonnes = rows[i].split(",");
@@ -295,30 +297,6 @@
                          }
                         //console.log(`Dernière ligne avec du contenu pour le voyage ${voyageName} (colonne ${8 * v}) : ${derniereLigneAvecContenu}`);
                         
-                        // Créer le bouton
-                        const btn = document.createElement("button");
-                        btn.className = "toggle-button";
-                        btn.id = `toggle_${voyageId}`;
-                        btn.textContent = `Afficher le voyage ${voyageName}`;
-                        voyagesButtonsDiv.appendChild(btn);
-                        // Créer le LayerGroup pour ce voyage
-                        const voyageLayer = L.layerGroup([]);
-                        voyageLayers[voyageId] = voyageLayer;
-                        voyageVisibility[voyageId] = false;
-                        // Ajouter l'événement de toggle
-                        btn.onclick = function () {
-                            if (voyageVisibility[voyageId]) {
-                                map.removeLayer(voyageLayer);
-                                btn.textContent = `Afficher le voyage ${voyageName}`;
-                                btn.classList.remove("active");
-                            } else {
-                                map.addLayer(voyageLayer);
-                                btn.textContent = `Masquer le voyage ${voyageName}`;
-                                btn.classList.add("active");
-                            }
-                            voyageVisibility[voyageId] = !voyageVisibility[voyageId];
-                        };
-
                         //WIP nombre de point affiché
                         var pointafficher = 10;
                         var pointdepart = derniereLigneAvecContenu - pointafficher;
