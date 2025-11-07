@@ -175,7 +175,6 @@
             </div>
             <br>
             <div>
-                <button onclick="increment(pointafficher)">Incrémenter</button>
             </div>
             <br>
             <div id="voyages-buttons"></div>
@@ -195,16 +194,6 @@
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
         
         <script>
-
-        function increment(counter) {
-            counter++;
-            console.log(counter);
-            document.getElementById("pointafficher").textContent = counter;
-        }
-        function decrement(counter) {
-            counter--;
-        }
-
         
         function creation_polyline_voyage (table_voyage,nb_cols_voyage,n_voyage,rows_length,derniereLigneAvecContenu,pointafficher,voyageLayer){ // n_voyage = v,
                 var pointdepart = derniereLigneAvecContenu - pointafficher;
