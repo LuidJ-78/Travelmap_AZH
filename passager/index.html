@@ -191,7 +191,7 @@
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
         
         <script>
-        function creation_polyline_voyage (table_voyage,nb_cols_voyage,n_voyage,rows_lenght,derniereLigneAvecContenu,pointafficher){ // n_voyage = v,
+        function creation_polyline_voyage (table_voyage,nb_cols_voyage,n_voyage,rows_length,derniereLigneAvecContenu,pointafficher){ // n_voyage = v,
                 var pointdepart = derniereLigneAvecContenu - pointafficher;
                 if (pointdepart < 1){
                     pointdepart = 1
@@ -294,7 +294,7 @@
                                 btn.textContent = `Afficher le voyage ${voyageName}`;
                                 btn.classList.remove("active");
                             } else {
-                                creation_polyline_voyage (table_voyage,nb_cols_voyage,v,rows_lenght,derniereLigneAvecContenu,pointafficher);
+                                creation_polyline_voyage (table_voyage,nb_cols_voyage,v,rows_length,derniereLigneAvecContenu,pointafficher);
                                 map.addLayer(voyageLayer);
                                 btn.textContent = `Masquer le voyage ${voyageName}`;
                                 btn.classList.add("active");
