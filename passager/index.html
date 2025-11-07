@@ -247,7 +247,8 @@
                     for (let y =  0; y < rows.length; y++) {
                         table_voyage[y] = rows[y].split(",");
                     }
-                    //console.table(table_voyage);
+                    console.table(table_voyage.lenght);
+                    console.table(table_voyage.width);
                     //console.log(table_voyage[25][60]);
 
                     // Création voyage et bouton
@@ -281,6 +282,11 @@
                             voyageVisibility[voyageId] = !voyageVisibility[voyageId];
                         };
                      }
+            }); //fin fetch
+
+            
+            function creation_polyline_voyage (table_voyage,nb_cols_voyage,n_voyage){               
+            }
                     
                     
 //WIP
@@ -339,12 +345,7 @@
                             const polyline = L.polyline(markerPositions, {color: "green"});
                             voyageLayer.addLayer(polyline);
                         }
-                    } */
-                }); //fin fetch
-
-            function creation_polyline_voyage (){
-            }
-            
+                    } */            
         </script>
         
         // décalage sidebar pour le barre de déffilement 
