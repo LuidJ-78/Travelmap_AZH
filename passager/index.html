@@ -241,17 +241,45 @@
                     const voyageCount = Math.floor(header.length / nb_cols_voyage);
                     const voyagesButtonsDiv = document.getElementById("voyages-buttons");
 
-                    //WIP
-                    var cols_TMP = {};
+//WIP
+                    
+                    var table_voyage = {};
                     for (let y =  0; y < rows.length; y++) {
-                        cols_TMP[y] = rows[y].split(",");
+                        table_voyage[y] = rows[y].split(",");
                     }
-                    //console.table(cols_TMP);
-                    //console.log(cols_TMP[25][60]);
+                    //console.table(table_voyage);
+                    //console.log(table_voyage[25][60]);
+
+                    // Création bouton
+                     for (let v = 0; v < voyageCount; v++) {
+                        const btn = document.createElement("button");
+                        btn.className = "toggle-button";
+                        btn.id = `toggle_${voyageId}`;
+                        btn.textContent = `Afficher le voyage ${voyageName}`;
+                        voyagesButtonsDiv.appendChild(btn);
+                        // Créer le LayerGroup pour ce voyage
+                        const voyageLayer = L.layerGroup([]);
+                        voyageLayers[voyageId] = voyageLayer;
+                        voyageVisibility[voyageId] = false;
+                        // Ajouter l'événement de toggle
+                        btn.onclick = function () {
+                            if (voyageVisibility[voyageId]) {
+                                map.removeLayer(voyageLayer);
+                                btn.textContent = `Afficher le voyage ${voyageName}`;
+                                btn.classList.remove("active");
+                            } else {
+                                map.addLayer(voyageLayer);
+                                btn.textContent = `Masquer le voyage ${voyageName}`;
+                                btn.classList.add("active");
+                            }
+                            voyageVisibility[voyageId] = !voyageVisibility[voyageId];
+                        };
+                     }
                     
-                    //WIP
                     
-                    // Pour chaque voyage, créer un bouton et afficher ce qui correspond au voyage
+//WIP
+                    
+ /*                   // Pour chaque voyage, créer un bouton et afficher ce qui correspond au voyage
                     for (let v = 0; v < voyageCount; v++) {
                         // Nom du voyage (on prend la première colonne du groupe, donc 8*v)
                         const voyageName = header[8 * v] ? header[8 * v].trim() : `Voyage ${v + 1}`;
@@ -332,7 +360,7 @@
                             const polyline = L.polyline(markerPositions, {color: "green"});
                             voyageLayer.addLayer(polyline);
                         }
-                    }
+                    } */
                 });
         </script>
         
