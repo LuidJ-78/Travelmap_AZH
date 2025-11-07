@@ -273,6 +273,7 @@
                                 btn.textContent = `Afficher le voyage ${voyageName}`;
                                 btn.classList.remove("active");
                             } else {
+                                console.log(v);
                                 map.addLayer(voyageLayer);
                                 btn.textContent = `Masquer le voyage ${voyageName}`;
                                 btn.classList.add("active");
@@ -339,7 +340,11 @@
                             voyageLayer.addLayer(polyline);
                         }
                     } */
-                });
+                }); //fin fetch
+
+            function creation_polyline_voyage (){
+            }
+            
         </script>
         
         // décalage sidebar pour le barre de déffilement 
