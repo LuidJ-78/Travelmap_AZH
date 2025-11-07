@@ -233,7 +233,8 @@
                 .then((response) => response.text())
                 .then((csvText) => {
                     const rows = csvText.split("\n");
-                    if (rows.length < 3) return; // Pas de données (on ignore la première ligne)
+                    const rows_length = rows.length;
+                    if (rows_length < 3) return; // Pas de données (on ignore la première ligne)
                     //console.log(rows);
 
                     const nb_cols_voyage = 8; // On suppose que chaque groupe de 8 colonnes est un voyage
@@ -247,7 +248,7 @@
                     for (let y =  0; y < rows.length; y++) {
                         table_voyage[y] = rows[y].split(",");
                     }
-                    console.table(table_voyage);
+                    //console.table(table_voyage);
                     //console.log(table_voyage[25][60]);
 
                     // Création voyage et bouton
@@ -255,6 +256,17 @@
                          //nom voyage
                         const voyageName = header[nb_cols_voyage * v] ? header[nb_cols_voyage * v].trim() : `Voyage ${v + 1}`;
                         const voyageId = `voyage_${v}`;
+                         
+                        //dernière ligne voyage
+                        let derniereLigneAvecContenu = -1;
+                        for (let i = rows_length - 1; i >= 1; i--) {
+                            const colonnes = table_voyage[i][];
+                            if (colonnes.length > 8 * v && colonnes[8 * v].trim() !== "") {
+                                derniereLigneAvecContenu = i+1;
+                                break;
+                            }
+                         }
+                        console.log(`Dernière ligne avec du contenu pour le voyage ${voyageName} (colonne ${8 * v}) : ${derniereLigneAvecContenu}`);
 
                         //bouton
                         const btn = document.createElement("button");
@@ -284,7 +296,7 @@
             }); //fin fetch
 
             
-            function creation_polyline_voyage (table_voyage,nb_cols_voyage,n_voyage){               
+            function creation_polyline_voyage (table_voyage,nb_cols_voyage,n_voyage,rows_lenght){ // n_voyage = v,       
             }
                     
                     
