@@ -260,7 +260,7 @@
                         //dernière ligne voyage
                         let derniereLigneAvecContenu = -1;
                         for (let i = rows_length - 1; i >= 1; i--) {
-                            const colonnes = table_voyage[i][];
+                            const colonnes = table_voyage[i];
                             if (colonnes.length > 8 * v && colonnes[8 * v].trim() !== "") {
                                 derniereLigneAvecContenu = i+1;
                                 break;
