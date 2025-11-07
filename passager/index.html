@@ -279,13 +279,27 @@
 
             function incrementPointafficher() {
                 pointafficher += 1;
-                console.log( pointafficher);
                 document.getElementById("pointafficher-value").textContent = pointafficher;
+                for (let v = 0; v < voyageCount; v++) {
+                    const voyageId = `voyage_${v}`;
+                    if (voyageVisibility[voyageId]) {
+                        const voyageLayer = voyageLayers[voyageId];
+                        voyageLayer.clearLayers();
+                        creation_polyline_voyage(table_voyage, nb_cols_voyage, v, rows_length, derniereLigneAvecContenu, pointafficher, voyageLayer);
+                    }
+                }
             }
             function decrementPointafficher() {
                 pointafficher -= 1;
-                console.log( pointafficher);
                 document.getElementById("pointafficher-value").textContent = pointafficher;
+                for (let v = 0; v < voyageCount; v++) {
+                    const voyageId = `voyage_${v}`;
+                    if (voyageVisibility[voyageId]) {
+                        const voyageLayer = voyageLayers[voyageId];
+                        voyageLayer.clearLayers();
+                        creation_polyline_voyage(table_voyage, nb_cols_voyage, v, rows_length, derniereLigneAvecContenu, pointafficher, voyageLayer);
+                    }
+                }
             }
 
             // Récupérer les données du CSV et créer un bouton par voyage
