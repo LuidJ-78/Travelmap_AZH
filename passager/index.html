@@ -175,7 +175,8 @@
             </div>
             <br>
             <div>
-                <button onclick="incrementPointafficher()" class="toggle-button">+10 points</button>
+                <button onclick="incrementPointafficher()" class="toggle-button">+</button>
+                <button onclick="decrementPointafficher()" class="toggle-button">-</button>
             </div>
             <br>
             <div id="voyages-buttons"></div>
@@ -275,7 +276,11 @@
             var pointafficher = 10;
 
             function incrementPointafficher() {
-                pointafficher += 10;
+                pointafficher += 1;
+                console.log( pointafficher);
+            }
+            function decrementPointafficher() {
+                pointafficher -= 1;
                 console.log( pointafficher);
             }
 
