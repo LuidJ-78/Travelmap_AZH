@@ -176,9 +176,9 @@
             <br>
             <div>
                 <a>Nombre de point affiché <br /></a>
-                <button onclick="incrementPointafficher()" class="toggle-button"  style="width: 20%;">+</button>
+                <button onclick="incrementPointafficher(pointafficher)" class="toggle-button"  style="width: 20%;">+</button>
                 <span id="pointafficher-value">10</span>
-                <button onclick="decrementPointafficher()" class="toggle-button"  style="width: 20%;">-</button>
+                <button onclick="decrementPointafficher(pointafficher)" class="toggle-button"  style="width: 20%;">-</button>
             </div>
             <br>
             <div id="voyages-buttons"></div>
@@ -277,29 +277,13 @@
 
             var pointafficher = 10;
 
-            function incrementPointafficher() {
+            function incrementPointafficher(pointafficher) {
                 pointafficher += 1;
                 document.getElementById("pointafficher-value").textContent = pointafficher;
-                for (let v = 0; v < voyageCount; v++) {
-                    const voyageId = `voyage_${v}`;
-                    if (voyageVisibility[voyageId]) {
-                        const voyageLayer = voyageLayers[voyageId];
-                        voyageLayer.clearLayers();
-                        creation_polyline_voyage(table_voyage, nb_cols_voyage, v, rows_length, derniereLigneAvecContenu, pointafficher, voyageLayer);
-                    }
-                }
             }
-            function decrementPointafficher() {
+            function decrementPointafficher(pointafficher) {
                 pointafficher -= 1;
                 document.getElementById("pointafficher-value").textContent = pointafficher;
-                for (let v = 0; v < voyageCount; v++) {
-                    const voyageId = `voyage_${v}`;
-                    if (voyageVisibility[voyageId]) {
-                        const voyageLayer = voyageLayers[voyageId];
-                        voyageLayer.clearLayers();
-                        creation_polyline_voyage(table_voyage, nb_cols_voyage, v, rows_length, derniereLigneAvecContenu, pointafficher, voyageLayer);
-                    }
-                }
             }
 
             // Récupérer les données du CSV et créer un bouton par voyage
