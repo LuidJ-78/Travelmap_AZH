@@ -177,6 +177,7 @@
             <div>
                 <a>Nombre de point affiché <br /></a>
                 <button onclick="incrementPointafficher()" class="toggle-button"  style="width: 20%;">+</button>
+                <span id="pointafficher-value">10</span>
                 <button onclick="decrementPointafficher()" class="toggle-button"  style="width: 20%;">-</button>
             </div>
             <br>
@@ -279,10 +280,12 @@
             function incrementPointafficher() {
                 pointafficher += 1;
                 console.log( pointafficher);
+                document.getElementById("pointafficher-value").textContent = pointafficher;
             }
             function decrementPointafficher() {
                 pointafficher -= 1;
                 console.log( pointafficher);
+                document.getElementById("pointafficher-value").textContent = pointafficher;
             }
 
             // Récupérer les données du CSV et créer un bouton par voyage
