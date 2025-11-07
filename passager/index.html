@@ -204,13 +204,12 @@
 
                      //marker pour tout les points                            
                     const airportCode = table_voyage[i][nb_cols_voyage*n_voyage + 1] ? table_voyage[i][nb_cols_voyage*n_voyage + 1].trim() : ""; //cols[8 * n_voyage + 1] ? cols[8 * n_voyage + 1].trim() : "";
-                    console.log(airportCode);
-                    /*const lat = //parseFloat(cols[8 * n_voyage + 2]);
-                    const lng = //parseFloat(cols[8 * n_voyage + 3]);
-                    const airportName = //cols[8 * n_voyage + 4] ? cols[8 * n_voyage + 4].trim() : "";
-                    const date = //cols[8 * n_voyage + 5] ? cols[8 * n_voyage + 5].trim() : "";
-                    const player = //cols[8 * n_voyage + 6] ? cols[8 * n_voyage + 6].trim() : "";
-                    const PopupContent = `
+                    const lat = parseFloat(table_voyage[i][nb_cols_voyage*n_voyage + 2]);//parseFloat(cols[8 * n_voyage + 2]);
+                    const lng = parseFloat(table_voyage[i][nb_cols_voyage*n_voyage + 3]);//parseFloat(cols[8 * n_voyage + 3]);
+                    const airportName = table_voyage[i][nb_cols_voyage*n_voyage + 4] ? table_voyage[i][nb_cols_voyage*n_voyage + 4].trim() : "";//cols[8 * n_voyage + 4] ? cols[8 * n_voyage + 4].trim() : "";
+                    const date = table_voyage[i][nb_cols_voyage*n_voyage + 5] ? table_voyage[i][nb_cols_voyage*n_voyage + 5].trim() : "";//cols[8 * n_voyage + 5] ? cols[8 * n_voyage + 5].trim() : "";
+                    const player = table_voyage[i][nb_cols_voyage*n_voyage + 6] ? table_voyage[i][nb_cols_voyage*n_voyage + 6].trim() : "";//cols[8 * n_voyage + 6] ? cols[8 * n_voyage + 6].trim() : "";
+                    /*const PopupContent = `
                                             <b>${airportName}</b><br>
                                             ${airportCode} | ${date} | ${player}
                                         `;
@@ -277,7 +276,7 @@
                     const rows = csvText.split("\n");
                     const rows_length = rows.length;
                     if (rows_length < 3) return; // Pas de données (on ignore la première ligne)
-                    console.log(rows);
+                    //console.log(rows);
 
                     const nb_cols_voyage = 8; // On suppose que chaque groupe de 8 colonnes est un voyage
                     const header = rows[1].split(",");
@@ -288,7 +287,7 @@
                     for (let y =  0; y < rows.length; y++) {
                         table_voyage[y] = rows[y].split(",");
                     }
-                    console.log(table_voyage);
+                    //console.log(table_voyage);
                     //console.log(table_voyage[25][60]);
 
                     // Création voyage et bouton
