@@ -189,9 +189,17 @@
         <div id="map"></div>
 
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        
+        <script>
+        function creation_polyline_voyage (table_voyage,nb_cols_voyage,n_voyage,rows_lenght,derniereLigneAvecContenu,pointafficher){ // n_voyage = v,
+                var pointdepart = derniereLigneAvecContenu - pointafficher;
+                if (pointdepart < 1){
+                    pointdepart = 1
+                }
+                console.log(pointdepart);
+            }
 
         //affichage map et pointer sur la map
-        <script>
             //affichage de la map en fond
             const map = L.map("map", {zoomControl: false}).setView([20, 0], 2);
             L.control.zoom({position: 'bottomright'}).addTo(map);
@@ -226,7 +234,8 @@
             const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTjulAyJlAG5smNj1FHKrfqWijHp8asBRfrDAGhB94HF5udtGl3_dWC3bIkEyce6b-5jwsbFI20PFci/pub?gid=1768006993&single=true&output=csv";//google sheet url
             const voyageLayers = {}; // Pour stocker les groupes LayerGroup de chaque voyage
             const voyageVisibility = {}; // Pour suivre la visibilité de chaque voyage
-            
+
+             var pointafficher = 10;            
 
             // Récupérer les données du CSV et créer un bouton par voyage
             fetch(sheetURL)
@@ -266,7 +275,7 @@
                                 break;
                             }
                          }
-                        console.log(`Dernière ligne avec du contenu pour le voyage ${voyageName} (colonne ${8 * v}) : ${derniereLigneAvecContenu}`);
+                        //console.log(`Dernière ligne avec du contenu pour le voyage ${voyageName} (colonne ${8 * v}) : ${derniereLigneAvecContenu}`);
 
                         //bouton
                         const btn = document.createElement("button");
@@ -285,7 +294,7 @@
                                 btn.textContent = `Afficher le voyage ${voyageName}`;
                                 btn.classList.remove("active");
                             } else {
-                                console.log(v);
+                                creation_polyline_voyage (table_voyage,nb_cols_voyage,v,rows_lenght,derniereLigneAvecContenu,pointafficher);
                                 map.addLayer(voyageLayer);
                                 btn.textContent = `Masquer le voyage ${voyageName}`;
                                 btn.classList.add("active");
@@ -294,26 +303,11 @@
                         };
                      }
             }); //fin fetch
-
             
-            function creation_polyline_voyage (table_voyage,nb_cols_voyage,n_voyage,rows_lenght){ // n_voyage = v,       
-            }
-                    
-                    
 //WIP
                     
  /*                   // Pour chaque voyage, créer un bouton et afficher ce qui correspond au voyage
                     for (let v = 0; v < voyageCount; v++) {
-                    
-                        let derniereLigneAvecContenu = -1;
-                        for (let i = rows.length - 1; i >= 1; i--) {
-                            const colonnes = rows[i].split(",");
-                            if (colonnes.length > 8 * v && colonnes[8 * v].trim() !== "") {
-                                derniereLigneAvecContenu = i+1;
-                                break;
-                            }
-                         }
-                        //console.log(`Dernière ligne avec du contenu pour le voyage ${voyageName} (colonne ${8 * v}) : ${derniereLigneAvecContenu}`);
                         
                         //WIP nombre de point affiché
                         var pointafficher = 10;
