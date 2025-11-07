@@ -321,6 +321,7 @@
                         btn.onclick = function () {
                             if (voyageVisibility[voyageId]) {
                                 map.removeLayer(voyageLayer);
+                                voyageLayer.clearLayers()
                                 btn.textContent = `Afficher le voyage ${voyageName}`;
                                 btn.classList.remove("active");
                             } else {
@@ -332,47 +333,7 @@
                             voyageVisibility[voyageId] = !voyageVisibility[voyageId];
                         };
                      }// fin creation bouton et voyage
-            }); //fin fetch
-            
-//WIP
-                    
- /*                   // Pour chaque voyage, créer un bouton et afficher ce qui correspond au voyage
-                    for (let v = 0; v < voyageCount; v++) {
-                        
-                        // Parcourir les données du CSV pour ce voyage et ajouter les marqueurs et polylines
-                        const markerPositions = [];
-                        for (let i = pointdepart; i < rows.length; i++) {
-                            const row = rows[i];
-                            const cols = row.split(",");
-
-                            //marker pour tout les points                            
-                            const airportCode = cols[8 * v + 1] ? cols[8 * v + 1].trim() : "";
-                            const lat = parseFloat(cols[8 * v + 2]);
-                            const lng = parseFloat(cols[8 * v + 3]);
-                            const airportName = cols[8 * v + 4] ? cols[8 * v + 4].trim() : "";
-                            const date = cols[8 * v + 5] ? cols[8 * v + 5].trim() : "";
-                            const player = cols[8 * v + 6] ? cols[8 * v + 6].trim() : "";
-                            const PopupContent = `
-                                                 <b>${airportName}</b><br>
-                                                 ${airportCode} | ${date} | ${player}
-                                                 `;
-                            if (!isNaN(lat) && !isNaN(lng) && airportCode) {
-                                markerPositions.push([lat, lng]);
-                                const marker = L.marker([lat, lng], {icon: customIcon,}).bindPopup(PopupContent);
-                                voyageLayer.addLayer(marker);
-                            }
-                            if (i == derniereLigneAvecContenu-1 ) { //dernier point
-                                const marker = L.marker([lat, lng], {icon: lastIcon,}).bindPopup(PopupContent);
-                                voyageLayer.addLayer(marker);
-                                break;
-                            }
-                        }
-                        // Ajouter la polyline si au moins 2 points
-                        if (markerPositions.length >= 2) {
-                            const polyline = L.polyline(markerPositions, {color: "green"});
-                            voyageLayer.addLayer(polyline);
-                        }
-                    } */            
+            }); //fin fetch       
         </script>
         
         // décalage sidebar pour le barre de déffilement 
