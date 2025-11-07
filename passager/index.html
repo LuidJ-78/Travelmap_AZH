@@ -196,7 +196,40 @@
                 if (pointdepart < 1){
                     pointdepart = 1
                 }
-                console.log(pointdepart);
+                //console.log(pointdepart);
+            
+                const markerPositions = [];
+                for (let i = pointdepart; i < rows_length; i++) {
+                    //table_voyage[i][nb_cols_voyage*n_voyage + x]
+
+                     //marker pour tout les points                            
+                    const airportCode = table_voyage[i][nb_cols_voyage*n_voyage + x] ? table_voyage[i][nb_cols_voyage*n_voyage + 1].trim() : ""; //cols[8 * n_voyage + 1] ? cols[8 * n_voyage + 1].trim() : "";
+                    console.log(airportCode);
+                    /*const lat = //parseFloat(cols[8 * n_voyage + 2]);
+                    const lng = //parseFloat(cols[8 * n_voyage + 3]);
+                    const airportName = //cols[8 * n_voyage + 4] ? cols[8 * n_voyage + 4].trim() : "";
+                    const date = //cols[8 * n_voyage + 5] ? cols[8 * n_voyage + 5].trim() : "";
+                    const player = //cols[8 * n_voyage + 6] ? cols[8 * n_voyage + 6].trim() : "";
+                    const PopupContent = `
+                                            <b>${airportName}</b><br>
+                                            ${airportCode} | ${date} | ${player}
+                                        `;
+                    if (!isNaN(lat) && !isNaN(lng) && airportCode) {
+                                markerPositions.push([lat, lng]);
+                                const marker = L.marker([lat, lng], {icon: customIcon,}).bindPopup(PopupContent);
+                                voyageLayer.addLayer(marker);
+                    }
+                    if (i == derniereLigneAvecContenu-1 ) { //dernier point
+                                const marker = L.marker([lat, lng], {icon: lastIcon,}).bindPopup(PopupContent);
+                                voyageLayer.addLayer(marker);
+                                break;
+                    }*/
+                }
+                // Ajouter la polyline si au moins 2 points
+                /*if (markerPositions.length >= 2) {
+                            const polyline = L.polyline(markerPositions, {color: "green"});
+                            voyageLayer.addLayer(polyline);
+                }*/
             }
 
         //affichage map et pointer sur la map
@@ -251,8 +284,6 @@
                     const voyageCount = Math.floor(header.length / nb_cols_voyage);
                     const voyagesButtonsDiv = document.getElementById("voyages-buttons");
 
-//WIP
-                    
                     var table_voyage = {};
                     for (let y =  0; y < rows.length; y++) {
                         table_voyage[y] = rows[y].split(",");
@@ -301,21 +332,13 @@
                             }
                             voyageVisibility[voyageId] = !voyageVisibility[voyageId];
                         };
-                     }
+                     }// fin creation bouton et voyage
             }); //fin fetch
             
 //WIP
                     
  /*                   // Pour chaque voyage, créer un bouton et afficher ce qui correspond au voyage
                     for (let v = 0; v < voyageCount; v++) {
-                        
-                        //WIP nombre de point affiché
-                        var pointafficher = 10;
-                        var pointdepart = derniereLigneAvecContenu - pointafficher;
-                        if (pointdepart < 1){
-                            pointdepart = 1
-                        }
-                        //console.log(pointdepart);
                         
                         // Parcourir les données du CSV pour ce voyage et ajouter les marqueurs et polylines
                         const markerPositions = [];
