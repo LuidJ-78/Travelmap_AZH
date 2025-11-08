@@ -254,28 +254,6 @@
                 }
             }
 
-            // Sélectionne tous les boutons avec la classe toggle-button_incrdecr
-            document.querySelectorAll('.toggle-button_incrdecr').forEach(button => {
-                button.addEventListener('click', function() {
-                    // Récupère la valeur de l'attribut data-increment
-                    const increment = parseInt(this.getAttribute('data-increment'));
-                    pointafficher += increment;
-                    if (pointafficher <1) {
-                        pointafficher = 1;
-                    }
-                    document.getElementById('pointafficher-value').textContent = pointafficher;
-                    // Rafraîchit les layers des voyages affichés
-                    for (let v = 0; v < voyageCount; v++) {
-                        const voyageId = `voyage_${v}`;
-                        if (voyageVisibility[voyageId]) {
-                            const voyageLayer = voyageLayers[voyageId];
-                            voyageLayer.clearLayers();
-                            creation_polyline_voyage(table_voyage, nb_cols_voyage, v, rows_length, derniereLigneAvecContenu, pointafficher, voyageLayer);
-                        }
-                    }
-                });
-            });
-
         //affichage map et pointer sur la map
             //affichage de la map en fond
             const map = L.map("map", {zoomControl: false}).setView([20, 0], 2);
@@ -380,6 +358,8 @@
                         };
                      }// fin creation bouton et voyage
 
+                    console.log(derniereLigneAvecContenu);
+
                     // Sélectionne tous les boutons avec la classe toggle-button_incrdecr
                     document.querySelectorAll('.toggle-button_incrdecr').forEach(button => {
                         button.addEventListener('click', function() {
@@ -390,6 +370,7 @@
                                 pointafficher = 1;
                             }
                             document.getElementById('pointafficher-value').textContent = pointafficher;
+                           
                             // Rafraîchit les layers des voyages affichés
                             for (let v = 0; v < voyageCount; v++) {
                                 const voyageId = `voyage_${v}`;
