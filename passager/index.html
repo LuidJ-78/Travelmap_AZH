@@ -302,9 +302,11 @@
                 .then((csvText) => {
                     const rows = csvText.split("\n");
                     const rows_length = rows.length;
-                    pointafficher = rows_length
                     if (rows_length < 3) return; // Pas de données (on ignore la première ligne)
                     //console.log(rows);
+
+                    pointafficher = rows_length
+                    document.getElementById("pointafficher-value").textContent = pointafficher;
 
                     const nb_cols_voyage = 8; // On suppose que chaque groupe de 8 colonnes est un voyage
                     const header = rows[1].split(",");
@@ -316,7 +318,6 @@
                         table_voyage[y] = rows[y].split(",");
                     }
                     //console.log(table_voyage);
-                    //console.log(table_voyage[25][60]);
 
                     // Création voyage et bouton
                      for (let v = 0; v < voyageCount; v++) {
