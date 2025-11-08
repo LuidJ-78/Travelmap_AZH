@@ -109,6 +109,19 @@
             .modal-bouton:hover {
               background-color: #218838;
             }
+            .toggle-button_incrdecr {
+                background: #007bff;
+                color: white;
+                border-radius: 5px;
+                padding: 10px;
+                border: none;
+                cursor: pointer;
+                width: 20%;
+                margin-top: 5px;
+            }
+            .toggle-button_incrdecr:hover {
+                background: #0056b3;
+            }
             
             #header {
                 position: fixed;
@@ -176,11 +189,11 @@
             <br>
             <div>
                 <a>Nombre de point affiché <br /></a>
-                <button onclick="incrementPointafficher10()" class="toggle-button"  style="width: 20%;">+10</button>
-                <button onclick="incrementPointafficher()" class="toggle-button"  style="width: 20%;">+1</button>
+                <button onclick="incrementPointafficher10()" class="toggle-button_incrdecr">+10</button>
+                <button onclick="incrementPointafficher()" class="toggle-button_incrdecr">+1</button>
                 <span id="pointafficher-value">10</span>
-                <button onclick="decrementPointafficher()" class="toggle-button"  style="width: 20%;">-1</button>
-                <button onclick="decrementPointafficher10()" class="toggle-button"  style="width: 20%;">-10</button>
+                <button onclick="decrementPointafficher()" class="toggle-button_incrdecr">-1</button>
+                <button onclick="decrementPointafficher10()" class="toggle-button_incrdecr">-10</button>
             </div>
             <br>
             <div id="voyages-buttons"></div>
