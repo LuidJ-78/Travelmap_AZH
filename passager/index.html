@@ -311,7 +311,7 @@
             const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTjulAyJlAG5smNj1FHKrfqWijHp8asBRfrDAGhB94HF5udtGl3_dWC3bIkEyce6b-5jwsbFI20PFci/pub?gid=1768006993&single=true&output=csv";//google sheet url
             const voyageLayers = {}; // Pour stocker les groupes LayerGroup de chaque voyage
             const voyageVisibility = {}; // Pour suivre la visibilité de chaque voyage
-            var pointafficher = {};
+            var pointafficher = 10;
 
             // Récupérer les données du CSV et créer un bouton par voyage
             fetch(sheetURL)
@@ -379,6 +379,28 @@
                             voyageVisibility[voyageId] = !voyageVisibility[voyageId];
                         };
                      }// fin creation bouton et voyage
+
+                    // Sélectionne tous les boutons avec la classe toggle-button_incrdecr
+                    document.querySelectorAll('.toggle-button_incrdecr').forEach(button => {
+                        button.addEventListener('click', function() {
+                            // Récupère la valeur de l'attribut data-increment
+                            const increment = parseInt(this.getAttribute('data-increment'));
+                            pointafficher += increment;
+                            if (pointafficher <1) {
+                                pointafficher = 1;
+                            }
+                            document.getElementById('pointafficher-value').textContent = pointafficher;
+                            // Rafraîchit les layers des voyages affichés
+                            for (let v = 0; v < voyageCount; v++) {
+                                const voyageId = `voyage_${v}`;
+                                if (voyageVisibility[voyageId]) {
+                                    const voyageLayer = voyageLayers[voyageId];
+                                    voyageLayer.clearLayers();
+                                    creation_polyline_voyage(table_voyage, nb_cols_voyage, v, rows_length, derniereLigneAvecContenu, pointafficher, voyageLayer);
+                                }
+                            }
+                        });
+                    });
             }); //fin fetch       
         </script>
         
