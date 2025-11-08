@@ -369,18 +369,17 @@
                             }
                             document.getElementById('pointafficher-value').textContent = pointafficher;
 
-                            let derniereLigneAvecContenu_1 = -1;
-                            for (let i = rows_length - 1; i >= 1; i--) {
-                                const colonnes = table_voyage[i];
-                                if (colonnes.length > 8 * v && colonnes[8 * v].trim() !== "") {
-                                    derniereLigneAvecContenu_1 = i+1;
-                                    break;
-                                }
-                            }
-                           
                             // Rafraîchit les layers des voyages affichés
                             for (let v = 0; v < voyageCount; v++) {
                                 const voyageId = `voyage_${v}`;
+                                let derniereLigneAvecContenu_1 = -1;
+                                for (let i = rows_length - 1; i >= 1; i--) {
+                                    const colonnes = table_voyage[i];
+                                    if (colonnes.length > 8 * v && colonnes[8 * v].trim() !== "") {
+                                        derniereLigneAvecContenu_1 = i+1;
+                                        break;
+                                    }
+                                }
                                 if (voyageVisibility[voyageId]) {
                                     const voyageLayer = voyageLayers[voyageId];
                                     voyageLayer.clearLayers();
