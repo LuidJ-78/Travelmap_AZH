@@ -254,6 +254,13 @@
                 }
             }
 
+
+            document.querySelectorAll('.toggle-button_incrdecr').forEach(button => {
+                button.addEventListener('click', function() {
+                    console.log(click);
+                });
+            });
+
         //affichage map et pointer sur la map
             //affichage de la map en fond
             const map = L.map("map", {zoomControl: false}).setView([20, 0], 2);
