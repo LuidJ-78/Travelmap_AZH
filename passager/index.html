@@ -277,7 +277,7 @@
             const voyageLayers = {}; // Pour stocker les groupes LayerGroup de chaque voyage
             const voyageVisibility = {}; // Pour suivre la visibilité de chaque voyage
 
-            var pointafficher = 10;
+            var pointafficher = 25;
 
             function incrementPointafficher() {
                 pointafficher += 1;
@@ -302,6 +302,7 @@
                 .then((csvText) => {
                     const rows = csvText.split("\n");
                     const rows_length = rows.length;
+                    pointafficher = rows_length
                     if (rows_length < 3) return; // Pas de données (on ignore la première ligne)
                     //console.log(rows);
 
