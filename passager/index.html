@@ -176,9 +176,11 @@
             <br>
             <div>
                 <a>Nombre de point affiché <br /></a>
-                <button onclick="incrementPointafficher()" class="toggle-button"  style="width: 20%;">+</button>
+                <button onclick="incrementPointafficher10()" class="toggle-button"  style="width: 20%;">+10</button>
+                <button onclick="incrementPointafficher()" class="toggle-button"  style="width: 20%;">+1</button>
                 <span id="pointafficher-value">10</span>
-                <button onclick="decrementPointafficher()" class="toggle-button"  style="width: 20%;">-</button>
+                <button onclick="decrementPointafficher()" class="toggle-button"  style="width: 20%;">-1</button>
+                <button onclick="decrementPointafficher10()" class="toggle-button"  style="width: 20%;">-10</button>
             </div>
             <br>
             <div id="voyages-buttons"></div>
@@ -283,6 +285,14 @@
             }
             function decrementPointafficher() {
                 pointafficher -= 1;
+                document.getElementById("pointafficher-value").textContent = pointafficher;
+            }
+            function incrementPointafficher10() {
+                pointafficher += 10;
+                document.getElementById("pointafficher-value").textContent = pointafficher;
+            }
+            function decrementPointafficher10() {
+                pointafficher -= 10;
                 document.getElementById("pointafficher-value").textContent = pointafficher;
             }
 
