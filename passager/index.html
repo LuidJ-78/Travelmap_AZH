@@ -358,8 +358,6 @@
                         };
                      }// fin creation bouton et voyage
 
-                    console.log(derniereLigneAvecContenu);
-
                     // Sélectionne tous les boutons avec la classe toggle-button_incrdecr
                     document.querySelectorAll('.toggle-button_incrdecr').forEach(button => {
                         button.addEventListener('click', function() {
@@ -370,6 +368,15 @@
                                 pointafficher = 1;
                             }
                             document.getElementById('pointafficher-value').textContent = pointafficher;
+
+                            let derniereLigneAvecContenu_1 = -1;
+                            for (let i = rows_length - 1; i >= 1; i--) {
+                                const colonnes = table_voyage[i];
+                                if (colonnes.length > 8 * v && colonnes[8 * v].trim() !== "") {
+                                    derniereLigneAvecContenu_1 = i+1;
+                                    break;
+                                }
+                            }
                            
                             // Rafraîchit les layers des voyages affichés
                             for (let v = 0; v < voyageCount; v++) {
@@ -377,7 +384,7 @@
                                 if (voyageVisibility[voyageId]) {
                                     const voyageLayer = voyageLayers[voyageId];
                                     voyageLayer.clearLayers();
-                                    creation_polyline_voyage(table_voyage, nb_cols_voyage, v, rows_length, derniereLigneAvecContenu, pointafficher, voyageLayer);
+                                    creation_polyline_voyage(table_voyage, nb_cols_voyage, v, rows_length, derniereLigneAvecContenu_1, pointafficher, voyageLayer);
                                 }
                             }
                         });
