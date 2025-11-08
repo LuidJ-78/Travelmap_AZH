@@ -189,11 +189,11 @@
             <br>
             <div>
                 <a>Nombre de point affiché <br /></a>
-                <button onclick="incrementPointafficher10()" class="toggle-button_incrdecr">+10</button>
-                <button onclick="incrementPointafficher()" class="toggle-button_incrdecr">+1</button>
+                <button class="toggle-button_incrdecr" data-increment="10">+10</button>
+                <button class="toggle-button_incrdecr" data-increment="1">+1</button>
                 <span id="pointafficher-value">10</span>
-                <button onclick="decrementPointafficher()" class="toggle-button_incrdecr">-1</button>
-                <button onclick="decrementPointafficher10()" class="toggle-button_incrdecr">-10</button>
+                <button class="toggle-button_incrdecr" data-increment="-1">-1</button>
+                <button class="toggle-button_incrdecr" data-increment="-10">-10</button>
             </div>
             <br>
             <div id="voyages-buttons"></div>
@@ -254,10 +254,22 @@
                 }
             }
 
-
+            // Sélectionne tous les boutons avec la classe toggle-button_incrdecr
             document.querySelectorAll('.toggle-button_incrdecr').forEach(button => {
                 button.addEventListener('click', function() {
-                    console.log("click");
+                    // Récupère la valeur de l'attribut data-increment
+                    const increment = parseInt(this.getAttribute('data-increment'));
+                    pointafficher += increment;
+                    document.getElementById('pointafficher-value').textContent = pointafficher;
+                    // Rafraîchit les layers des voyages affichés
+                    for (let v = 0; v < voyageCount; v++) {
+                        const voyageId = `voyage_${v}`;
+                        if (voyageVisibility[voyageId]) {
+                            const voyageLayer = voyageLayers[voyageId];
+                            voyageLayer.clearLayers();
+                            creation_polyline_voyage(table_voyage, nb_cols_voyage, v, rows_length, derniereLigneAvecContenu, pointafficher, voyageLayer);
+                        }
+                    }
                 });
             });
 
