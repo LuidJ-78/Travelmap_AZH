@@ -4,346 +4,191 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Travel Map Azgharie Airlines</title>
-        <link
-            rel="stylesheet"
-            href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-        />
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/leaflet-measure/dist/leaflet-measure.css"
-        />
+        <link href="https://unpkg.com/leaflet/dist/leaflet.css" rel="stylesheet"/>
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         <style>
             body {
                 font-family: Arial, sans-serif;
                 margin: 0;
                 padding: 0;
             }
-            #sidebar {
+            #header {
                 position: fixed;
-                left: 10px;
                 top: 10px;
-                width: 250px;
-                height: 95vh;
+                left: 50%;
+                transform: translateX(-50%);
+                width: auto;
+                max-width: calc(100% - 40px);
+                min-width: 280px;
+                height: 50px;
                 background: #f4f4f4;
-                padding: 10px;
+                padding: 0 10px;
+                box-sizing: border-box; 
                 box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
                 border-radius: 10px;
                 overflow-y: auto;
-                text-align: center;
-                z-index: 2;
+                text-align: left;
+                overflow: hidden;
+                z-index: 25;
             }
             #map {
-                position: fixed;
-                top: 0;
-                right: 0;
-                height: 100%;
-                width: 100%;
                 z-index: 1;
             }
-            .sidebar-large {
-                width: 265px !important; /* ou la largeur désirée */
+            .topnav {
+                display: flex;
+                background-color: #333;
+                align-items: center;
+                white-space: nowrap;
             }
-            .toggle-button {
-                background: #007bff;
-                color: white;
-                border-radius: 5px;
-                padding: 10px;
-                border: none;
-                cursor: pointer;
-                width: 100%;
-                margin-top: 5px;
-            }
-            .toggle-button:hover {
-                background: #0056b3;
-            }
-            .toggle-button.active {
-                background: #28a745; /* Choose the color you want for the active state */
-                color: white;
-            }
-            .modal {
-              display: none; /* Caché par défaut */
-              position: fixed;
-              z-index: 1;
-              left: 0;
-              top: 0;
-              width: 100%;
-              height: 100%;
-              overflow: auto;
-              background-color: rgba(0,0,0,0.5); /* Fond semi-transparent */
-            }
-            .modal-content {
-              background-color: #fff;
-              margin: 10% auto;
-              padding: 20px;
-              border: 1px solid #888;
-              width: 1500px;
+            .topnav a {
+              color: #f2f2f2;
               text-align: center;
-              position: relative;
+              padding: 0 12px;
+              text-decoration: none;
+              font-size: 17px;
+              display: inline-flex;
+              align-items: center;
+              height: 100%;
             }
-            .close {
-              position: absolute;
-              top: 10px;
-              right: 20px;
-              color: #aaa;
-              font-size: 24px;
-              font-weight: bold;
-              cursor: pointer;
+            .topnav a img {
+              display: block;
+              height: 40px;
             }
-            .close:hover {
-              color: #000;
+            .topnav a:hover {
+              background-color: #ddd;
+              color: black;
             }
-            img {
-              max-width: 100%;
-              height: auto;
-            }
-            .modal-bouton {
-              background-color: #007bff;
+            .topnav a.active {
+              background-color: #04AA6D;
               color: white;
-              border-radius: 5px;
-              padding: 10px;
-              border: none;
-              cursor: pointer;
-              width: 100%;
-              margin-top: 5px;
             }
-            .modal-bouton:hover {
-              background-color: #218838;
+
+            #main_body {
+                position: fixed;
+                top: 70px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 870px;
+                height: 650px;
+                background: #f4f4f4;
+                padding: 0 10px;
+                box-sizing: border-box; 
+                box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+                border-radius: 10px;
+                text-align: center;
+                z-index: 24;
+            }
+            #logo_azh_airline{
+                position: fixed;
+                top: 40px;
+                left: 50%;
+                transform: translateX(-150%);
+                width: 250px;
+                height: 250px;
+                z-index: 25;
+            }
+            #description_1 {
+                position: fixed;
+                top: 60px;
+                left: 50%;
+                transform: translateX(-16%);
+                width: 435px;
+                height: 250px;
+                background: #f4f4f4;
+                box-sizing: border-box; 
+                text-align: justify;
+                text-justify: inter-word;
+                z-index: 25;
+            }
+            #description_2 {
+                position: fixed;
+                top: 310px;
+                left: 50%;
+                transform: translateX(-150%);
+                width: 250px;
+                height: 250px;
+                background: #f4f4f4;
+                box-sizing: border-box; 
+                text-align: justify;
+                text-justify: inter-word;
+                z-index: 25;
+            }
+            #infographie_azh{
+                position: fixed;
+                top: 290px;
+                left: 50%;
+                transform: translateX(-15%);
+                width: 440px;
+                height: auto;
+                z-index: 25;
             }
         </style>
     </head>
 
-    <body>
-        <div id="sidebar">
-            <div style="display: flex; align-items: center;">
-                <img src="azgharie_airlines.png" alt="azgharie_airlines.png" style="height: 250px;">
-                </div>
-            <br>
-            <a href="https://d1git4l.github.io/mapAirbus/" target="_blank" style="color:#007BFF;font-weight:bold;"> - Planificateur de vol - </a><br>
-            <br>
-            <h2>Travel Map</h2>
-            <div style="display: flex; align-items: center;">
-                <img src="Point avion.svg" alt="dernière position de l'avion" style="height: 24px; margin-right: 8px;">
-                <span>dernière position de l'avion</span>
-                </div>
-            <div style="display: flex; align-items: center;">
-                <img src="Green_dot_icon.png" alt="point de passage de l'avion" style="height: 12px; margin-right: 14px; margin-left: 6px;">
-                <span>point de passage de l'avion</span>
-                </div>
-            <br>
-            <button id="openPopup" class="modal-bouton">Afficher les avions possibles par lignes</button>
-            <br>
-            <div id="myModal" class="modal">
-                <div class="modal-content">
-                  <span class="close" id="closeModal">&times;</span>
-                  <img src="liste_avion_possible.png" alt="liste avion possible" />
+    <body>           
+        <div id="main_body">
+            <h3> Bienvenue sur le planificateur de vol de l'Azgharie Airlines</h3>
+            
+            <div id="logo_azh_airline">
+                <div style="display: flex; align-items: center;">
+                    <img src="azgharie_airlines_transparent.png" alt="azgharie_airlines_transparent.png" style="height: 250px;">
                 </div>
             </div>
-            <br>
-            <div id="voyages-buttons"></div>
+            <div id="description_1">
+                <p> 
+                    L'Azgharie Airlines est une
+                    <a href="https://fshub.io/airline/AZH/overview" target="_blank" style="color:#679fd5;font-weight:bold;text-decoration:none;"> compagnie aérienne virtuelle </a>
+                    créée sur FShub.
+                </p>
+                <p> 
+                    <a href="https://fshub.io/" target="_blank" style="color:#ED8A00;font-weight:bold;text-decoration:none;"> FShub </a>
+                    est un service en ligne gratuit de suivi de vol qui fonctionne avec plusieurs plateforme comme Microsoft Flight Simulator ou X-Plane.
+                </p>
+                <p> 
+                    Cette compagnie a été créée et est gérée par la communauté du vidéaste et Leader Supreme
+                    <a href="https://twitch.tv/azghaaar" target="_blank" style="color:#9146FF;font-weight:bold;text-decoration:none;"> Azghaaar </a>
+                    sur
+                    <a href="https://discord.gg/azgharie" target="_blank" style="color:#5865F2;font-weight:bold;text-decoration:none;"> Discord. </a>
+                </p>
+            </div>
+            <div id="description_2">
+                <p> 
+                    Ici, vous pourrez planifier et créer un plan de vol simbrief pour réaliser différentes activités.
+                </p>
+                <p> 
+                    Toute ces activités sont gérées par un 
+                    <a href="https://docs.google.com/spreadsheets/d/1XeNSL5uGvEs2YffUxcDWHfenT37o2l4nxruZBqnaiMU" target="_blank" style="color:#79D600;font-weight:bold;text-decoration:none;"> google sheet </a>
+                    et éxpliquées sur ce 
+                    <a href="https://docs.google.com/document/d/19_WjD9vYB-2mGxpQB1473cOVo0jc73eOQXmo3w12W6o/edit?tab=t.0" target="_blank" style="color:#000ED6;font-weight:bold;text-decoration:none;"> document </a>
+                </p>
+                <p> 
+                    Une carte dédiée permet d'afficher le voyage des lignes de la compagnie.
+                </p>
+            </div>
+            <div id="infographie_azh">
+                <div style="display: flex; align-items: center;">
+                    <img src="Infographie_AZH-1024x724.jpg" alt="Infographie_AZH-1024x724.jpg" style=" width: 440px;">
+                </div>
+            </div>
         </div>
 
-        <div id="map"></div>
+        <div id="header" class="topnav">
+            <script>const baseUrl = "https://luidj-78.github.io/Travelmap_AZH/";</script>
+            <a href="https://www.azgharie.net/" target="_blank"> <img src="azgharie-removebg-preview.png" alt="azgharie-removebg-preview.png" style="height: 50px">  </a>
+            <a href="#" onclick="window.location.href=baseUrl + 'test/'" style="color:#007BFF;font-weight:bold;">Acceuil</a>
+            <a href="https://fshub.io/airline/AZH/radar" target="_blank" style="color:#007BFF;font-weight:bold;"> Radar </a>
+            <a href="#" onclick="window.location.href=baseUrl + 'planificateur/'" style="color:#007BFF;font-weight:bold;">Planificateur de vol</a>
+            <a href="#" onclick="window.location.href=baseUrl + 'passager/'" style="color:#007BFF;font-weight:bold;">Passager</a>
+            <a href="#" onclick="window.location.href=baseUrl + 'cargo/'" style="color:#007BFF;font-weight:bold;">Cargo</a>
+        </div>
 
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+       <div id="map" style="position: absolute; top: 0px; left: 0; bottom: 0; right: 0;"></div>
 
-        // popup pour afficher les avions possibles
+
         <script>
-            // Récupération des éléments
-            const liste_avion_modal = document.getElementById('myModal');
-            const liste_avion_btn = document.getElementById('openPopup');
-            const liste_avion_span = document.getElementById('closeModal');
-
-            // Quand on clique sur le bouton, on affiche la modal
-            liste_avion_btn.onclick = function() {
-              liste_avion_modal.style.display = "block";
-            }
-
-            // Quand on clique sur la croix, on ferme la modal
-            liste_avion_span.onclick = function() {
-              liste_avion_modal.style.display = "none";
-            }
-
-            // Fermer la modal si on clique en dehors du contenu
-            window.onclick = function(event) {
-              if (event.target == modal) {
-                liste_avion_modal.style.display = "none";
-              }
-            }
-        </script> 
-
-        //affichage map et pointer sur la map
-        <script>
-            //affichage de la map en fond
-            const map = L.map("map", {zoomControl: false}).setView([20, 0], 2);
-            L.control.zoom({position: 'bottomright'}).addTo(map);
-            L.tileLayer("https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",{ attribution: "&copy; OpenStreetMap contributeurs" },).addTo(map);
-            // Grouper les layers de base
-            var clair = L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', { attribution: 'clair' });
-            //var sombre = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', { attribution: 'sombre' });
-            var topographique = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', { attribution: 'topographique' });
-            var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: 'Satellite' });
-            var baseLayers = {
-                "clair": clair,
-                //"sombre": sombre,
-                "topographique": topographique,
-                "Satellite": satellite
-            };
-            // Ajouter le contrôle à la carte
-            L.control.layers(baseLayers).addTo(map);
-
-            // Create a custom icon 
-            const customIcon = L.icon({
-                iconUrl: "Green_dot_icon.png", // Make sure it is in the same directory as index.html
-                iconSize: [12, 12], // Adjust size as needed
-                iconAnchor: [6, 6], // The point of the icon which will correspond to marker's location
-                popupAnchor: [0, -12], // Point from which the popup should open relative to the iconAnchor
-            });
-            const lastIcon = L.icon({
-                iconUrl: "Point avion.svg", // Make sure it is in the same directory as index.html
-                iconSize: [32, 32], // Adjust size as needed
-                iconAnchor: [16, 32], // The point of the icon which will correspond to marker's location
-                popupAnchor: [0, -32], // Point from which the popup should open relative to the iconAnchor
-            });
-
-            //google sheet url
-            const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTjulAyJlAG5smNj1FHKrfqWijHp8asBRfrDAGhB94HF5udtGl3_dWC3bIkEyce6b-5jwsbFI20PFci/pub?gid=1768006993&single=true&output=csv";
-
-            // Pour stocker les groupes LayerGroup de chaque voyage
-            const voyageLayers = {};
-            // Pour suivre la visibilité de chaque voyage
-            const voyageVisibility = {};
-
-            // Récupérer les données du CSV et créer un bouton par voyage
-            fetch(sheetURL)
-                .then((response) => response.text())
-                .then((csvText) => {
-                    const rows = csvText.split("\n");
-                    if (rows.length < 3) return; // Pas de données (on ignore la première ligne)
-
-                    // On suppose que chaque groupe de 8 colonnes est un voyage
-                    const header = rows[1].split(",");
-                    const voyageCount = Math.floor(header.length / 8);
-
-                    const voyagesButtonsDiv = document.getElementById("voyages-buttons");
-
-                    // Pour chaque voyage, créer un bouton et afficher ce qui correspond au voyage
-                    for (let v = 0; v < voyageCount; v++) {
-                        // Nom du voyage (on prend la première colonne du groupe, donc 8*v)
-                        const voyageName = header[8 * v] ? header[8 * v].trim() : `Voyage ${v + 1}`;
-                        const voyageId = `voyage_${v}`;
-
-                        // Créer le bouton
-                        const btn = document.createElement("button");
-                        btn.className = "toggle-button";
-                        btn.id = `toggle_${voyageId}`;
-                        btn.textContent = `Afficher le voyage ${voyageName}`;
-                        voyagesButtonsDiv.appendChild(btn);
-
-                        // Créer le LayerGroup pour ce voyage
-                        const voyageLayer = L.layerGroup([]);
-                        voyageLayers[voyageId] = voyageLayer;
-                        voyageVisibility[voyageId] = false;
-
-                        // Ajouter l'événement de toggle
-                        btn.onclick = function () {
-                            if (voyageVisibility[voyageId]) {
-                                map.removeLayer(voyageLayer);
-                                btn.textContent = `Afficher le voyage ${voyageName}`;
-                                btn.classList.remove("active");
-                            } else {
-                                map.addLayer(voyageLayer);
-                                btn.textContent = `Masquer le voyage ${voyageName}`;
-                                btn.classList.add("active");
-                            }
-                            voyageVisibility[voyageId] = !voyageVisibility[voyageId];
-                        };
-
-                        //nombre de point affiché
-                        var pointafficher = 50;
-                        var pointdepart = rows.length - pointafficher;
-                        //console.log(pointdepart);
-                        if (pointdepart < 1){
-                            pointdepart = 1
-                            //console.log(pointdepart);
-                        }
-
-                        // Parcourir les données du CSV pour ce voyage et ajouter les marqueurs et polylines
-                        const markerPositions = [];
-                        for (let i = pointdepart; i < rows.length; i++) {
-                            const row = rows[i];
-                            const cols = row.split(",");
-                            //icon unique pour le dernier point
-                            if (!cols[8 * v]) {
-                                const lastrow = rows[i-1];
-                                const lastcols = lastrow.split(",");
-                                const lastairportCode = lastcols[8 * v + 1] ? lastcols[8 * v + 1].trim() : "";
-                                const lastlat = parseFloat(lastcols[8 * v + 2]);
-                                const lastlng = parseFloat(lastcols[8 * v + 3]);
-                                const lastairportName = lastcols[8 * v + 4] ? lastcols[8 * v + 4].trim() : "";
-                                const lastdate = lastcols[8 * v + 5] ? lastcols[8 * v + 5].trim() : "";
-                                const lastplayer = lastcols[8 * v + 6] ? lastcols[8 * v + 6].trim() : "";
-                                const lastPopupContent = `
-                                                        <b>${lastairportName}</b><br>
-                                                        ${lastairportCode} | ${lastdate} | ${lastplayer}
-                                                        `;
-                                if (!isNaN(lastlat) && !isNaN(lastlng) && lastairportCode) {
-                                    const lastmarker = L.marker([lastlat, lastlng], {icon: lastIcon,}).bindPopup(lastPopupContent);
-                                    voyageLayer.addLayer(lastmarker);
-                                }
-                            }
-                            console.log[row];
-                            
-                            //continue si des valeurs sont présentes
-                            if (!row.trim()) continue;
-                            if (!cols[8 * v].trim()) continue;
-                            //marker pour tout les points                            
-                            const airportCode = cols[8 * v + 1] ? cols[8 * v + 1].trim() : "";
-                            const lat = parseFloat(cols[8 * v + 2]);
-                            const lng = parseFloat(cols[8 * v + 3]);
-                            const airportName = cols[8 * v + 4] ? cols[8 * v + 4].trim() : "";
-                            const date = cols[8 * v + 5] ? cols[8 * v + 5].trim() : "";
-                            const player = cols[8 * v + 6] ? cols[8 * v + 6].trim() : "";
-                            const PopupContent = `
-                                                 <b>${airportName}</b><br>
-                                                 ${airportCode} | ${date} | ${player}
-                                                 `;
-                            if (!isNaN(lat) && !isNaN(lng) && airportCode) {
-                                markerPositions.push([lat, lng]);
-                                const marker = L.marker([lat, lng], {icon: customIcon,}).bindPopup(PopupContent);
-                                voyageLayer.addLayer(marker);
-                                if (i === rows.length - 1) { //dernier point
-                                    const marker = L.marker([lat, lng], {icon: lastIcon,}).bindPopup(PopupContent);
-                                    voyageLayer.addLayer(marker);
-                                }
-                            }
-                        }
-                        // Ajouter la polyline si au moins 2 points
-                        if (markerPositions.length >= 2) {
-                            const polyline = L.polyline(markerPositions, {color: "green"});
-                            voyageLayer.addLayer(polyline);
-                        }
-                    }
-                });
+            //affichage de la map en fond           
+            var map = L.map('map', {zoomControl: false}).setView([48.8566, 2.3522], 4);
+            L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', { attribution: "&copy; OpenStreetMap contributeurs" }).addTo(map);
         </script>
-        
-        // décalage sidebar pour le barre de déffilement 
-        <script>
-        function checkSidebarScrollbar() {
-            const sidebar = document.getElementById('sidebar');
-            if (!sidebar) return;
-
-            // Vérifie si la sidebar déborde (scroll)
-            if (sidebar.scrollHeight > sidebar.clientHeight) {
-                sidebar.classList.add('sidebar-large');
-            } else {
-                sidebar.classList.remove('sidebar-large');
-            }
-        }
-
-        // Vérifie au chargement et à chaque redimensionnement
-        window.addEventListener('load', checkSidebarScrollbar);
-        window.addEventListener('resize', checkSidebarScrollbar);
-        </script>
-        
     </body>
 </html>
