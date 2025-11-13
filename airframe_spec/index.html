@@ -83,7 +83,13 @@
 
     <body>           
         <div id="main_body">
-
+            <select id="airframe" name="airframe">
+                <option value="">Sélectionner un avion</option>
+                <option value="Antonov AN-124 Ruslan">Antonov AN-124 Ruslan</option>
+                <option value="Airbus A319 Neo">Airbus A319 Neo</option>
+                <option value="Airbus A320 Neo">Airbus A320 Neo</option>
+                <option value="Airbus A320 Neo">Airbus A321 Neo</option>
+            </select>
         </div>
 
         <div id="header" class="topnav">
@@ -112,11 +118,13 @@
                 .then((csvText) => {
                     const rows = csvText.split("\n");
                     const rows_length = rows.length;
-                    var table_voyage = {};
+                    var table_airframe = {};
                     for (let y =  0; y < rows.length; y++) {
-                        table_voyage[y] = rows[y].split(",");
+                        table_airframe[y] = rows[y].split(",");
                     }
-                    console.log(table_voyage);
+                    console.log(table_airframe);
+
+                    
                 });
         </script>
     </body>
