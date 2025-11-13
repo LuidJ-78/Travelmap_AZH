@@ -100,10 +100,24 @@
        <div id="map" style="position: absolute; top: 0px; left: 0; bottom: 0; right: 0;"></div>
 
 
-        <script>
-            //affichage de la map en fond           
+        <script> //affichage de la map en fond
             var map = L.map('map', {zoomControl: false}).setView([48.8566, 2.3522], 4);
             L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', { attribution: "&copy; OpenStreetMap contributeurs" }).addTo(map);
+        </script>
+        
+        <script>
+            const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTjulAyJlAG5smNj1FHKrfqWijHp8asBRfrDAGhB94HF5udtGl3_dWC3bIkEyce6b-5jwsbFI20PFci/pub?gid=1768006993&single=true&output=csv";
+            fetch(sheetURL)
+                .then((response) => response.text())
+                .then((csvText) => {
+                    const rows = csvText.split("\n");
+                    const rows_length = rows.length;
+                    var table_voyage = {};
+                    for (let y =  0; y < rows.length; y++) {
+                        table_voyage[y] = rows[y].split(",");
+                    }
+                    console.log(table_voyage);
+                });
         </script>
     </body>
 </html>
