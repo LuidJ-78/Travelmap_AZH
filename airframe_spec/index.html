@@ -125,11 +125,12 @@
                     defaultOption.textContent = "Sélectionner un avion";
                     airframeSelect.appendChild(defaultOption);
 
-                    var option = document.createElement('option');
+                    var option = {};
                     for (let i = 0; i < rows_length; i++) { // Parcourez table_airframe et ajoutez les options
-                        option.value = i; // La valeur est l'index de la ligne
-                        option.textContent = table_airframe[i][2]; // Le texte est la 3ème colonne
-                        airframeSelect.appendChild(option);
+                        option[i] = document.createElement('option');
+                        option[i].value = i; // La valeur est l'index de la ligne
+                        option[i].textContent = table_airframe[i][2]; // Le texte est la 3ème colonne
+                        airframeSelect.appendChild(option[i]);
                     }
 
                     
