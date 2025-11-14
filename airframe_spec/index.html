@@ -173,6 +173,21 @@
                         const data_range = table_airframe[selectedIndex][23];
                         const data_takeoff = table_airframe[selectedIndex][24];
                         const data_landing = table_airframe[selectedIndex][25];
+
+                        let ligneRecommande = "";
+                        let ligneAutorise = "";
+                        let ligneInterdite = "";
+                        for (let i = 27; i <= 39; i++) {
+                            const value = table_airframe[selectedIndex][i];
+                            const columnName = headers[i]; // Nom de la colonne (première ligne)
+                            if (value === "1") {
+                                ligneRecommande += columnName + ", ";
+                            } else if (value === "2") {
+                                ligneAutorise += columnName + ", ";
+                            } else if (value === "0") {
+                                ligneInterdite += columnName + ", ";
+                            }
+                        }
                         
                         const selectedRow = table_airframe[selectedIndex];
                         let detailsHTML = "<h3>Détails de l'avion sélectionné :</h3><ul>";
