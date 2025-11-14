@@ -84,9 +84,7 @@
     <body>           
         <div id="main_body">
             <a> choix de l'avion : </a>
-            <select id="airframe" name="airframe">
-                <option value="">Sélectionner un avion</option>
-            </select>
+            <select id="airframe" name="airframe"></select>
         </div>
 
         <div id="header" class="topnav">
@@ -127,7 +125,7 @@
                     defaultOption.textContent = "Sélectionner un avion";
                     airframeSelect.appendChild(defaultOption);
 
-                    const option = document.createElement('option');
+                    var option = document.createElement('option');
                     for (let i = 0; i < rows_length; i++) { // Parcourez table_airframe et ajoutez les options
                         option.value = i; // La valeur est l'index de la ligne
                         option.textContent = table_airframe[i][2]; // Le texte est la 3ème colonne
