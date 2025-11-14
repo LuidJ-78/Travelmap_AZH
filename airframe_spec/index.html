@@ -128,7 +128,7 @@
                     airframeSelect.appendChild(defaultOption);
 
                     const option = document.createElement('option');
-                    for (let i = 0; i < table_airframe.length; i++) { // Parcourez table_airframe et ajoutez les options
+                    for (let i = 0; i < rows_length; i++) { // Parcourez table_airframe et ajoutez les options
                         option.value = i; // La valeur est l'index de la ligne
                         option.textContent = table_airframe[i][2]; // Le texte est la 3ème colonne
                         airframeSelect.appendChild(option);
