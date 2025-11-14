@@ -82,10 +82,7 @@
             #selectedAirframeDetails {
                 margin-top: 20px;
                 text-align: left;
-                background: white;
-                padding: 10px;
-                border-radius: 5px;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                background: #f4f4f4;
             }
         </style>
     </head>
@@ -154,10 +151,9 @@
 
                         const selectedRow = table_airframe[selectedIndex];
                         let detailsHTML = "<h3>Détails de l'avion sélectionné :</h3><ul>";
-                        for (let i = 0; i < headers.length; i++) {
+                        for (let i = 0; i < 25; i++) {
                             detailsHTML += `<li><strong>${headers[i]}:</strong> ${selectedRow[i]}</li>`;
                         }
-
                         detailsHTML += "</ul>";
                         selectedAirframeDetails.innerHTML = detailsHTML;
                     });
