@@ -150,6 +150,31 @@
                         console.log("Index de la ligne sélectionnée :", selectedIndex);
                         console.log("Nom de l'avion sélectionné :", selectedText);
 
+                        const data_nomavion = table_airframe[selectedIndex][2]; //nom avion
+                        const data_icao = table_airframe[selectedIndex][0]; //icao
+                        const data_icaoweight = table_airframe[selectedIndex][16];
+                        const data_type = table_airframe[selectedIndex][3];
+                        const data_azhcategorie = table_airframe[selectedIndex][4];
+                        const data_nbpax = table_airframe[selectedIndex][5];
+                        const data_moteur = table_airframe[selectedIndex][6];
+                        const data_nbmoteur = table_airframe[selectedIndex][7];
+                        const data_longueur = table_airframe[selectedIndex][9];
+                        const data_envergure = table_airframe[selectedIndex][10];
+                        const data_parking = table_airframe[selectedIndex][11];
+                        const data_oew = table_airframe[selectedIndex][12];
+                        const data_mzfw = table_airframe[selectedIndex][13];
+                        const data_mtow = table_airframe[selectedIndex][14];
+                        const data_mlw = table_airframe[selectedIndex][15];
+                        const data_maxfuel = table_airframe[selectedIndex][17];
+                        const data_maxpayload = table_airframe[selectedIndex][18];
+                        const data_vmax = table_airframe[selectedIndex][19];
+                        const data_vcruise = table_airframe[selectedIndex][20];
+                        const data_vapp = table_airframe[selectedIndex][21];
+                        const data_plafond = table_airframe[selectedIndex][22];
+                        const data_range = table_airframe[selectedIndex][23];
+                        const data_takeoff = table_airframe[selectedIndex][24];
+                        const data_landing = table_airframe[selectedIndex][25];
+                        
                         const selectedRow = table_airframe[selectedIndex];
                         let detailsHTML = "<h3>Détails de l'avion sélectionné :</h3><ul>";
                         for (let i = 0; i < 26; i++) {
