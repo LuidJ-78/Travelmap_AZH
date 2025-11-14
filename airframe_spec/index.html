@@ -83,13 +83,8 @@
 
     <body>           
         <div id="main_body">
-            <select id="airframe" name="airframe">
-                <option value="">Sélectionner un avion</option>
-                <option value="Antonov AN-124 Ruslan">Antonov AN-124 Ruslan</option>
-                <option value="Airbus A319 Neo">Airbus A319 Neo</option>
-                <option value="Airbus A320 Neo">Airbus A320 Neo</option>
-                <option value="Airbus A320 Neo">Airbus A321 Neo</option>
-            </select>
+            <a> choix de l'avion : </a>
+            <select id="airframe" name="airframe"></select>
         </div>
 
         <div id="header" class="topnav">
@@ -122,7 +117,21 @@
                     for (let y =  0; y < rows.length; y++) {
                         table_airframe[y] = rows[y].split(",");
                     }
-                    console.log(table_airframe);
+                    //console.log(table_airframe);
+
+                    const airframeSelect = document.getElementById('airframe');// Sélectionnez le menu déroulant
+                    const defaultOption = document.createElement('option'); // Ajoutez une option par défaut
+                    defaultOption.value = "";
+                    defaultOption.textContent = "Sélectionner un avion";
+                    airframeSelect.appendChild(defaultOption);
+
+                    for (let i = 0; i < table_airframe.length; i++) { // Parcourez table_airframe et ajoutez les options
+                        const option = document.createElement('option');
+                        option.value = i; // La valeur est l'index de la ligne
+                        option.textContent = table_airframe[i][2]; // Le texte est la 3ème colonne
+                        airframeSelect.appendChild(option);
+                    }
+                    console.log(option);
 
                     
                 });
