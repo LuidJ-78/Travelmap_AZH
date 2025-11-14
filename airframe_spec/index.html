@@ -133,17 +133,15 @@
                         airframeSelect.appendChild(option[i]);
                     }
 
+
+                    const selectedValue = {}; // Index de la ligne
+                    const selectedText = {}; // Texte de l'option
                     // Écouteur d'événement pour le changement de sélection
                     airframeSelect.addEventListener('change', function() {
-                        const selectedValue = this.value; // Index de la ligne
-                        const selectedText = this.options[this.selectedIndex].text; // Texte de l'option
-
+                        selectedValue = this.value; // Index de la ligne
+                        selectedText = this.options[this.selectedIndex].text; // Texte de l'option
                         console.log("Index de la ligne sélectionnée :", selectedValue);
                         console.log("Nom de l'avion sélectionné :", selectedText);
-
-                        // Vous pouvez utiliser selectedValue et selectedText ici
-                        // Par exemple, afficher une alerte :
-                        alert(`Vous avez sélectionné : ${selectedText} (Index : ${selectedValue})`);
                     });
 
                     
