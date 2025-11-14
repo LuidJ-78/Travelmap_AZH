@@ -78,6 +78,15 @@
                 text-align: center;
                 z-index: 24;
             }
+            
+            #selectedAirframeDetails {
+                margin-top: 20px;
+                text-align: left;
+                background: white;
+                padding: 10px;
+                border-radius: 5px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
         </style>
     </head>
 
@@ -85,6 +94,7 @@
         <div id="main_body">
             <a> choix de l'avion : </a>
             <select id="airframe" name="airframe"></select>
+            <div id="selectedAirframeDetails"></div>
         </div>
 
         <div id="header" class="topnav">
@@ -113,6 +123,7 @@
                 .then((csvText) => {
                     const rows = csvText.split("\n");
                     const rows_length = rows.length;
+                    const headers = rows[0].split(","); // Première ligne = légende
                     var table_airframe = {};
                     for (let y =  0; y < rows.length; y++) {
                         table_airframe[y] = rows[y].split(",");
@@ -120,6 +131,7 @@
                     //console.log(table_airframe);
 
                     const airframeSelect = document.getElementById('airframe');// Sélectionnez le menu déroulant
+                    const selectedAirframeDetails = document.getElementById('selectedAirframeDetails');
                     const defaultOption = document.createElement('option'); // Ajoutez une option par défaut
                     defaultOption.value = "";
                     defaultOption.textContent = "Sélectionner un avion";
@@ -133,18 +145,23 @@
                         airframeSelect.appendChild(option[i]);
                     }
 
-
-                    let airframe_index = null;
                     // Écouteur d'événement pour le changement de sélection
                     airframeSelect.addEventListener('change', function() {
-                        selectedValue = this.value; // Index de la ligne
+                        selectedIndex = this.value; // Index de la ligne
                         selectedText = this.options[this.selectedIndex].text; // Texte de l'option
-                        airframe_index = selectedValue;
-                        console.log("Index de la ligne sélectionnée :", selectedValue);
+                        console.log("Index de la ligne sélectionnée :", selectedIndex);
                         console.log("Nom de l'avion sélectionné :", selectedText);
+
+                        const selectedRow = table_airframe[selectedIndex];
+                        let detailsHTML = "<h3>Détails de l'avion sélectionné :</h3><ul>";
+                        for (let i = 0; i < headers.length; i++) {
+                            detailsHTML += `<li><strong>${headers[i]}:</strong> ${selectedRow[i]}</li>`;
+                        }
+
+                        detailsHTML += "</ul>";
+                        selectedAirframeDetails.innerHTML = detailsHTML;
                     });
 
-                    console.log(airframe_index);
 
                     
                 });
