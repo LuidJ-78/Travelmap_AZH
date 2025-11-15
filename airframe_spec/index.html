@@ -180,15 +180,19 @@
                         for (let i = 27; i <= 39; i++) {
                             const value = table_airframe[selectedIndex][i];
                             const columnName = headers[i]; // Nom de la colonne (première ligne)
+                            const a = 0; const b = 0; const c = 0;
                             if (value === "1") {
+                                if (a>0){ ligneRecommande += ", "};
                                 ligneRecommande += columnName;
-                                if (i<39){ ligneRecommande += ", "};
+                                a++;
                             } else if (value === "2") {
+                                if (b>0){ ligneAutorise += ", "};
                                 ligneAutorise += columnName;
-                                if (i<39){ ligneAutorise += ", "};
+                                b++;
                             } else if (value === "0") {
+                                if (c>0){ ligneInterdite += ", "};
                                 ligneInterdite += columnName;
-                                if (i<39){ ligneInterdite += ", "};
+                                c++;
                             }
                         }
                         console.log(ligneRecommande);
