@@ -126,7 +126,7 @@
                     for (let y =  0; y < rows.length; y++) {
                         table_airframe[y] = rows[y].split(",").map(value => value.replace(/\r$/, '').trim());
                     }
-                    console.log(table_airframe);
+                    //console.log(table_airframe);
 
                     const airframeSelect = document.getElementById('airframe');// Sélectionnez le menu déroulant
                     const selectedAirframeDetails = document.getElementById('selectedAirframeDetails');
@@ -173,22 +173,22 @@
                         const data_range = table_airframe[selectedIndex][23];
                         const data_takeoff = table_airframe[selectedIndex][24];
                         const data_landing = table_airframe[selectedIndex][25];
-
-                        const selectedRow = table_airframe[selectedIndex];
-                        console.log(selectedRow);
                         
                         let ligneRecommande = "";
                         let ligneAutorise = "";
                         let ligneInterdite = "";
-                        for (let i = 27; i <= 40; i++) {
+                        for (let i = 27; i <= 39; i++) {
                             const value = table_airframe[selectedIndex][i];
                             const columnName = headers[i]; // Nom de la colonne (première ligne)
                             if (value === "1") {
-                                ligneRecommande += columnName + ", ";
+                                ligneRecommande += columnName;
+                                if (i<39){ ligneRecommande += ", "};
                             } else if (value === "2") {
-                                ligneAutorise += columnName + ", ";
+                                ligneAutorise += columnName;
+                                if (i<39){ ligneRecommande += ", "};
                             } else if (value === "0") {
-                                ligneInterdite += columnName + ", ";
+                                ligneInterdite += columnName;
+                                if (i<39){ ligneRecommande += ", "};
                             }
                         }
                         console.log(ligneRecommande);
