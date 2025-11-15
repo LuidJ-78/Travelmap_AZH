@@ -124,7 +124,7 @@
                     const headers = rows[0].split(","); // Première ligne = légende
                     var table_airframe = {};
                     for (let y =  0; y < rows.length; y++) {
-                        table_airframe[y] = rows[y].split(",");
+                        table_airframe[y] = rows[y].split(",").map(value => value.replace(/\r$/, '').trim());
                     }
                     console.log(table_airframe);
 
