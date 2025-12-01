@@ -88,14 +88,14 @@
 
     <body>           
         <div id="main_body">
-            <div style="text-align: center; position: fixed; top: 10px;">
+            <div style="text-align: center; position: fixed; top: 10px; left: 50px">
                 <a style="font-weight:bold"> choix de l'avion : </a>
                 <select id="airframe" name="airframe"></select>
             </div>
             <div style="position: fixed; top: 50px; right: 50px;">
                 <a> <img src="airframe_dimsension.png" alt="airframe_dimsension.png" style="height: 200px">  </a>
-                <span id="data_longueur"> </span>
-                <span id="data_envergure"> </span>
+                <span id="data_longueur" style="position: fixed; top: 50px; right: 50px;"> </span>
+                <span id="data_envergure" style="position: fixed; top: 70px; right: 50px;"> </span>
             </div>
         </div>
 
@@ -162,8 +162,8 @@
                         document.getElementById("data_nbpax").textContent = table_airframe[selectedIndex][5];
                         document.getElementById("data_moteur").textContent = table_airframe[selectedIndex][6];
                         document.getElementById("data_nbmoteur").textContent = table_airframe[selectedIndex][7];*/
-                        document.getElementById("data_longueur").textContent = table_airframe[selectedIndex][9];
-                        document.getElementById("data_envergure").textContent = table_airframe[selectedIndex][10];
+                        document.getElementById("data_longueur").textContent = table_airframe[selectedIndex][9] + " m";
+                        document.getElementById("data_envergure").textContent = table_airframe[selectedIndex][10] + " m";
                         /*document.getElementById("data_oew").textContent = table_airframe[selectedIndex][12];
                         document.getElementById("data_mzfw").textContent = table_airframe[selectedIndex][13];
                         document.getElementById("data_mtow").textContent = table_airframe[selectedIndex][14];
