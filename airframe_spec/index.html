@@ -99,15 +99,19 @@
         </div>
         
         <div id="main_body">
-            <div style="text-align: center; position: fixed; top: 10px; left: 50px">
+            <div style="text-align: center; position: fixed; top: 50px; left: 100px">
                 <a style="font-weight:bold"> choix de l'avion : </a>
                 <select id="airframe" name="airframe"></select>
             </div>
-            <div style="position: fixed; top: 100px; right: 70px;">
-                <h3>Dimension</h3>
+            <div style="position: fixed; top: 700px; left: 50px;">
+                <h3>Caractérisation</h3>
+                <a> code ICAO :</a><span id="data_icao"> </span>
+            </div>            
+            <div style="position: fixed; top: 700px; right: 70px;">
+                <h3>Dimension de l'avion</h3>
                 <a> <img src="airframe_dimsension.png" alt="airframe_dimsension.png" style="height: 200px">  </a>
-                <span id="data_longueur" style="position: fixed; top: 105px; left: 630px;"> </span>
-                <span id="data_envergure" style="position: fixed; top: 260px; right: 30px;"> </span>
+                <span id="data_longueur" style="position: fixed; top: 125px; left: 630px;"> </span>
+                <span id="data_envergure" style="position: fixed; top: 280px; right: 30px;"> </span>
             </div>
         </div>
 
@@ -154,29 +158,29 @@
                         console.log("Index de la ligne sélectionnée :", selectedIndex);
                         console.log("Nom de l'avion sélectionné :", selectedText);
 
-                        /*document.getElementById("data_nomavion").textContent = table_airframe[selectedIndex][2];
+                        //document.getElementById("data_nomavion").textContent = table_airframe[selectedIndex][2];
                         document.getElementById("data_icao").textContent = table_airframe[selectedIndex][0];
-                        document.getElementById("data_icaoweight").textContent = table_airframe[selectedIndex][16];
-                        document.getElementById("data_azhcategorie").textContent = table_airframe[selectedIndex][4];
-                        document.getElementById("data_type").textContent = table_airframe[selectedIndex][3];
-                        document.getElementById("data_nbpax").textContent = table_airframe[selectedIndex][5];
-                        document.getElementById("data_moteur").textContent = table_airframe[selectedIndex][6];
-                        document.getElementById("data_nbmoteur").textContent = table_airframe[selectedIndex][7];*/
+                        //document.getElementById("data_icaoweight").textContent = table_airframe[selectedIndex][16];
+                        //document.getElementById("data_azhcategorie").textContent = table_airframe[selectedIndex][4];
+                        //document.getElementById("data_type").textContent = table_airframe[selectedIndex][3];
+                        //document.getElementById("data_nbpax").textContent = table_airframe[selectedIndex][5];
+                        //document.getElementById("data_moteur").textContent = table_airframe[selectedIndex][6];
+                        //document.getElementById("data_nbmoteur").textContent = table_airframe[selectedIndex][7];
                         document.getElementById("data_longueur").textContent = table_airframe[selectedIndex][9] + " m";
                         document.getElementById("data_envergure").textContent = table_airframe[selectedIndex][10] + " m";
-                        /*document.getElementById("data_oew").textContent = table_airframe[selectedIndex][12];
-                        document.getElementById("data_mzfw").textContent = table_airframe[selectedIndex][13];
-                        document.getElementById("data_mtow").textContent = table_airframe[selectedIndex][14];
-                        document.getElementById("data_mlw").textContent = table_airframe[selectedIndex][15];
-                        document.getElementById("data_maxfuel").textContent = table_airframe[selectedIndex][17];
-                        document.getElementById("data_maxpayload").textContent = table_airframe[selectedIndex][18];
-                        document.getElementById("data_vmax").textContent = table_airframe[selectedIndex][19];
-                        document.getElementById("data_vcruise").textContent = table_airframe[selectedIndex][20];
-                        document.getElementById("data_vapp").textContent = table_airframe[selectedIndex][21];
-                        document.getElementById("data_plafond").textContent = table_airframe[selectedIndex][22];
-                        document.getElementById("data_range").textContent = table_airframe[selectedIndex][23];
-                        document.getElementById("data_takeoff").textContent = table_airframe[selectedIndex][24];
-                        document.getElementById("data_landing").textContent = table_airframe[selectedIndex][25];*/
+                        //document.getElementById("data_oew").textContent = table_airframe[selectedIndex][12];
+                        //document.getElementById("data_mzfw").textContent = table_airframe[selectedIndex][13];
+                        //document.getElementById("data_mtow").textContent = table_airframe[selectedIndex][14];
+                        //document.getElementById("data_mlw").textContent = table_airframe[selectedIndex][15];
+                        //document.getElementById("data_maxfuel").textContent = table_airframe[selectedIndex][17];
+                        //document.getElementById("data_maxpayload").textContent = table_airframe[selectedIndex][18];
+                        //document.getElementById("data_vmax").textContent = table_airframe[selectedIndex][19];
+                        //document.getElementById("data_vcruise").textContent = table_airframe[selectedIndex][20];
+                        //document.getElementById("data_vapp").textContent = table_airframe[selectedIndex][21];
+                        //document.getElementById("data_plafond").textContent = table_airframe[selectedIndex][22];
+                        //document.getElementById("data_range").textContent = table_airframe[selectedIndex][23];
+                        //document.getElementById("data_takeoff").textContent = table_airframe[selectedIndex][24];
+                        //document.getElementById("data_landing").textContent = table_airframe[selectedIndex][25];
                         
                         let ligneRecommande = "";
                         let ligneAutorise = "";
@@ -204,9 +208,9 @@
                         console.log(ligneRecommande);
                         console.log(ligneAutorise);
                         console.log(ligneInterdite);
-                        /*document.getElementById("data_ligneRecommande").textContent = ligneRecommande;
-                        document.getElementById("data_ligneAutorise").textContent = ligneAutorise;
-                        document.getElementById("data_ligneInterdite").textContent = ligneInterdite;*/
+                        //document.getElementById("data_ligneRecommande").textContent = ligneRecommande;
+                        //document.getElementById("data_ligneAutorise").textContent = ligneAutorise;
+                        //document.getElementById("data_ligneInterdite").textContent = ligneInterdite;
                     });
                 });
         </script>
