@@ -154,7 +154,7 @@
                         console.log("Index de la ligne sélectionnée :", selectedIndex);
                         console.log("Nom de l'avion sélectionné :", selectedText);
 
-                        var data_nomavion = table_airframe[selectedIndex][2]; //nom avion
+                        const data_nomavion = table_airframe[selectedIndex][2]; //nom avion
                         const data_icao = table_airframe[selectedIndex][0]; //icao
                         const data_icaoweight = table_airframe[selectedIndex][16];
                         const data_azhcategorie = table_airframe[selectedIndex][4];
@@ -178,17 +178,17 @@
                         const data_takeoff = table_airframe[selectedIndex][24];
                         const data_landing = table_airframe[selectedIndex][25];
 
-                        document.getElementById("css_data_nomavion").textContent = data_nomavion;
+                        /*document.getElementById("css_data_nomavion").textContent = data_nomavion;
                         document.getElementById("css_data_icao").textContent = data_icao;
                         document.getElementById("css_data_icaoweight").textContent = data_icaoweight;
                         document.getElementById("css_data_azhcategorie").textContent = data_azhcategorie;
                         document.getElementById("css_data_type").textContent = data_type;
                         document.getElementById("css_data_nbpax").textContent = table_airframe[selectedIndex][5];
                         document.getElementById("css_data_moteur").textContent = table_airframe[selectedIndex][6];
-                        document.getElementById("css_data_nbmoteur").textContent = table_airframe[selectedIndex][7];
+                        document.getElementById("css_data_nbmoteur").textContent = table_airframe[selectedIndex][7];*/
                         document.getElementById("css_data_longueur").textContent = table_airframe[selectedIndex][9];
                         document.getElementById("css_data_envergure").textContent = table_airframe[selectedIndex][10];
-                        document.getElementById("css_data_oew").textContent = table_airframe[selectedIndex][12];
+                        /*document.getElementById("css_data_oew").textContent = table_airframe[selectedIndex][12];
                         document.getElementById("css_data_mzfw").textContent = table_airframe[selectedIndex][13];
                         document.getElementById("css_data_mtow").textContent = table_airframe[selectedIndex][14];
                         document.getElementById("css_data_mlw").textContent = table_airframe[selectedIndex][15];
@@ -200,7 +200,7 @@
                         document.getElementById("css_data_plafond").textContent = table_airframe[selectedIndex][22];
                         document.getElementById("css_data_range").textContent = table_airframe[selectedIndex][23];
                         document.getElementById("css_data_takeoff").textContent = table_airframe[selectedIndex][24];
-                        document.getElementById("css_data_landing").textContent = table_airframe[selectedIndex][25];
+                        document.getElementById("css_data_landing").textContent = table_airframe[selectedIndex][25];*/
                         
                         let ligneRecommande = "";
                         let ligneAutorise = "";
@@ -228,9 +228,9 @@
                         console.log(ligneRecommande);
                         console.log(ligneAutorise);
                         console.log(ligneInterdite);
-                        document.getElementById("data_ligneRecommande").textContent = ligneRecommande;
+                        /*document.getElementById("data_ligneRecommande").textContent = ligneRecommande;
                         document.getElementById("data_ligneAutorise").textContent = ligneAutorise;
-                        document.getElementById("data_ligneInterdite").textContent = ligneInterdite;                        
+                        document.getElementById("data_ligneInterdite").textContent = ligneInterdite;*/
                     });
                 });
         </script>
