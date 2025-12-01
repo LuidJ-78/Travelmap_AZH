@@ -85,20 +85,8 @@
             }
         </style>
     </head>
-
-    <body>           
-        <div id="main_body">
-            <div style="text-align: center; position: fixed; top: 10px; left: 50px">
-                <a style="font-weight:bold"> choix de l'avion : </a>
-                <select id="airframe" name="airframe"></select>
-            </div>
-            <div style="position: fixed; top: 50px; right: 50px;">
-                <a> <img src="airframe_dimsension.png" alt="airframe_dimsension.png" style="height: 200px">  </a>
-                <span id="data_longueur" style="position: fixed; top: 60px; left: 660px;"> </span>
-                <span id="data_envergure" style="position: fixed; top: 200px; right: 40px;"> </span>
-            </div>
-        </div>
-
+    
+    <body>
         <div id="header" class="topnav">
             <script>const baseUrl = "https://luidj-78.github.io/Travelmap_AZH/";</script>
             <a href="https://www.azgharie.net/" target="_blank"> <img src="azgharie-removebg-preview.png" alt="azgharie-removebg-preview.png" style="height: 50px">  </a>
@@ -109,9 +97,21 @@
             <a href="#" onclick="window.location.href=baseUrl + 'cargo/'" style="color:#007BFF;font-weight:bold;">Cargo</a>
             <a href="#" onclick="window.location.href=baseUrl + 'airframe_spec/'" style="color:#007BFF;font-weight:bold;">BDD Avion</a>
         </div>
+        
+        <div id="main_body">
+            <div style="text-align: center; position: fixed; top: 10px; left: 50px">
+                <a style="font-weight:bold"> choix de l'avion : </a>
+                <select id="airframe" name="airframe"></select>
+            </div>
+            <div style="position: fixed; top: 100px; right: 70px;">
+                <h3>Dimension</h3><br>
+                <a> <img src="airframe_dimsension.png" alt="airframe_dimsension.png" style="height: 200px">  </a>
+                <span id="data_longueur" style="position: fixed; top: 105px; left: 630px;"> </span>
+                <span id="data_envergure" style="position: fixed; top: 260px; right: 30px;"> </span>
+            </div>
+        </div>
 
        <div id="map" style="position: absolute; top: 0px; left: 0; bottom: 0; right: 0;"></div>
-
 
         <script> //affichage de la map en fond
             var map = L.map('map', {zoomControl: false}).setView([48.8566, 2.3522], 4);
