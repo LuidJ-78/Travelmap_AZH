@@ -109,8 +109,9 @@
                 <div><a> type : </a><span id="data_type"> </span></div>
                 <div><a> nombre de passager : </a><span id="data_nbpax"> </span></div>
                 <div><a> catégorie : </a><span id="data_azhcategorie"> </span></div>
-                <div><a> type de moteur : </a><span id="data_moteur"> </span></div>
-                <div><a> nombre de moteur : </a><span id="data_nbmoteur"> </span></div>
+                <div><a> ligne Recommande : </a><span id="data_ligneRecommande"> </span></div>
+                <div><a> ligne Autorise : </a><span id="data_ligneAutorise"> </span></div>
+                <div><a> ligne Interdite : </a><span id="data_ligneInterdite"> </span></div>
             </div>            
             <div style="position: fixed; top: 70px; right: 70px;">
                 <h4>Dimension de l'avion</h4>
@@ -118,25 +119,30 @@
                 <span id="data_longueur" style="position: fixed; top: 125px; left: 630px;"> </span>
                 <span id="data_envergure" style="position: fixed; top: 280px; right: 30px;"> </span>
             </div>
-            <div style="position: fixed; top: 170px; left: 50px; width: 550px;">
-                <h4>Masse</h4>
-                <div><a> data_icaoweight : </a><span id="data_icaoweight"> </span></div>
-                <div><a> data_oew : </a><span id="data_oew"> </span></div>
-                <div><a> data_mzfw : </a><span id="data_mzfw"> </span></div>
-                <div><a> data_mtow : </a><span id="data_mtow"> </span></div>
-                <div><a> data_mlw : </a><span id="data_mlw"> </span></div>
-                <div><a> data_maxfuel : </a><span id="data_maxfuel"> </span></div>
-                <div><a> data_maxpayload : </a><span id="data_maxpayload"> </span></div>
-            </div>
             <div style="position: fixed; top: 270px; left: 50px; width: 550px;">
+                <h4>Moteur</h4>
+                <div><a> type : </a><span id="data_moteur"> </span></div>
+                <div><a> nombre : </a><span id="data_nbmoteur"> </span></div>
+            </div>
+            <div style="position: fixed; top: 370px; left: 50px; width: 550px;">
+                <h4>Masse</h4>
+                <div><a> catégorie : </a><span id="data_icaoweight"> </span></div>
+                <div><a> OEW : </a><span id="data_oew"> </span></div>
+                <div><a> MFFW : </a><span id="data_mzfw"> </span></div>
+                <div><a> MTOW : </a><span id="data_mtow"> </span></div>
+                <div><a> MLW : </a><span id="data_mlw"> </span></div>
+                <div><a> Masse carburant max : </a><span id="data_maxfuel"> </span></div>
+                <div><a> Masse poayload max : </a><span id="data_maxpayload"> </span></div>
+            </div>
+            <div style="position: fixed; top: 570px; left: 50px; width: 550px;">
                 <h4>Performance</h4>
-                <div><a> data_vmax : </a><span id="data_vmax"> </span></div>
-                <div><a> data_vcruise : </a><span id="data_vcruise"> </span></div>
-                <div><a> data_vapp : </a><span id="data_vapp"> </span></div>
-                <div><a> data_plafond : </a><span id="data_plafond"> </span></div>
-                <div><a> data_range : </a><span id="data_range"> </span></div>
-                <div><a> data_takeoff : </a><span id="data_takeoff"> </span></div>
-                <div><a> data_landing : </a><span id="data_landing"> </span></div>
+                <div><a> Vitesse max : </a><span id="data_vmax"> </span></div>
+                <div><a> Vitesse de croisière : </a><span id="data_vcruise"> </span></div>
+                <div><a> Vitesse d'approche : </a><span id="data_vapp"> </span></div>
+                <div><a> Plafond : </a><span id="data_plafond"> </span></div>
+                <div><a> Autonomie max : </a><span id="data_range"> </span></div>
+                <div><a> distance de décollage : </a><span id="data_takeoff"> </span></div>
+                <div><a> distance d'atterrissage : </a><span id="data_landing"> </span></div>
             </div> 
         </div>
 
@@ -233,9 +239,9 @@
                         console.log(ligneRecommande);
                         console.log(ligneAutorise);
                         console.log(ligneInterdite);
-                        //document.getElementById("data_ligneRecommande").textContent = ligneRecommande;
-                        //document.getElementById("data_ligneAutorise").textContent = ligneAutorise;
-                        //document.getElementById("data_ligneInterdite").textContent = ligneInterdite;
+                        document.getElementById("data_ligneRecommande").textContent = ligneRecommande;
+                        document.getElementById("data_ligneAutorise").textContent = ligneAutorise;
+                        document.getElementById("data_ligneInterdite").textContent = ligneInterdite;
                     });
                 });
         </script>
