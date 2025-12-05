@@ -106,11 +106,11 @@
             <div style="position: fixed; top: 70px; left: 50px; width: 550px;">
                 <h4>Caractérisation</h4>
                 <div><a> code ICAO : </a><span id="data_icao"> </span></div>
-                <div><a> - type : </a><span id="data_type"> </span></div>
-                <div><a> - catégorie : </a><span id="data_azhcategorie"> </span></div>
+                <div><a> type : </a><span id="data_type"> </span></div>
+                <div><a> nombre de passager : </a><span id="data_nbpax"> </span></div>
+                <div><a> catégorie : </a><span id="data_azhcategorie"> </span></div>
                 <div><a> type de moteur : </a><span id="data_moteur"> </span></div>
-                <div><a> - nombre de moteur : </a><span id="data_nbmoteur"> </span></div>
-                
+                <div><a> nombre de moteur : </a><span id="data_nbmoteur"> </span></div>
             </div>            
             <div style="position: fixed; top: 70px; right: 70px;">
                 <h4>Dimension de l'avion</h4>
@@ -118,6 +118,26 @@
                 <span id="data_longueur" style="position: fixed; top: 125px; left: 630px;"> </span>
                 <span id="data_envergure" style="position: fixed; top: 280px; right: 30px;"> </span>
             </div>
+            <div style="position: fixed; top: 170px; left: 50px; width: 550px;">
+                <h4>Masse</h4>
+                <div><a> data_icaoweight : </a><span id="data_icaoweight"> </span></div>
+                <div><a> data_oew : </a><span id="data_oew"> </span></div>
+                <div><a> data_mzfw : </a><span id="data_mzfw"> </span></div>
+                <div><a> data_mtow : </a><span id="data_mtow"> </span></div>
+                <div><a> data_mlw : </a><span id="data_mlw"> </span></div>
+                <div><a> data_maxfuel : </a><span id="data_maxfuel"> </span></div>
+                <div><a> data_maxpayload : </a><span id="data_maxpayload"> </span></div>
+            </div>
+            <div style="position: fixed; top: 270px; left: 50px; width: 550px;">
+                <h4>Performance</h4>
+                <div><a> data_vmax : </a><span id="data_vmax"> </span></div>
+                <div><a> data_vcruise : </a><span id="data_vcruise"> </span></div>
+                <div><a> data_vapp : </a><span id="data_vapp"> </span></div>
+                <div><a> data_plafond : </a><span id="data_plafond"> </span></div>
+                <div><a> data_range : </a><span id="data_range"> </span></div>
+                <div><a> data_takeoff : </a><span id="data_takeoff"> </span></div>
+                <div><a> data_landing : </a><span id="data_landing"> </span></div>
+            </div> 
         </div>
 
        <div id="map" style="position: absolute; top: 0px; left: 0; bottom: 0; right: 0;"></div>
@@ -165,27 +185,27 @@
 
                         //document.getElementById("data_nomavion").textContent = table_airframe[selectedIndex][2];
                         document.getElementById("data_icao").textContent = table_airframe[selectedIndex][0];
-                        //document.getElementById("data_icaoweight").textContent = table_airframe[selectedIndex][16];
+                        document.getElementById("data_icaoweight").textContent = table_airframe[selectedIndex][16];
                         document.getElementById("data_azhcategorie").textContent = table_airframe[selectedIndex][4];
                         document.getElementById("data_type").textContent = table_airframe[selectedIndex][3];
-                        //document.getElementById("data_nbpax").textContent = table_airframe[selectedIndex][5];
+                        document.getElementById("data_nbpax").textContent = table_airframe[selectedIndex][5];
                         document.getElementById("data_moteur").textContent = table_airframe[selectedIndex][6];
                         document.getElementById("data_nbmoteur").textContent = table_airframe[selectedIndex][7];
                         document.getElementById("data_longueur").textContent = table_airframe[selectedIndex][9] + " m";
                         document.getElementById("data_envergure").textContent = table_airframe[selectedIndex][10] + " m";
-                        //document.getElementById("data_oew").textContent = table_airframe[selectedIndex][12] + " kg";
-                        //document.getElementById("data_mzfw").textContent = table_airframe[selectedIndex][13] + " kg";
-                        //document.getElementById("data_mtow").textContent = table_airframe[selectedIndex][14] + " kg";
-                        //document.getElementById("data_mlw").textContent = table_airframe[selectedIndex][15] + " kg";
-                        //document.getElementById("data_maxfuel").textContent = table_airframe[selectedIndex][17] + " kg";
-                        //document.getElementById("data_maxpayload").textContent = table_airframe[selectedIndex][18] + " kg";
-                        //document.getElementById("data_vmax").textContent = table_airframe[selectedIndex][19] + " kts";
-                        //document.getElementById("data_vcruise").textContent = table_airframe[selectedIndex][20] + " kts";
-                        //document.getElementById("data_vapp").textContent = table_airframe[selectedIndex][21] + " kts";
-                        //document.getElementById("data_plafond").textContent = table_airframe[selectedIndex][22] + " ft";
-                        //document.getElementById("data_range").textContent = table_airframe[selectedIndex][23] + " nm";
-                        //document.getElementById("data_takeoff").textContent = table_airframe[selectedIndex][24] + " ft";
-                        //document.getElementById("data_landing").textContent = table_airframe[selectedIndex][25] + " ft";
+                        document.getElementById("data_oew").textContent = table_airframe[selectedIndex][12] + " kg";
+                        document.getElementById("data_mzfw").textContent = table_airframe[selectedIndex][13] + " kg";
+                        document.getElementById("data_mtow").textContent = table_airframe[selectedIndex][14] + " kg";
+                        document.getElementById("data_mlw").textContent = table_airframe[selectedIndex][15] + " kg";
+                        document.getElementById("data_maxfuel").textContent = table_airframe[selectedIndex][17] + " kg";
+                        document.getElementById("data_maxpayload").textContent = table_airframe[selectedIndex][18] + " kg";
+                        document.getElementById("data_vmax").textContent = table_airframe[selectedIndex][19] + " kts";
+                        document.getElementById("data_vcruise").textContent = table_airframe[selectedIndex][20] + " kts";
+                        document.getElementById("data_vapp").textContent = table_airframe[selectedIndex][21] + " kts";
+                        document.getElementById("data_plafond").textContent = table_airframe[selectedIndex][22] + " ft";
+                        document.getElementById("data_range").textContent = table_airframe[selectedIndex][23] + " nm";
+                        document.getElementById("data_takeoff").textContent = table_airframe[selectedIndex][24] + " ft";
+                        document.getElementById("data_landing").textContent = table_airframe[selectedIndex][25] + " ft";
                         
                         let ligneRecommande = "";
                         let ligneAutorise = "";
