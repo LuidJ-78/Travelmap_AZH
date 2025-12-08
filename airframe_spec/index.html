@@ -77,6 +77,34 @@
                 border-radius: 10px;
                 z-index: 24;
             }
+            .data_tooltip { 
+                position: relative; 
+                display: inline-block; 
+                cursor: help; 
+            } 
+            .data_tooltip .data_tooltiptext { 
+                visibility: hidden; 
+                width: 220px; 
+                background: rgba(0,0,0,0.85); 
+                color: #fff; 
+                text-align: left; 
+                padding: 8px; 
+                border-radius: 6px; 
+                position: absolute; 
+                z-index: 999; 
+                bottom: 130%; 
+                left: 50%; 
+                transform: translateX(-50%); 
+                opacity: 0; 
+                transition: opacity .18s ease; 
+                box-shadow: 0 2px 6px rgba(0,0,0,0.3); 
+                pointer-events: none; 
+            } 
+            .data_tooltip:hover .data_tooltiptext, .data_tooltip:focus-within .data_tooltiptext { 
+                visibility: visible; 
+                opacity: 1; 
+                pointer-events: auto; 
+            }
             
             #selectedAirframeDetails {
                 margin-top: 20px;
@@ -128,7 +156,8 @@
                 <a style="font-weight:bold;">Masse</a>
                 <div><a> catégorie : </a><span id="data_icaoweight"> </span></div>
                 <div><span title="Masse à vide en opération"> OEW : </span><span id="data_oew"> </span></div>
-                <div><a> MZFW : </a><span id="data_mzfw"> </span></div>
+                <span class="data_tooltip" tabindex="0" aria-describedby="MZFW-data_tooltip"> MZFW : <span id="MZFW-data_tooltip" class="data_tooltiptext" role="data_tooltip">Masse max sans carburant</span></span>
+                <!-- <div><a> MZFW : </a><span id="data_mzfw"> </span></div> -->
                 <div><a> MTOW : </a><span id="data_mtow"> </span></div>
                 <div><a> MLW : </a><span id="data_mlw"> </span></div>
                 <div><a> Masse carburant max : </a><span id="data_maxfuel"> </span></div>
