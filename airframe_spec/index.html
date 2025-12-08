@@ -155,13 +155,12 @@
             <div style="position: fixed; top: 325px; left: 50px; width: 550px;">
                 <a style="font-weight:bold;">Masse</a>
                 <div><a> catégorie : </a><span id="data_icaoweight"> </span></div>
-                <div><span title="Masse à vide en opération"> OEW : </span><span id="data_oew"> </span></div>
+                <div><span class="data_tooltip" tabindex="0" aria-describedby="OEW-data_tooltip"> OEW : <span id="OEW-data_tooltip" class="data_tooltiptext" role="data_tooltip">Masse à vide en opération</span></span><span id="data_oew"> </span></div>
                 <div><span class="data_tooltip" tabindex="0" aria-describedby="MZFW-data_tooltip"> MZFW : <span id="MZFW-data_tooltip" class="data_tooltiptext" role="data_tooltip">Masse max sans carburant</span></span><span id="data_mzfw"> </span></div>
-                <!-- <div><a> MZFW : </a><span id="data_mzfw"> </span></div> -->
-                <div><a> MTOW : </a><span id="data_mtow"> </span></div>
-                <div><a> MLW : </a><span id="data_mlw"> </span></div>
+                <div><span class="data_tooltip" tabindex="0" aria-describedby="MTOW-data_tooltip"> MTOW : <span id="MZFW-data_tooltip" class="data_tooltiptext" role="data_tooltip">Masse max au décollage</span></span><span id="data_mtow"> </span></div>
+                <div><span class="data_tooltip" tabindex="0" aria-describedby="MLW-data_tooltip"> MLW : <span id="MZFW-data_tooltip" class="data_tooltiptext" role="data_tooltip">Masse max à l'attterrissage</span></span><span id="data_mlw"> </span></div>
                 <div><a> Masse carburant max : </a><span id="data_maxfuel"> </span></div>
-                <div><a> Masse poayload max : </a><span id="data_maxpayload"> </span></div>
+                <div><a> Masse charge utile max : </a><span id="data_maxpayload"> </span></div>
             </div>
             <div style="position: fixed; top: 485px; left: 50px; width: 550px;">
                 <a style="font-weight:bold;">Performance</a>
@@ -169,9 +168,9 @@
                 <div><a> Vitesse de croisière : </a><span id="data_vcruise"> </span></div>
                 <div><a> Vitesse d'approche : </a><span id="data_vapp"> </span></div>
                 <div><a> Plafond : </a><span id="data_plafond"> </span></div>
-                <div><a> Autonomie max : </a><span id="data_range"> </span></div>
-                <div><a> distance de décollage : </a><span id="data_takeoff"> </span></div>
-                <div><a> distance d'atterrissage : </a><span id="data_landing"> </span></div>
+                <div><span class="data_tooltip" tabindex="0" aria-describedby="OEW-data_tooltip"> Autonomie max :  <span id="range-data_tooltip" class="data_tooltiptext" role="data_tooltip">charge utile 0 kg, carburant 100 % </span></span><span id="data_range"> </span></div>
+                <div><span class="data_tooltip" tabindex="0" aria-describedby="OEW-data_tooltip"> distance de décollage :  <span id="takeoff-data_tooltip" class="data_tooltiptext" role="data_tooltip">MTOW, niveau de la mer, 15°C </span></span><span id="data_takeoff"> </span></div>
+                <div><span class="data_tooltip" tabindex="0" aria-describedby="OEW-data_tooltip"> distance d'atterrissage :  <span id="landing-data_tooltip" class="data_tooltiptext" role="data_tooltip">MLW, niveau de la mer, 15°C </span></span><span id="data_landing"> </span></div>
             </div> 
         </div>
 
