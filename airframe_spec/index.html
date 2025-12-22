@@ -227,19 +227,19 @@
                         document.getElementById("data_nbmoteur").textContent = table_airframe[selectedIndex][7];
                         document.getElementById("data_longueur").textContent = table_airframe[selectedIndex][9] + " m";
                         document.getElementById("data_envergure").textContent = table_airframe[selectedIndex][10] + " m";
-                        document.getElementById("data_oew").textContent = table_airframe[selectedIndex][12] + " kg";
-                        document.getElementById("data_mzfw").textContent = table_airframe[selectedIndex][13] + " kg";
-                        document.getElementById("data_mtow").textContent = table_airframe[selectedIndex][14] + " kg";
-                        document.getElementById("data_mlw").textContent = table_airframe[selectedIndex][15] + " kg";
+                        document.getElementById("data_oew").textContent = " " + table_airframe[selectedIndex][12] + " kg";
+                        document.getElementById("data_mzfw").textContent = " " + table_airframe[selectedIndex][13] + " kg";
+                        document.getElementById("data_mtow").textContent = " " + table_airframe[selectedIndex][14] + " kg";
+                        document.getElementById("data_mlw").textContent = " " + table_airframe[selectedIndex][15] + " kg";
                         document.getElementById("data_maxfuel").textContent = table_airframe[selectedIndex][17] + " kg";
                         document.getElementById("data_maxpayload").textContent = table_airframe[selectedIndex][18] + " kg";
                         document.getElementById("data_vmax").textContent = table_airframe[selectedIndex][19] + " kts";
                         document.getElementById("data_vcruise").textContent = table_airframe[selectedIndex][20] + " kts";
                         document.getElementById("data_vapp").textContent = table_airframe[selectedIndex][21] + " kts";
                         document.getElementById("data_plafond").textContent = table_airframe[selectedIndex][22] + " ft";
-                        document.getElementById("data_range").textContent = table_airframe[selectedIndex][23] + " nm";
-                        document.getElementById("data_takeoff").textContent = table_airframe[selectedIndex][24] + " ft";
-                        document.getElementById("data_landing").textContent = table_airframe[selectedIndex][25] + " ft";
+                        document.getElementById("data_range").textContent = " " + table_airframe[selectedIndex][23] + " nm";
+                        document.getElementById("data_takeoff").textContent = " " + table_airframe[selectedIndex][24] + " ft";
+                        document.getElementById("data_landing").textContent = " " + table_airframe[selectedIndex][25] + " ft";
                         
                         let ligneRecommande = "";
                         let ligneAutorise = "";
@@ -269,7 +269,7 @@
                         console.log(ligneInterdite);
                         document.getElementById("data_ligneRecommande").textContent = ligneRecommande;
                         document.getElementById("data_ligneAutorise").textContent = ligneAutorise;
-                        document.getElementById("data_ligneInterdite").textContent = ligneInterdite;
+                        document.getElementById("data_ligneInterdite").textContent = " " + ligneInterdite;
                     });
                 });
         </script>
