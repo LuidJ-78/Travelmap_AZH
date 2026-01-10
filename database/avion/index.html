@@ -184,8 +184,12 @@
             <div style="position: fixed; top: 70px; right: 70px;">
                 <h4>Dimension de l'avion</h4>
                 <a> <img src="airframe_dimsension.png" alt="airframe_dimsension.png" style="height: 200px">  </a>
-                <span id="data_longueur" style="position: fixed; top: 125px; left: 630px;"> </span>
-                <span id="data_envergure" style="position: fixed; top: 280px; right: 30px;"> </span>
+
+                <div style="position: fixed; top: 125px; left: 630px;"><span class="data_tooltip" tabindex="0" aria-describedby="longueur-data_tooltip"><span id="longueur-data_tooltip" class="data_tooltiptext" role="data_tooltip">longueur</span></span><span id="data_longueur"> </span></div>
+                <div style="position: fixed; top: 280px; right: 30px;"><span class="data_tooltip" tabindex="0" aria-describedby="envergure-data_tooltip"><span id="envergure-data_tooltip" class="data_tooltiptext" role="data_tooltip">envergure</span></span><span id="data_envergure"> </span></div>
+                
+                <!--<span id="data_longueur" style="position: fixed; top: 125px; left: 630px;"> </span>
+                <span id="data_envergure" style="position: fixed; top: 280px; right: 30px;"> </span> -->
             </div>
             <div style="position: fixed; top: 250px; left: 50px; width: 550px;">
                 <a style="font-weight:bold;">Moteur</a>
