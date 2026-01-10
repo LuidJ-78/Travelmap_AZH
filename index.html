@@ -1,4 +1,4 @@
-<!doctype html>
+    <!doctype html>
 <html lang="fr">
     <head>
         <meta charset="UTF-8" />
@@ -31,6 +31,34 @@
                 overflow: hidden;
                 z-index: 25;
             }
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+                left: 0;
+                top: 100%;
+            }
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                text-align: left;
+            }
+            .dropdown-content a:hover {
+                background-color: #ddd;
+            }
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+            
             #map {
                 z-index: 1;
             }
@@ -152,18 +180,14 @@
                 </p>
             </div>
             <div id="description_2">
-                <p> 
-                    Ici, vous pourrez planifier et créer un plan de vol simbrief pour réaliser différentes activités.
-                </p>
+                <p> Ici, vous pourrez planifier et créer un plan de vol simbrief pour réaliser différentes activités.</p>
                 <p> 
                     Toute ces activités sont gérées par un 
                     <a href="https://docs.google.com/spreadsheets/d/1XeNSL5uGvEs2YffUxcDWHfenT37o2l4nxruZBqnaiMU" target="_blank" style="color:#79D600;font-weight:bold;text-decoration:none;"> google sheet </a>
                     et éxpliquées sur ce 
                     <a href="https://docs.google.com/document/d/19_WjD9vYB-2mGxpQB1473cOVo0jc73eOQXmo3w12W6o/edit?tab=t.0" target="_blank" style="color:#000ED6;font-weight:bold;text-decoration:none;"> document </a>
                 </p>
-                <p> 
-                    Une carte dédiée permet d'afficher le voyage des lignes de la compagnie.
-                </p>
+                <p> Une carte dédiée permet d'afficher le voyage des lignes de la compagnie.</p>
             </div>
             <div id="infographie_azh">
                 <div style="display: flex; align-items: center;">
@@ -180,11 +204,18 @@
             <a href="#" onclick="window.location.href=baseUrl + 'planificateur/'" style="color:#007BFF;font-weight:bold;">Planificateur de vol</a>
             <a href="#" onclick="window.location.href=baseUrl + 'passager/'" style="color:#007BFF;font-weight:bold;">Passager</a>
             <a href="#" onclick="window.location.href=baseUrl + 'cargo/'" style="color:#007BFF;font-weight:bold;">Cargo</a>
-            <a href="#" onclick="window.location.href=baseUrl + 'airframe_spec/'" style="color:#007BFF;font-weight:bold;">BDD Avion</a>
+            <div class="dropdown" style="display: inline-block; height: 100%;">
+                <a href="#" style="color:#007BFF;font-weight:bold;height: 100%;display: flex;align-items: center;padding: 0 12px;">Base de donnée</a>
+                <div class="dropdown-content">
+                    <a href="#" onclick="window.location.href=baseUrl + 'database/avion/'" style="color:#007BFF;font-weight:bold;">Avion</a>
+                    <a href="#" onclick="window.location.href=baseUrl + 'database/aeroport/'" style="color:#007BFF;font-weight:bold;">Aéroport</a>
+                </div>
+            </div>
+
+     <!--       <a href="#" onclick="window.location.href=baseUrl + 'database/avion/'" style="color:#007BFF;font-weight:bold;">Base de donnée</a> -->
         </div>
 
        <div id="map" style="position: absolute; top: 0px; left: 0; bottom: 0; right: 0;"></div>
-
 
         <script>
             //affichage de la map en fond           
