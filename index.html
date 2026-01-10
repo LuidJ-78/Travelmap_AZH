@@ -202,8 +202,13 @@
             <a href="#" onclick="window.location.href=baseUrl" style="color:#007BFF;font-weight:bold;">Acceuil</a>
             <a href="https://fshub.io/airline/AZH/radar" target="_blank" style="color:#007BFF;font-weight:bold;"> Radar </a>
             <a href="#" onclick="window.location.href=baseUrl + 'planificateur/'" style="color:#007BFF;font-weight:bold;">Planificateur de vol</a>
-            <a href="#" onclick="window.location.href=baseUrl + 'passager/'" style="color:#007BFF;font-weight:bold;">Passager</a>
-            <a href="#" onclick="window.location.href=baseUrl + 'cargo/'" style="color:#007BFF;font-weight:bold;">Cargo</a>
+            <div class="dropdown" style="display: inline-block; height: 100%;">
+                <a href="#" style="color:#007BFF;font-weight:bold;height: 100%;display: flex;align-items: center;padding: 0 12px;">Carte de voyage</a>
+                <div class="dropdown-content">
+                    <a href="#" onclick="window.location.href=baseUrl + 'passager/'" style="color:#007BFF;font-weight:bold;">Passager </a> <br />
+                    <a href="#" onclick="window.location.href=baseUrl + 'cargo/'" style="color:#007BFF;font-weight:bold;">Cargo</a>
+                </div>
+            </div>
             <div class="dropdown" style="display: inline-block; height: 100%;">
                 <a href="#" style="color:#007BFF;font-weight:bold;height: 100%;display: flex;align-items: center;padding: 0 12px;">Base de donnée</a>
                 <div class="dropdown-content">
