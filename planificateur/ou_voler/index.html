@@ -184,6 +184,12 @@
        <div id="map" style="position: absolute; top: 0px; left: 0; bottom: 0; right: 0;"></div>
 
         <div id="sidebar">
+		<a>Choisisez le temps de vol minimum et maximum désiré</a> <br>
+		<label for="temps_mini">Temps mini  </label>
+		<input type="time" id="temps_mini" name="temps_mini" min="00:00" max="24:00" required /> <br>
+		<label for="temps_maxi">Temps maxi </label>
+		<input type="time" id="temps_maxi" name="temps_maxi" min="00:00" max="24:00" required />
+
         </div>
 
     <script> //affichage de la map, controle et météo
@@ -386,11 +392,20 @@
     </script>
 
     <script>
+	let temps_mini_id = document.getElementById("temps_mini");
+	let temps_mini;
+	temps_mini_id.addEventListener("input",  function () {
+		temps_mini = temps_mini_id.value;
+		console.log(temps_mini);
+	},  false,);
 
+	let temps_maxi_id = document.getElementById("temps_maxi").value;   
+	let temps_maxi;
+	temps_mini_id.addEventListener("input",  function () {
+		temps_maxi = temps_maxi_id.value;
+		console.log(temps_maxi);
+	},  false,);
 
-
-
-        
         function charger_vol(frame) {
             const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRk5HwoX9-ZlzVnEdobeUU795qpeZk2cP7BLfw9hOQVBV8WSJmsE4wV9oja_ey7vwetOvif9FB7o2cw/pub?gid=1325407337&single=true&output=csv";
             fetch(sheetURL)
@@ -403,7 +418,7 @@
                     for (let y =  0; y < rows.length; y++) {
                         liste_vols[y] = rows[y].split(",").map(value => value.replace(/\r$/, '').trim());
                     }
-                    console.log(liste_vols);
+                    //console.log(liste_vols);
                 });
         }
     </script>
