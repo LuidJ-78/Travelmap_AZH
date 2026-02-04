@@ -386,19 +386,26 @@
     </script>
 
     <script>
-        const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRk5HwoX9-ZlzVnEdobeUU795qpeZk2cP7BLfw9hOQVBV8WSJmsE4wV9oja_ey7vwetOvif9FB7o2cw/pub?gid=1325407337&single=true&output=csv";
-        fetch(sheetURL)
-            .then((response) => response.text())
-            .then((csvText) => {
-                const rows = csvText.split("\n");
-                const rows_length = rows.length;
-                const headers = rows[0].split(","); // Première ligne = légende
-                var liste_vols = {};
-                for (let y =  0; y < rows.length; y++) {
-                    liste_vols[y] = rows[y].split(",").map(value => value.replace(/\r$/, '').trim());
-                }
-                console.log(liste_vols);
-            });
+
+
+
+
+        
+        function charger_vol(frame) {
+            const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRk5HwoX9-ZlzVnEdobeUU795qpeZk2cP7BLfw9hOQVBV8WSJmsE4wV9oja_ey7vwetOvif9FB7o2cw/pub?gid=1325407337&single=true&output=csv";
+            fetch(sheetURL)
+                .then((response) => response.text())
+                .then((csvText) => {
+                    const rows = csvText.split("\n");
+                    const rows_length = rows.length;
+                    const headers = rows[0].split(","); // Première ligne = légende
+                    var liste_vols = {};
+                    for (let y =  0; y < rows.length; y++) {
+                        liste_vols[y] = rows[y].split(",").map(value => value.replace(/\r$/, '').trim());
+                    }
+                    console.log(liste_vols);
+                });
+        }
     </script>
     
     </body>
