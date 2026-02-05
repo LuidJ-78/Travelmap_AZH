@@ -7,11 +7,6 @@
         <link href="https://unpkg.com/leaflet/dist/leaflet.css" rel="stylesheet"/>
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-		<link rel="stylesheet" href="https://code.jquery.com/ui/1.14.2/themes/base/jquery-ui.css">
-  		<link rel="stylesheet" href="/resources/demos/style.css">
-  		<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-  		<script src="https://code.jquery.com/ui/1.14.2/jquery-ui.js"></script>
-
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.2.0/wNumb.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.js"></script>
@@ -197,12 +192,6 @@
        <div id="map" style="position: absolute; top: 0px; left: 0; bottom: 0; right: 0;"></div>
 
         <div id="sidebar">
-			<!-- <a>Choisisez le temps de vol minimum et maximum désiré</a> <br>
-			<label for="temps_mini">Temps mini  </label>
-			<input type="time" id="temps_mini" name="temps_mini" min="00:00" max="24:00" required /> <br>
-			<label for="temps_maxi">Temps maxi </label>
-			<input type="time" id="temps_maxi" name="temps_maxi" min="00:00" max="24:00" required /> -->
-
 			<p>
   				<label for="range_flight_time">Temps de vol désiré:</label>
   				<input type="text" id="range_flight_time" readonly="" style="border:0; color:#007BFF; font-weight:bold;">
@@ -410,49 +399,26 @@
     </script>
 
     <script>
-		/* let temps_mini_id = document.getElementById("temps_mini");
-		let temps_mini;
-		temps_mini_id.addEventListener("input",  function () {
-			temps_mini = temps_mini_id.value;
-			console.log(temps_mini);
-		},  false,);
-		let temps_maxi_id = document.getElementById("temps_maxi").value;   
-		let temps_maxi;
-		temps_mini_id.addEventListener("input",  function () {
-			temps_maxi = temps_maxi_id.value;
-			console.log(temps_maxi);
-		},  false,); */
-
-		/*var temps_mini = 1;
-		var temps_maxi = 5;
-		$( function() {
-    		$( "#slider_range_flight_time" ).slider({
-      			range: true,
-      			min: 0,
-      			max: 12,
-      			values: [ 1, 5 ],
-      			slide: function( event, ui ) {$( "#range_flight_time" ).val( ui.values[ 0 ] + "h - " + ui.values[ 1 ] +"h" );}
-    		});
-    		$( "#range_flight_time" ).val( $( "#slider_range_flight_time" ).slider( "values", 0 ) + "h - " + $( "#slider_range_flight_time" ).slider( "values", 1 ) + "h" );
-  		} );
-		console.log(range_flight_time);
-		console.log(slider_range_flight_time);*/
-
 		let temps_mini = 0;
   		let temps_maxi = 24;
-  		var slider = document.getElementById('slider_range_flight_time');
-  		noUiSlider.create(slider, {
-    		start: [2, 9],
+  		var slider_range_flight_time = document.getElementById('slider_range_flight_time');
+		var range_flight_time = document.getElementById('range_flight_time');
+  		noUiSlider.create(slider_range_flight_time, {
+    		start: [1, 5],
     		connect: true,
     		range: { min: 0, max: 24 }
   		});
-  		// mise à jour des variables (update = à chaque mouvement)
-  		slider.noUiSlider.on('update', function(values) {
+		// initialiser l'affichage avec les valeurs de départ
+  		const initial = sliderEl.noUiSlider.get(); // retourne ['2','9']
+ 		temps_mini = Number(initial[0]);
+  		temps_maxi = Number(initial[1]);
+  		range_flight_time.value = temps_mini + "h - " + temps_maxi + "h";
+  		// mise à jour en temps réel (update = à chaque mouvement)
+  		slider_range_flight_time.noUiSlider.on('update', function(values) {
     		temps_mini = Number(values[0]);
     		temps_maxi = Number(values[1]);
-			console.log(temps_mini + "h - " + temps_maxi +"h");
-  		});
-		
+    		range_flight_time.value = temps_mini + "h - " + temps_maxi + "h";
+		});
 
         function charger_vol(frame) {
             const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRk5HwoX9-ZlzVnEdobeUU795qpeZk2cP7BLfw9hOQVBV8WSJmsE4wV9oja_ey7vwetOvif9FB7o2cw/pub?gid=1325407337&single=true&output=csv";
