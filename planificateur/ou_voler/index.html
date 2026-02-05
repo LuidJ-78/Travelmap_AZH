@@ -140,6 +140,20 @@
 			}
 			#slider_range_flight_time .noUi-handle-upper {
     			right: -30px;
+			}
+            .boutton_cherchez_un_vol {
+                background: #007bff;
+                color: white;
+                border-radius: 5px;
+                padding: 10px;
+                border: none;
+                cursor: pointer;
+                width: 20%;
+                margin-top: 5px;
+            }
+            .boutton_cherchez_un_vol:hover {
+                background: #0056b3;
+            }
 
         </style>
     </head>
@@ -204,6 +218,7 @@
   				<input type="text" id="range_flight_time" readonly="" style="border:0; color:#007BFF; font-weight:bold;">
 			</p>
 			<div id="slider_range_flight_time"></div>
+			<button class="boutton_cherchez_un_vol">cherchez un vol</button>
         </div>
 
     <script> //affichage de la map, controle et météo
