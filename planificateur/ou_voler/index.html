@@ -131,6 +131,9 @@
                     text-align: left;
                     z-index: 2;
             }
+			#slider_range_flight_time{
+				width: 350px;
+			}
 
         </style>
     </head>
@@ -416,17 +419,17 @@
 			console.log(temps_maxi);
 		},  false,); */
 
-		$( function() {
+		$( function(A, B) {
     		$( "#slider_range_flight_time" ).slider({
-      		range: true,
-      		min: 0,
-      		max: 12,
-      		values: [ 1, 5 ],
-      		slide: function( event, ui ) {
-				$( "#range_flight_time" ).val( ui.values[ 0 ] + "h - " + ui.values[ 1 ] +"h" );
-      		}
+      			range: true,
+      			min: 0,
+      			max: 12,
+      			values: [ 1, 5 ],
+      			slide: function( event, ui ) {$( "#range_flight_time" ).val( ui.values[ 0 ] + "h - " + ui.values[ 1 ] +"h" );}
     		});
     		$( "#range_flight_time" ).val( $( "#slider_range_flight_time" ).slider( "values", 0 ) + "h - " + $( "#slider_range_flight_time" ).slider( "values", 1 ) + "h" );
+			A = values[ 0 ];
+			B = values[ 1 ];
   		} );
 
 		console.log(range_flight_time);
