@@ -409,7 +409,7 @@
     		range: { min: 0, max: 24 }
   		});
 		// initialiser l'affichage avec les valeurs de départ
-  		const initial = sliderEl.noUiSlider.get(); // retourne ['2','9']
+  		const initial = slider_range_flight_time.noUiSlider.get();
  		temps_mini = Number(initial[0]);
   		temps_maxi = Number(initial[1]);
   		range_flight_time.value = temps_mini + "h - " + temps_maxi + "h";
