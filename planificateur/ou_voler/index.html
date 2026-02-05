@@ -461,8 +461,11 @@
 						let row_temp;
                     	for (let y =  0; y < rows.length; y++) {
                         	row_temp = rows[y].split(",").map(value => value.replace(/\r$/, '').trim());
-							console.log(row_temp[8]);
-							liste_vols[y] = row_temp;
+							//console.log(row_temp[8]);
+							if (  temps_mini < row_temp[8] & row_temp[8] < temps_maxi ) {
+								liste_vols[x] = row_temp;
+								x++;
+							}
                     	}
                     	console.log(liste_vols);
                 });
