@@ -134,6 +134,7 @@
 				width: 350px;
 				position: relative;
                 left: 10px;
+				background: #007BFF;
 			}
 
         </style>
@@ -402,13 +403,14 @@
 
     <script>
 		let temps_mini = 0;
-  		let temps_maxi = 24;
+  		let temps_maxi = 18;
   		var slider_range_flight_time = document.getElementById('slider_range_flight_time');
 		var range_flight_time = document.getElementById('range_flight_time');
   		noUiSlider.create(slider_range_flight_time, {
     		start: [1, 5],
+			step: 0.25,
     		connect: true,
-    		range: { min: 0, max: 24 }
+    		range: { min: 0, max: 18 }
   		});
 		// initialiser l'affichage avec les valeurs de départ
   		const initial = slider_range_flight_time.noUiSlider.get();
