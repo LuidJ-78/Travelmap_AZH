@@ -457,7 +457,7 @@
 
 		document.querySelectorAll('.boutton_cherchez_un_vol').forEach(button => {
         	button.addEventListener('click', function() {
-				console.log("temps_mini :" + temps_mini + "h - temps_maxi :" + temps_maxi + "h");
+				console.log("temps_mini :" + temps_mini_calcul + "h - temps_maxi :" + temps_maxi_calcul + "h");
 				
 				const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRk5HwoX9-ZlzVnEdobeUU795qpeZk2cP7BLfw9hOQVBV8WSJmsE4wV9oja_ey7vwetOvif9FB7o2cw/pub?gid=1325407337&single=true&output=csv";
             	fetch(sheetURL)
