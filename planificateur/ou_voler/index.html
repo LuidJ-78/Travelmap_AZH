@@ -446,8 +446,8 @@
   		slider_range_flight_time.noUiSlider.on('update', function(values) {
     		temps_mini = Number(values[0]);
     		temps_maxi = Number(values[1]);
-			temps_mini_calcul = Number(initial[0]);
-  			temps_maxi_calcul = Number(initial[1]);
+			temps_mini_calcul = Number(values[0]);
+  			temps_maxi_calcul = Number(values[1]);
 			if (temps_mini == temps_maxi) {
 				temps_mini_calcul = temps_mini - 0.25;
     			temps_maxi_calcul = temps_maxi + 0.25;
