@@ -483,8 +483,15 @@
 								}
 							}
                     	}
-                    	console.log(liste_vols_passager);
+                    	console.log(x_passager);
+						console.log(liste_vols_passager);
+						console.log(x_cargo);
 						console.log(liste_vols_cargo);
+						
+						let x_passager_random = Math.floor(Math.random() * (x_passager - 0 + 1)) + 0;
+						let x_cargo_random = Math.floor(Math.random() * (x_cargo - 0 + 1)) + 0;
+						console.log(x_passager_random);
+						console.log(x_cargo_random);
                 });
 			});
 		});
