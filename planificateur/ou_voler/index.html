@@ -488,14 +488,14 @@
 						//console.log(x_cargo);
 						console.log(liste_vols_cargo);
 						
-						let x_passager_random = Math.floor(Math.random() * (x_passager - 0 + 1)) + 0;
+						let x_passager_random = Math.floor(Math.random() * (x_passager + 1)) - 1;
 						let vol_passager_random = liste_vols_passager[x_passager_random]
 						console.log(x_passager_random);
 						console.log(vol_passager_random);
-						let x_cargo_random = Math.floor(Math.random() * (x_cargo - 0 + 1)) + 0;
+						let x_cargo_random = Math.floor(Math.random() * (x_cargo + 1)) - 1;
 						let vol_cargo_random = liste_vols_cargo[x_cargo_random]
 						console.log(x_cargo_random);
-						console.log(vol_passager_random);
+						console.log(vol_cargo_random);
                 });
 			});
 		});
