@@ -423,10 +423,10 @@
       		max: 12,
       		values: [ 1, 5 ],
       		slide: function( event, ui ) {
-        		$( "#range_flight_time" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+				$( "#range_flight_time" ).val( ui.values[ 0 ] + "h - " + ui.values[ 1 ] +"h" );
       		}
     		});
-    		$( "#range_flight_time" ).val( $( "#slider_range_flight_time" ).slider( "values", 0 ) + "h" + " - " + $( "#slider_range_flight_time" ).slider( "values", 1 ) + "h" );
+    		$( "#range_flight_time" ).val( $( "#slider_range_flight_time" ).slider( "values", 0 ) + "h - " + $( "#slider_range_flight_time" ).slider( "values", 1 ) + "h" );
   		} );
 
 		console.log(range_flight_time);
