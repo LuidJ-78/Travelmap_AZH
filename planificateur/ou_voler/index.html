@@ -473,12 +473,11 @@
 						let row_temp;
                     	for (let y =  0; y < rows.length; y++) {
                         	row_temp = rows[y].split(",").map(value => value.replace(/\r$/, '').trim());
-							//console.log(row_temp[8]);
 							if (  temps_mini_calcul < row_temp[8] & row_temp[8] < temps_maxi_calcul ) {
-								if ( row_temp[8] == "passager") {
+								if ( row_temp[6] == "passager") {
 									liste_vols_passager[x_passager] = row_temp;
 									x_passager++;
-								} else if (row_temp[8] == "cargo") {
+								} else if (row_temp[6] == "cargo") {
 									liste_vols_cargo[x_cargo] = row_temp;
 									x_cargo++;
 								}
