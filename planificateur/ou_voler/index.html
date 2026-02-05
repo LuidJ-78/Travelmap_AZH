@@ -458,11 +458,13 @@
                     	const headers = rows[0].split(","); // Première ligne = légende
                     	var liste_vols = {};
 						let x = 0;
+						let row_temp;
                     	for (let y =  0; y < rows.length; y++) {
-                        	liste_vols[y] = rows[y].split(",").map(value => value.replace(/\r$/, '').trim());
+                        	row_temp = rows[y].split(",").map(value => value.replace(/\r$/, '').trim());
+							console.log(row_temp[8]);
+							liste_vols[y] = row_temp;
                     	}
                     	console.log(liste_vols);
-						console.log(liste_vols[0][0]);
                 });
 			});
 		});
