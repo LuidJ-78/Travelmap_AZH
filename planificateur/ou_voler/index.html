@@ -131,7 +131,7 @@
                     z-index: 2;
             }
 			#slider_range_flight_time{
-				width: 330px;
+				width: 305px;
 				position: relative;
                 left: 30px;
 			}
@@ -148,7 +148,7 @@
                 padding: 10px;
                 border: none;
                 cursor: pointer;
-                width: 80%;
+                width: 90%;
                 margin-top: 5px;
 				text-align: center;
             }
@@ -443,6 +443,12 @@
     		temps_mini = Number(values[0]);
     		temps_maxi = Number(values[1]);
     		range_flight_time.value = temps_mini + "h - " + temps_maxi + "h";
+		});
+
+		document.querySelectorAll('.boutton_cherchez_un_vol').forEach(button => {
+        	button.addEventListener('click', function() {
+				console.log("temps_mini :" + temps_mini + "h - temps_maxi :" + temps_mini + "h");
+			}
 		});
 
         function charger_vol(frame) {
