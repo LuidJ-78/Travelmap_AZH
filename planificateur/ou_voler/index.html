@@ -517,31 +517,37 @@
 						//console.log(liste_vols_passager);
 						//console.log(x_cargo);
 						//console.log(liste_vols_cargo);
-						
-						let x_passager_random = Math.floor(Math.random() * (x_passager));
-						vol_passager_random = liste_vols_passager[x_passager_random];
-						//console.log(x_passager_random);
-						console.log(vol_passager_random);
-						const boutton_vol_passager = document.getElementById("boutton_vol_passager");
-						boutton_vol_passager.innerHTML =
-    						`<strong>vol passager</strong><br>` +
-    						`${vol_passager_random[9]} : ${vol_passager_random[0]} → ${vol_passager_random[3]}<br>` +
-    						`${vol_passager_random[7]} nm, ${parseFloat(vol_passager_random[8]).toFixed(2)} h<br>` +
-    						`<small>${vol_passager_random[10]}</small>`;
-						
-						let x_cargo_random = Math.floor(Math.random() * (x_cargo));
-						vol_cargo_random = liste_vols_cargo[x_cargo_random];
-						//console.log(x_cargo_random);
-						console.log(vol_cargo_random);
-						const boutton_vol_cargo = document.getElementById("boutton_vol_cargo");
-						boutton_vol_cargo.innerHTML =
-    						`<strong>vol cargo</strong><br>` +
-    						`${vol_cargo_random[9]} : ${vol_cargo_random[0]} → ${vol_cargo_random[3]}<br>` +
-    						`${vol_cargo_random[7]} nm, ${parseFloat(vol_cargo_random[8]).toFixed(2)} h<br>` +
-    						`<small>${vol_cargo_random[10]}</small>`;
+						if (x_passager > 0) {
+							let x_passager_random = Math.floor(Math.random() * (x_passager));
+							vol_passager_random = liste_vols_passager[x_passager_random];
+							//console.log(x_passager_random);
+							console.log(vol_passager_random);
+							const boutton_vol_passager = document.getElementById("boutton_vol_passager");
+							boutton_vol_passager.innerHTML =
+    							`<strong>vol passager</strong><br>` +
+    							`${vol_passager_random[9]} : ${vol_passager_random[0]} → ${vol_passager_random[3]}<br>` +
+    							`${vol_passager_random[7]} nm, ${parseFloat(vol_passager_random[8]).toFixed(2)} h<br>` +
+    							`<small>${vol_passager_random[10]}</small>`;
+							document.getElementById("boutton_vol_passager").style.display = "block";
+						} else {
+                    		console.log("Aucun vol passager disponible.");
+                		}
 
-						document.getElementById("boutton_vol_passager").style.display = "block";
-        				document.getElementById("boutton_vol_cargo").style.display = "block";
+						if (x_cargo > 0) {
+							let x_cargo_random = Math.floor(Math.random() * (x_cargo));
+							vol_cargo_random = liste_vols_cargo[x_cargo_random];
+							//console.log(x_cargo_random);
+							console.log(vol_cargo_random);
+							const boutton_vol_cargo = document.getElementById("boutton_vol_cargo");
+							boutton_vol_cargo.innerHTML =
+    							`<strong>vol cargo</strong><br>` +
+    							`${vol_cargo_random[9]} : ${vol_cargo_random[0]} → ${vol_cargo_random[3]}<br>` +
+    							`${vol_cargo_random[7]} nm, ${parseFloat(vol_cargo_random[8]).toFixed(2)} h<br>` +
+    							`<small>${vol_cargo_random[10]}</small>`;
+							document.getElementById("boutton_vol_cargo").style.display = "block";
+						} else {
+                    		console.log("Aucun vol cargo disponible.");
+                		}
 
 						boutton_vol_passager.onclick = function () {
 							if (boutton_vol_passager_actif == 0){
