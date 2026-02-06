@@ -471,9 +471,13 @@
 		document.querySelectorAll('#boutton_cherchez_un_vol').forEach(button => {
         	button.addEventListener('click', function() {
 				console.log("temps_mini :" + temps_mini_calcul + "h - temps_maxi :" + temps_maxi_calcul + "h");
+				
 				document.getElementById("boutton_vol_passager").style.display = "none";
+				const boutton_vol_passager_actif = 0;
         		document.getElementById("boutton_vol_cargo").style.display = "none";
+				const boutton_vol_cargo_actif = 0;
         		document.getElementById("boutton_generer_simbrief").style.display = "none";
+				const boutton_generer_simbrief_actif = 0;
 				
 				const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRk5HwoX9-ZlzVnEdobeUU795qpeZk2cP7BLfw9hOQVBV8WSJmsE4wV9oja_ey7vwetOvif9FB7o2cw/pub?gid=1325407337&single=true&output=csv";
             	fetch(sheetURL)
@@ -528,7 +532,34 @@
 
 						document.getElementById("boutton_vol_passager").style.display = "block";
         				document.getElementById("boutton_vol_cargo").style.display = "block";
-        				//document.getElementById("boutton_generer_simbrief").style.display = "block";
+
+						boutton_vol_passager.onclick = function () {
+							if (boutton_vol_passager_actif = 0){
+								boutton_vol_passager_actif = 1;
+								boutton_vol_passager.classList.add("active")
+								if (boutton_vol_cargo_actif = 1){
+									boutton_vol_cargo_actif = 0;
+									boutton_vol_cargo.classList.remove("active")
+								}
+							} else if (boutton_vol_passager_actif = 1){
+								boutton_vol_passager_actif = 0;
+								boutton_vol_passager.classList.remove("active")
+						}
+
+						boutton_vol_cargo.onclick = function () {
+							if (boutton_vol_cargo_actif = 0){
+								boutton_vol_cargo_actif = 1;
+								boutton_vol_cargo.classList.add("active")
+								if (boutton_vol_passager_actif = 1){
+									boutton_vol_passager_actif = 0;
+									boutton_vol_passager.classList.remove("active")
+								}
+							} else if (boutton_vol_cargo_actif = 1){
+								boutton_vol_cargo_actif = 0;
+								boutton_vol_cargo.classList.remove("active")
+						}
+
+						//document.getElementById("boutton_generer_simbrief").style.display = "block";
                 });
 			});
 		});
