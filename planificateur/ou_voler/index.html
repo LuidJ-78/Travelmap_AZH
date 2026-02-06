@@ -473,11 +473,11 @@
 				console.log("temps_mini :" + temps_mini_calcul + "h - temps_maxi :" + temps_maxi_calcul + "h");
 				
 				document.getElementById("boutton_vol_passager").style.display = "none";
-				const boutton_vol_passager_actif = 0;
+				let boutton_vol_passager_actif = 0;
         		document.getElementById("boutton_vol_cargo").style.display = "none";
-				const boutton_vol_cargo_actif = 0;
+				let boutton_vol_cargo_actif = 0;
         		document.getElementById("boutton_generer_simbrief").style.display = "none";
-				const boutton_generer_simbrief_actif = 0;
+				let boutton_generer_simbrief_actif = 0;
 				
 				const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRk5HwoX9-ZlzVnEdobeUU795qpeZk2cP7BLfw9hOQVBV8WSJmsE4wV9oja_ey7vwetOvif9FB7o2cw/pub?gid=1325407337&single=true&output=csv";
             	fetch(sheetURL)
