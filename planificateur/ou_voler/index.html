@@ -557,7 +557,7 @@
 							const PopupContent_depart = `<b>${vol_passager_random[0]}</b>`;
 							const PopupContent_arriver = `<b>${vol_passager_random[3]}</b>`;
 							const marker_passager_depart = L.marker([vol_passager_random[1], vol_passager_random[2]], {icon: icon_depart,}).bindPopup(PopupContent_depart);
-							const marker_passager_arriver = L.marker([vol_passager_random[3], vol_passager_random[4]], {icon: icon_arriver,}).bindPopup(PopupContent_arriver);
+							const marker_passager_arriver = L.marker([vol_passager_random[4], vol_passager_random[5]], {icon: icon_arriver,}).bindPopup(PopupContent_arriver);
                             layer_vol_passager.addLayer(marker_passager_depart, marker_passager_arriver);
 							layer_vol_passager.addLayer(L.polyline(marker_passager_depart, marker_passager_arriver, {color: "green"}));
 						} else {
@@ -580,7 +580,7 @@
 							const PopupContent_depart = `<b>${vol_cargo_random[0]}</b>`;
 							const PopupContent_arriver = `<b>${vol_cargo_random[3]}</b>`;
 							const marker_cargo_depart = L.marker([vol_cargo_random[1], vol_cargo_random[2]], {icon: icon_depart,}).bindPopup(PopupContent_depart);
-							const marker_cargo_arriver = L.marker([vol_cargo_random[3], vol_cargo_random[4]], {icon: icon_arriver,}).bindPopup(PopupContent_arriver);
+							const marker_cargo_arriver = L.marker([vol_cargo_random[4], vol_cargo_random[5]], {icon: icon_arriver,}).bindPopup(PopupContent_arriver);
                             layer_vol_cargo.addLayer(marker_cargo_depart, marker_cargo_arriver);
 							layer_vol_cargo.addLayer(L.polyline(marker_cargo_depart, marker_cargo_arriver, {color: "green"}));
 						} else {
