@@ -470,15 +470,15 @@
     		range_flight_time.value = temps_mini + "h - " + temps_maxi + "h";
 		});
 
-		let liste_vols_passager = {};
-		let liste_vols_cargo = {};
 		document.querySelectorAll('#boutton_cherchez_un_vol').forEach(button => {
         	button.addEventListener('click', function() {
 				console.log("temps_mini :" + temps_mini_calcul + "h - temps_maxi :" + temps_maxi_calcul + "h");
 				
 				document.getElementById("boutton_vol_passager").style.display = "none";
+				boutton_vol_passager.classList.remove("active")
 				let boutton_vol_passager_actif = 0;
         		document.getElementById("boutton_vol_cargo").style.display = "none";
+				boutton_vol_cargo.classList.remove("active")
 				let boutton_vol_cargo_actif = 0;
         		document.getElementById("boutton_generer_simbrief_passager").style.display = "none";
 				document.getElementById("boutton_generer_simbrief_cargo").style.display = "none";
@@ -490,10 +490,12 @@
                     	const rows = csvText.split("\n");
                     	const rows_length = rows.length;
                     	const headers = rows[0].split(","); // Première ligne = légende
+						let liste_vols_passager = {};
+						let liste_vols_cargo = {};
 						let x_passager = 0;
 						let x_cargo = 0;
 						let row_temp;
-                    	for (let y =  1; y < rows.length; y++) {
+                    	for (let y =  0; y < rows.length; y++) {
                         	row_temp = rows[y].split(",").map(value => value.replace(/\r$/, '').trim());
 							if (  temps_mini_calcul < row_temp[8] & row_temp[8] < temps_maxi_calcul ) {
 								if ( row_temp[6] == "passager") {
@@ -576,7 +578,8 @@
 							const airlinePrefix = callsign.substring(0, 3);
 							const flightNumber = callsign.substring(3);
        						const simBriefURL = `https://dispatch.simbrief.com/options/custom?airline=${airlinePrefix}&fltnum=${flightNumber}&orig=${departure}&dest=${arrival}`;
-        					console.log("URL générée : ", simBriefURL);
+							console.log(vol_passager_random);
+        					console.log("URL générée passager : ", simBriefURL);
        						window.open(simBriefURL, '_blank');
 						});
 						document.getElementById('boutton_generer_simbrief_cargo').addEventListener('click', () => {
@@ -586,7 +589,7 @@
 							const airlinePrefix = callsign.substring(0, 3);
 							const flightNumber = callsign.substring(3);
        						const simBriefURL = `https://dispatch.simbrief.com/options/custom?airline=${airlinePrefix}&fltnum=${flightNumber}&orig=${departure}&dest=${arrival}`;
-        					console.log("URL générée : ", simBriefURL);
+        					console.log("URL générée cargo : ", simBriefURL);
        						window.open(simBriefURL, '_blank');
 						});
                 	});
