@@ -227,6 +227,7 @@
 			<br />
 			<button id="boutton_vol_passager" class="boutton_vol"> </button>
 			<button id="boutton_vol_cargo" class="boutton_vol"> </button>
+			<button id="boutton_generer_simbrief" class="boutton_vol"> </button>
         </div>
 
     <script> //affichage de la map, controle et météo
@@ -511,10 +512,10 @@
 						console.log(vol_cargo_random);
 						const boutton_vol_cargo = document.getElementById("boutton_vol_cargo");
 						boutton_vol_cargo.innerHTML =
-    						`<strong>vol passager</strong><br>` +
-    						`${vol_passager_random[9]} : ${vol_passager_random[0]} → ${vol_passager_random[3]}<br>` +
-    						`${vol_passager_random[7]} nm, ${vol_passager_random[8]} h<br>` +
-    						`<small>${vol_passager_random[10]}</small>`;
+    						`<strong>vol cargo</strong><br>` +
+    						`${vol_passager_cargo[9]} : ${vol_passager_cargo[0]} → ${vol_passager_cargo[3]}<br>` +
+    						`${vol_passager_cargo[7]} nm, ${vol_passager_cargo[8]} h<br>` +
+    						`<small>${vol_passager_cargo[10]}</small>`;
                 });
 			});
 		});
