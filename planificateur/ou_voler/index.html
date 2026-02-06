@@ -224,8 +224,12 @@
        <div id="map" style="position: absolute; top: 0px; left: 0; bottom: 0; right: 0;"></div>
 
         <div id="sidebar">
+			<h2>Ou voler ?</h2>
 			<p>
-  				<label for="range_flight_time">Temps de vol désiré:</label>
+				<a>cet outil vous permet de choisir un vol aléatoire parmis ceux dispo dans la compagnie en fonction d'une durée de vol choisi</a>
+			</p>
+			<p>
+  				<label for="range_flight_time"  style="background: #f4f4f4;">Temps de vol désiré:</label>
   				<input type="text" id="range_flight_time" readonly="" style="border:0; color:#007BFF; font-weight:bold;">
 			</p>
 			<div id="slider_range_flight_time"></div>
@@ -239,6 +243,11 @@
 			<button id="boutton_vol_cargo" class="boutton_vol"> </button>
 			<button id="boutton_generer_simbrief_passager" class="boutton_vol"> Générer le plan de vol simbrief </button>
 			<button id="boutton_generer_simbrief_cargo" class="boutton_vol"> Générer le plan de vol simbrief</button>
+			<div style=" position: relative; top: 700px;">
+				<a>L'Azgharie Airlines permet l'ouverture de lignes permanentes de transport de passager en echange de point gagné en faisant des vols dans la compagnie. Ouvrir des nouvelles lignes permet d'augmenter le choix de vol de l'outil.</a>
+				<a>Pour faire une demande d'ouverture de ligne, rendez-vous dans l'onglet "liste des lignes" du </a>
+				<a href="https://docs.google.com/spreadsheets/d/1XeNSL5uGvEs2YffUxcDWHfenT37o2l4nxruZBqnaiMU" target="_blank" style="color:#79D600;font-weight:bold;text-decoration:none;"> google sheet </a>
+			</div>
         </div>
 
     <script> //affichage de la map, controle et météo
