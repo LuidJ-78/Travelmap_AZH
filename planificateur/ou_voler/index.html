@@ -534,28 +534,28 @@
         				document.getElementById("boutton_vol_cargo").style.display = "block";
 
 						boutton_vol_passager.onclick = function () {
-							if (boutton_vol_passager_actif = 0){
+							if (boutton_vol_passager_actif == 0){
 								boutton_vol_passager_actif = 1;
 								boutton_vol_passager.classList.add("active")
-								if (boutton_vol_cargo_actif = 1){
+								if (boutton_vol_cargo_actif == 1){
 									boutton_vol_cargo_actif = 0;
 									boutton_vol_cargo.classList.remove("active")
 								}
-							} else if (boutton_vol_passager_actif = 1){
+							} else if (boutton_vol_passager_actif == 1){
 								boutton_vol_passager_actif = 0;
 								boutton_vol_passager.classList.remove("active")
 							}
 						}
 
 						boutton_vol_cargo.onclick = function () {
-							if (boutton_vol_cargo_actif = 0){
+							if (boutton_vol_cargo_actif == 0){
 								boutton_vol_cargo_actif = 1;
 								boutton_vol_cargo.classList.add("active")
-								if (boutton_vol_passager_actif = 1){
+								if (boutton_vol_passager_actif == 1){
 									boutton_vol_passager_actif = 0;
 									boutton_vol_passager.classList.remove("active")
 								}
-							} else if (boutton_vol_cargo_actif = 1){
+							} else if (boutton_vol_cargo_actif == 1){
 								boutton_vol_cargo_actif = 0;
 								boutton_vol_cargo.classList.remove("active")
 							}
