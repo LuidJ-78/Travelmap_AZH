@@ -587,7 +587,6 @@
 			const airlinePrefix = callsign.substring(0, 3);
 			const flightNumber = callsign.substring(3);
        		const simBriefURL = `https://dispatch.simbrief.com/options/custom?airline=${airlinePrefix}&fltnum=${flightNumber}&orig=${departure}&dest=${arrival}`;
-			console.log(vol_passager_random);
         	console.log("URL générée passager : ", simBriefURL);
        		window.open(simBriefURL, '_blank');
 		});
