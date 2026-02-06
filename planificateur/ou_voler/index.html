@@ -141,7 +141,7 @@
 			#slider_range_flight_time .noUi-handle-upper {
     			right: -30px;
 			}
-            .boutton_cherchez_un_vol {
+            .boutton_vol {
                 background: #007bff;
                 color: white;
                 border-radius: 5px;
@@ -152,9 +152,12 @@
                 margin-top: 5px;
 				text-align: center;
             }
-            .boutton_cherchez_un_vol:hover {
+            .boutton_vol:hover {
                 background: #0056b3;
             }
+			.boutton_vol.active {
+                background: #28a745;
+                color: white;
 
         </style>
     </head>
@@ -220,10 +223,10 @@
 			</p>
 			<div id="slider_range_flight_time"></div>
 			<br />
-			<button class="boutton_cherchez_un_vol">cherchez un vol</button>
+			<button id="boutton_cherchez_un_vol" class="boutton_vol">cherchez un vol</button>
 			<br />
-			<button class="boutton_vol_passager">vol passager</button>
-			<button class="boutton_vol_cargo">vol cargo</button>
+			<button id="boutton_vol_passager" class="boutton_vol">vol passager</button>
+			<button id="boutton_vol_cargo" class="boutton_vol">vol cargo</button>
         </div>
 
     <script> //affichage de la map, controle et météo
@@ -458,7 +461,7 @@
     		range_flight_time.value = temps_mini + "h - " + temps_maxi + "h";
 		});
 
-		document.querySelectorAll('.boutton_cherchez_un_vol').forEach(button => {
+		document.querySelectorAll('boutton_cherchez_un_vol').forEach(button => {
         	button.addEventListener('click', function() {
 				console.log("temps_mini :" + temps_mini_calcul + "h - temps_maxi :" + temps_maxi_calcul + "h");
 				
