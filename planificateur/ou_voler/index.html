@@ -560,7 +560,7 @@
 							const marker_passager_arriver = L.marker([vol_passager_random[4], vol_passager_random[5]], {icon: icon_arriver,}).bindPopup(PopupContent_arriver);
                             layer_vol_passager.addLayer(marker_passager_depart);
 							layer_vol_passager.addLayer(marker_passager_arriver);
-							const polyline_passager = L.polyline([vol_passager_random[1], vol_passager_random[2]], [vol_passager_random[4], vol_passager_random[5]]], {color: "green"});
+							const polyline_passager = L.polyline([[vol_passager_random[1], vol_passager_random[2]], [vol_passager_random[4], vol_passager_random[5]]], {color: "green"});
 							layer_vol_passager.addLayer(polyline_passager);
 						} else {
                     		console.log("Aucun vol passager disponible.");
