@@ -512,7 +512,9 @@
 				document.getElementById("boutton_generer_simbrief_cargo").style.display = "none";
 
 				layer_vol_passager.clearLayers();
+				map.removeLayer(layer_vol_passager);
 				layer_vol_cargo.clearLayers();
+				map.removeLayer(layer_vol_cargo);
 				
 				const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRk5HwoX9-ZlzVnEdobeUU795qpeZk2cP7BLfw9hOQVBV8WSJmsE4wV9oja_ey7vwetOvif9FB7o2cw/pub?gid=1325407337&single=true&output=csv";
             	fetch(sheetURL)
@@ -548,10 +550,11 @@
 							console.log(vol_passager_random);
 							const boutton_vol_passager = document.getElementById("boutton_vol_passager");
 							boutton_vol_passager.innerHTML =
-    							`<strong>vol passager</strong><br>` +
+    							`<br><strong>vol passager</strong><br>` +
     							`${vol_passager_random[9]} : ${vol_passager_random[0]} → ${vol_passager_random[3]}<br>` +
     							`${vol_passager_random[7]} nm, ${parseFloat(vol_passager_random[8]).toFixed(2)} h<br>` +
-    							`<small>${vol_passager_random[10]}</small>`;
+    							`<small>${vol_passager_random[10]}</small><br>` +
+								`<small>${vol_passager_random[11]}</small>`:
 							document.getElementById("boutton_vol_passager").style.display = "block";
 							
 							const PopupContent_depart = `<b>${vol_passager_random[0]}</b>`;
@@ -573,10 +576,11 @@
 							console.log(vol_cargo_random);
 							const boutton_vol_cargo = document.getElementById("boutton_vol_cargo");
 							boutton_vol_cargo.innerHTML =
-    							`<strong>vol cargo</strong><br>` +
+    							`<br><strong>vol cargo</strong><br>` +
     							`${vol_cargo_random[9]} : ${vol_cargo_random[0]} → ${vol_cargo_random[3]}<br>` +
     							`${vol_cargo_random[7]} nm, ${parseFloat(vol_cargo_random[8]).toFixed(2)} h<br>` +
-    							`<small>${vol_cargo_random[10]}</small>`;
+    							`<small>${vol_cargo_random[10]}</small><br>` +
+								`<small>${vol_cargo_random[11]}</small><br>`;
 							document.getElementById("boutton_vol_cargo").style.display = "block";
 
 							const PopupContent_depart = `<b>${vol_cargo_random[0]}</b>`;
