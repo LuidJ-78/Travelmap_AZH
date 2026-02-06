@@ -233,7 +233,8 @@
 			<br />
 			<button id="boutton_vol_passager" class="boutton_vol"> </button>
 			<button id="boutton_vol_cargo" class="boutton_vol"> </button>
-			<button id="boutton_generer_simbrief" class="boutton_vol"> </button>
+			<button id="boutton_generer_simbrief_passager" class="boutton_vol"> </button>
+			<button id="boutton_generer_simbbrief_cargo" class="boutton_vol"> </button>
         </div>
 
     <script> //affichage de la map, controle et météo
@@ -476,8 +477,10 @@
 				let boutton_vol_passager_actif = 0;
         		document.getElementById("boutton_vol_cargo").style.display = "none";
 				let boutton_vol_cargo_actif = 0;
-        		document.getElementById("boutton_generer_simbrief").style.display = "none";
-				let boutton_generer_simbrief_actif = 0;
+        		document.getElementById("boutton_generer_simbrief_pasager").style.display = "none";
+				let boutton_generer_simbrief_actif_passager = 0;
+				document.getElementById("boutton_generer_simbrief_cargo").style.display = "none";
+				let boutton_generer_simbrief_actif_cargo = 0;
 				
 				const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRk5HwoX9-ZlzVnEdobeUU795qpeZk2cP7BLfw9hOQVBV8WSJmsE4wV9oja_ey7vwetOvif9FB7o2cw/pub?gid=1325407337&single=true&output=csv";
             	fetch(sheetURL)
@@ -537,13 +540,16 @@
 							if (boutton_vol_passager_actif == 0){
 								boutton_vol_passager_actif = 1;
 								boutton_vol_passager.classList.add("active")
+								document.getElementById("boutton_generer_simbrief_passager").style.display = "block";
 								if (boutton_vol_cargo_actif == 1){
 									boutton_vol_cargo_actif = 0;
 									boutton_vol_cargo.classList.remove("active")
+									document.getElementById("boutton_generer_simbrief_cargo").style.display = "none";
 								}
 							} else if (boutton_vol_passager_actif == 1){
 								boutton_vol_passager_actif = 0;
 								boutton_vol_passager.classList.remove("active")
+								document.getElementById("boutton_generer_simbrief_passager").style.display = "none";
 							}
 						}
 
@@ -551,20 +557,29 @@
 							if (boutton_vol_cargo_actif == 0){
 								boutton_vol_cargo_actif = 1;
 								boutton_vol_cargo.classList.add("active")
+								document.getElementById("boutton_generer_simbrief_cargo").style.display = "block";
 								if (boutton_vol_passager_actif == 1){
 									boutton_vol_passager_actif = 0;
 									boutton_vol_passager.classList.remove("active")
+									document.getElementById("boutton_generer_simbrief_passager").style.display = "none";
 								}
 							} else if (boutton_vol_cargo_actif == 1){
 								boutton_vol_cargo_actif = 0;
 								boutton_vol_cargo.classList.remove("active")
+								document.getElementById("boutton_generer_simbrief_cargo").style.display = "none";
 							}
 						}
 
-						//document.getElementById("boutton_generer_simbrief").style.display = "block";
-                });
+						document.getElementById('boutton_generer_simbrief_cargo').addEventListener('click', () => {
+    						const departure = vol_cargo_random[0];
+    						const arrival = vol_cargo_random[3];
+    						const callsignSelect = vol_cargo_random[9];
+       						const simBriefURL = `https://dispatch.simbrief.com/options/custom?airline=${airlinePrefix}&fltnum=${flightNumber}&orig=${departure}&dest=${arrival}`;
+        					console.log("URL générée : ", simBriefURL);
+       						window.open(simBriefURL, '_blank');
+						});
+                	});
 			});
-		});
     </script>
     
     </body>
