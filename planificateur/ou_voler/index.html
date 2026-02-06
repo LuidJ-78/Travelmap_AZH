@@ -586,7 +586,7 @@
                             layer_vol_cargo.addLayer(marker_cargo_depart);
 							layer_vol_cargo.addLayer(marker_cargo_arriver);
 							const polyline_cargo = L.polyline([[vol_cargo_random[1], vol_cargo_random[2]], [vol_cargo_random[4], vol_cargo_random[5]]], {color: "green"});
-							layer_vol_passager.addLayer(polyline_cargo);
+							layer_vol_cargo.addLayer(polyline_cargo);
 						} else {
                     		console.log("Aucun vol cargo disponible.");
                 		}
