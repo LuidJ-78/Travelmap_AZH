@@ -232,6 +232,9 @@
 			<br />
 			<button id="boutton_cherchez_un_vol" class="boutton_vol">cherchez un vol</button>
 			<br />
+			<div id="loading" style="display: none; text-align: center;">
+    			<img src="https://media.giphy.com/media/3o7bu3XilJ5BOkM1a4/giphy.gif" alt="Chargement..." style="width: 50px; height: 50px; margin: 50px auto;"/>
+			</div>
 			<button id="boutton_vol_passager" class="boutton_vol"> </button>
 			<button id="boutton_vol_cargo" class="boutton_vol"> </button>
 			<button id="boutton_generer_simbrief_passager" class="boutton_vol"> Générer le plan de vol simbrief </button>
@@ -477,7 +480,8 @@
 		
 		document.querySelectorAll('#boutton_cherchez_un_vol').forEach(button => {
         	button.addEventListener('click', function() {
-				console.log("temps_mini :" + temps_mini_calcul + "h - temps_maxi :" + temps_maxi_calcul + "h");
+				console.log("temps_mini :" + temps_mini_calcul + "h - temps_maxi :" + temps_maxi_calcul + "h, recherche de vol en cours");
+				document.getElementById("loading").style.display = "block";
 				
 				document.getElementById("boutton_vol_passager").style.display = "none";
 				boutton_vol_passager.classList.remove("active")
@@ -533,6 +537,8 @@
                     		console.log("Aucun vol passager disponible.");
                 		}
 
+						document.getElementById("loading").style.display = "none";
+						
 						if (x_cargo > 0) {
 							let x_cargo_random = Math.floor(Math.random() * (x_cargo));
 							vol_cargo_random = liste_vols_cargo[x_cargo_random];
