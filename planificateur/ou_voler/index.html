@@ -470,16 +470,22 @@
     		range_flight_time.value = temps_mini + "h - " + temps_maxi + "h";
 		});
 
+		let boutton_vol_passager_actif = 0;
+		let boutton_vol_cargo_actif = 0;
+		let vol_passager_random;
+		let vol_cargo_random;
+		
 		document.querySelectorAll('#boutton_cherchez_un_vol').forEach(button => {
         	button.addEventListener('click', function() {
 				console.log("temps_mini :" + temps_mini_calcul + "h - temps_maxi :" + temps_maxi_calcul + "h");
 				
 				document.getElementById("boutton_vol_passager").style.display = "none";
 				boutton_vol_passager.classList.remove("active")
-				let boutton_vol_passager_actif = 0;
+				boutton_vol_passager_actif = 0;
         		document.getElementById("boutton_vol_cargo").style.display = "none";
+				
 				boutton_vol_cargo.classList.remove("active")
-				let boutton_vol_cargo_actif = 0;
+				boutton_vol_cargo_actif = 0;
         		document.getElementById("boutton_generer_simbrief_passager").style.display = "none";
 				document.getElementById("boutton_generer_simbrief_cargo").style.display = "none";
 				
@@ -513,7 +519,7 @@
 						//console.log(liste_vols_cargo);
 						
 						let x_passager_random = Math.floor(Math.random() * (x_passager));
-						let vol_passager_random = liste_vols_passager[x_passager_random];
+						vol_passager_random = liste_vols_passager[x_passager_random];
 						//console.log(x_passager_random);
 						console.log(vol_passager_random);
 						const boutton_vol_passager = document.getElementById("boutton_vol_passager");
@@ -524,7 +530,7 @@
     						`<small>${vol_passager_random[10]}</small>`;
 						
 						let x_cargo_random = Math.floor(Math.random() * (x_cargo));
-						let vol_cargo_random = liste_vols_cargo[x_cargo_random];
+						vol_cargo_random = liste_vols_cargo[x_cargo_random];
 						//console.log(x_cargo_random);
 						console.log(vol_cargo_random);
 						const boutton_vol_cargo = document.getElementById("boutton_vol_cargo");
@@ -570,30 +576,30 @@
 								document.getElementById("boutton_generer_simbrief_cargo").style.display = "none";
 							}
 						}
-
-						document.getElementById('boutton_generer_simbrief_passager').addEventListener('click', () => {
-    						const departure = vol_passager_random[0];
-    						const arrival = vol_passager_random[3];
-    						const callsign = vol_passager_random[9];
-							const airlinePrefix = callsign.substring(0, 3);
-							const flightNumber = callsign.substring(3);
-       						const simBriefURL = `https://dispatch.simbrief.com/options/custom?airline=${airlinePrefix}&fltnum=${flightNumber}&orig=${departure}&dest=${arrival}`;
-							console.log(vol_passager_random);
-        					console.log("URL générée passager : ", simBriefURL);
-       						window.open(simBriefURL, '_blank');
-						});
-						document.getElementById('boutton_generer_simbrief_cargo').addEventListener('click', () => {
-    						const departure = vol_cargo_random[0];
-    						const arrival = vol_cargo_random[3];
-    						const callsign = vol_cargo_random[9];
-							const airlinePrefix = callsign.substring(0, 3);
-							const flightNumber = callsign.substring(3);
-       						const simBriefURL = `https://dispatch.simbrief.com/options/custom?airline=${airlinePrefix}&fltnum=${flightNumber}&orig=${departure}&dest=${arrival}`;
-        					console.log("URL générée cargo : ", simBriefURL);
-       						window.open(simBriefURL, '_blank');
-						});
                 	});
 			});
+		});
+		
+		document.getElementById('boutton_generer_simbrief_passager').addEventListener('click', () => {
+    		const departure = vol_passager_random[0];
+    		const arrival = vol_passager_random[3];
+    		const callsign = vol_passager_random[9];
+			const airlinePrefix = callsign.substring(0, 3);
+			const flightNumber = callsign.substring(3);
+       		const simBriefURL = `https://dispatch.simbrief.com/options/custom?airline=${airlinePrefix}&fltnum=${flightNumber}&orig=${departure}&dest=${arrival}`;
+			console.log(vol_passager_random);
+        	console.log("URL générée passager : ", simBriefURL);
+       		window.open(simBriefURL, '_blank');
+		});
+		document.getElementById('boutton_generer_simbrief_cargo').addEventListener('click', () => {
+    		const departure = vol_cargo_random[0];
+    		const arrival = vol_cargo_random[3];
+    		const callsign = vol_cargo_random[9];
+			const airlinePrefix = callsign.substring(0, 3);
+			const flightNumber = callsign.substring(3);
+       		const simBriefURL = `https://dispatch.simbrief.com/options/custom?airline=${airlinePrefix}&fltnum=${flightNumber}&orig=${departure}&dest=${arrival}`;
+        	console.log("URL générée cargo : ", simBriefURL);
+       		window.open(simBriefURL, '_blank');
 		});
     </script>
     
