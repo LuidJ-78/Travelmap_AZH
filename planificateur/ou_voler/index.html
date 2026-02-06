@@ -512,7 +512,7 @@
 						boutton_vol_passager.innerHTML =
     						`<strong>vol passager</strong><br>` +
     						`${vol_passager_random[9]} : ${vol_passager_random[0]} → ${vol_passager_random[3]}<br>` +
-    						`${vol_passager_random[7]} nm, ${vol_passager_random[8]} h<br>` +
+    						`${vol_passager_random[7]} nm, ${parseFloat(vol_passager_random[8]).toFixed(2)} h<br>` +
     						`<small>${vol_passager_random[10]}</small>`;
 						
 						let x_cargo_random = Math.floor(Math.random() * (x_cargo));
@@ -523,13 +523,12 @@
 						boutton_vol_cargo.innerHTML =
     						`<strong>vol cargo</strong><br>` +
     						`${vol_cargo_random[9]} : ${vol_cargo_random[0]} → ${vol_cargo_random[3]}<br>` +
-    						`${vol_cargo_random[7]} nm, ${vol_cargo_random[8]} h<br>` +
+    						`${vol_cargo_random[7]} nm, ${parseFloat(vol_cargo_random[8]).toFixed(2)} h<br>` +
     						`<small>${vol_cargo_random[10]}</small>`;
 
 						document.getElementById("boutton_vol_passager").style.display = "block";
         				document.getElementById("boutton_vol_cargo").style.display = "block";
         				//document.getElementById("boutton_generer_simbrief").style.display = "block";
-
                 });
 			});
 		});
