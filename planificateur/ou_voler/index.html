@@ -144,7 +144,8 @@
 			
 			#boutton_vol_passager,
 			#boutton_vol_cargo,
-			#boutton_generer_simbrief {
+			#boutton_generer_simbrief_passager
+			#boutton_generer_simbrief_cargo{
    				display: none;
 			}
             .boutton_vol {
@@ -478,9 +479,7 @@
         		document.getElementById("boutton_vol_cargo").style.display = "none";
 				let boutton_vol_cargo_actif = 0;
         		document.getElementById("boutton_generer_simbrief_pasager").style.display = "none";
-				let boutton_generer_simbrief_actif_passager = 0;
 				document.getElementById("boutton_generer_simbrief_cargo").style.display = "none";
-				let boutton_generer_simbrief_actif_cargo = 0;
 				
 				const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRk5HwoX9-ZlzVnEdobeUU795qpeZk2cP7BLfw9hOQVBV8WSJmsE4wV9oja_ey7vwetOvif9FB7o2cw/pub?gid=1325407337&single=true&output=csv";
             	fetch(sheetURL)
