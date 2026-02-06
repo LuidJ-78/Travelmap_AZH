@@ -225,8 +225,8 @@
 			<br />
 			<button id="boutton_cherchez_un_vol" class="boutton_vol">cherchez un vol</button>
 			<br />
-			<button id="boutton_vol_passager" class="boutton_vol">vol passager</button>
-			<button id="boutton_vol_cargo" class="boutton_vol">vol cargo</button>
+			<button id="boutton_vol_passager" class="boutton_vol"> </button>
+			<button id="boutton_vol_cargo" class="boutton_vol"> </button>
         </div>
 
     <script> //affichage de la map, controle et météo
@@ -490,18 +490,31 @@
 							}
                     	}
                     	//console.log(x_passager);
-						console.log(liste_vols_passager);
+						//console.log(liste_vols_passager);
 						//console.log(x_cargo);
-						console.log(liste_vols_cargo);
+						//console.log(liste_vols_cargo);
 						
 						let x_passager_random = Math.floor(Math.random() * (x_passager));
 						let vol_passager_random = liste_vols_passager[x_passager_random]
-						console.log(x_passager_random);
+						//console.log(x_passager_random);
 						console.log(vol_passager_random);
+						const boutton_vol_passager = document.getElementById("boutton_vol_passager");
+						boutton_vol_passager.innerHTML =
+    						`<strong>vol passager</strong><br>` +
+    						`${vol_passager_random[9]} : ${vol_passager_random[0]} → ${vol_passager_random[3]}<br>` +
+    						`${vol_passager_random[7]} nm, ${vol_passager_random[8]} h<br>` +
+    						`<small>${vol_passager_random[10]}</small>`;
+						
 						let x_cargo_random = Math.floor(Math.random() * (x_cargo));
 						let vol_cargo_random = liste_vols_cargo[x_cargo_random]
-						console.log(x_cargo_random);
+						//console.log(x_cargo_random);
 						console.log(vol_cargo_random);
+						const boutton_vol_cargo = document.getElementById("boutton_vol_cargo");
+						boutton_vol_cargo.innerHTML =
+    						`<strong>vol passager</strong><br>` +
+    						`${vol_passager_random[9]} : ${vol_passager_random[0]} → ${vol_passager_random[3]}<br>` +
+    						`${vol_passager_random[7]} nm, ${vol_passager_random[8]} h<br>` +
+    						`<small>${vol_passager_random[10]}</small>`;
                 });
 			});
 		});
