@@ -438,9 +438,25 @@
                 e.preventDefault();
                 return false;
             } 
-    </script>
 
-    <script>
+
+
+		
+		const icon_depart = L.icon({
+                iconUrl: "Point avion.png", // Make sure it is in the same directory as index.html
+                iconSize: [12, 12], // Adjust size as needed
+                iconAnchor: [6, 6], // The point of the icon which will correspond to marker's location
+                popupAnchor: [0, -12], // Point from which the popup should open relative to the iconAnchor
+        });
+        const icon_arriver = L.icon({
+                iconUrl: "Point avion à vendre.svg", // Make sure it is in the same directory as index.html
+                iconSize: [32, 32], // Adjust size as needed
+                iconAnchor: [16, 32], // The point of the icon which will correspond to marker's location
+                popupAnchor: [0, -32], // Point from which the popup should open relative to the iconAnchor
+        });
+		const layer_vol_passager = L.layerGroup([]);
+		const layer_vol_cargo = L.layerGroup([]);
+		
 		let temps_mini_calcul = 0;
 		let temps_mini = 0;
   		let temps_maxi_calcul = 18;
@@ -453,6 +469,7 @@
     		connect: true,
     		range: { min: 0, max: 18 }
   		});
+		
 		// initialiser l'affichage avec les valeurs de départ
   		let initial = slider_range_flight_time.noUiSlider.get();
  		temps_mini = Number(initial[0]);
@@ -486,12 +503,16 @@
 				document.getElementById("boutton_vol_passager").style.display = "none";
 				boutton_vol_passager.classList.remove("active")
 				boutton_vol_passager_actif = 0;
-        		document.getElementById("boutton_vol_cargo").style.display = "none";
 				
+        		document.getElementById("boutton_vol_cargo").style.display = "none";
 				boutton_vol_cargo.classList.remove("active")
 				boutton_vol_cargo_actif = 0;
+				
         		document.getElementById("boutton_generer_simbrief_passager").style.display = "none";
 				document.getElementById("boutton_generer_simbrief_cargo").style.display = "none";
+
+				layer_vol_passager.clearLayers();
+				layer_vol_cargo.clearLayers();
 				
 				const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRk5HwoX9-ZlzVnEdobeUU795qpeZk2cP7BLfw9hOQVBV8WSJmsE4wV9oja_ey7vwetOvif9FB7o2cw/pub?gid=1325407337&single=true&output=csv";
             	fetch(sheetURL)
@@ -517,10 +538,9 @@
 								}
 							}
                     	}
-                    	//console.log(x_passager);
-						//console.log(liste_vols_passager);
-						//console.log(x_cargo);
-						//console.log(liste_vols_cargo);
+
+						document.getElementById("loading").style.display = "none";
+						
 						if (x_passager > 0) {
 							let x_passager_random = Math.floor(Math.random() * (x_passager));
 							vol_passager_random = liste_vols_passager[x_passager_random];
@@ -533,11 +553,16 @@
     							`${vol_passager_random[7]} nm, ${parseFloat(vol_passager_random[8]).toFixed(2)} h<br>` +
     							`<small>${vol_passager_random[10]}</small>`;
 							document.getElementById("boutton_vol_passager").style.display = "block";
+							
+							const PopupContent_depart = `<b>${vol_passager_random[0]}</b>`;
+							const PopupContent_arriver = `<b>${vol_passager_random[3]}</b>`;
+							const marker_passager_depart = L.marker([vol_passager_random[1], vol_passager_random[2]], {icon: icon_depart,}).bindPopup(PopupContent_depart);
+							const marker_passager_arriver = L.marker([vol_passager_random[3], vol_passager_random[4]], {icon: icon_arriver,}).bindPopup(PopupContent_arriver);
+                            layer_vol_passager.addLayer(marker_passager_depart, marker_passager_arriver);
+							layer_vol_passager.addLayer(L.polyline(marker_passager_depart, marker_passager_arriver, {color: "green"}));
 						} else {
                     		console.log("Aucun vol passager disponible.");
                 		}
-
-						document.getElementById("loading").style.display = "none";
 						
 						if (x_cargo > 0) {
 							let x_cargo_random = Math.floor(Math.random() * (x_cargo));
@@ -551,6 +576,13 @@
     							`${vol_cargo_random[7]} nm, ${parseFloat(vol_cargo_random[8]).toFixed(2)} h<br>` +
     							`<small>${vol_cargo_random[10]}</small>`;
 							document.getElementById("boutton_vol_cargo").style.display = "block";
+
+							const PopupContent_depart = `<b>${vol_cargo_random[0]}</b>`;
+							const PopupContent_arriver = `<b>${vol_cargo_random[3]}</b>`;
+							const marker_cargo_depart = L.marker([vol_cargo_random[1], vol_cargo_random[2]], {icon: icon_depart,}).bindPopup(PopupContent_depart);
+							const marker_cargo_arriver = L.marker([vol_cargo_random[3], vol_cargo_random[4]], {icon: icon_arriver,}).bindPopup(PopupContent_arriver);
+                            layer_vol_cargo.addLayer(marker_cargo_depart, marker_cargo_arriver);
+							layer_vol_cargo.addLayer(L.polyline(marker_cargo_depart, marker_cargo_arriver, {color: "green"}));
 						} else {
                     		console.log("Aucun vol cargo disponible.");
                 		}
@@ -558,16 +590,19 @@
 						boutton_vol_passager.onclick = function () {
 							if (boutton_vol_passager_actif == 0){
 								boutton_vol_passager_actif = 1;
-								boutton_vol_passager.classList.add("active")
+								boutton_vol_passager.classList.add("active");
+								map.addLayer(layer_vol_passager);
 								document.getElementById("boutton_generer_simbrief_passager").style.display = "block";
 								if (boutton_vol_cargo_actif == 1){
 									boutton_vol_cargo_actif = 0;
-									boutton_vol_cargo.classList.remove("active")
+									boutton_vol_cargo.classList.remove("active");
+									map.removeLayer(layer_vol_cargo);
 									document.getElementById("boutton_generer_simbrief_cargo").style.display = "none";
 								}
 							} else if (boutton_vol_passager_actif == 1){
 								boutton_vol_passager_actif = 0;
-								boutton_vol_passager.classList.remove("active")
+								boutton_vol_passager.classList.remove("active");
+								map.removeLayer(layer_vol_passager);
 								document.getElementById("boutton_generer_simbrief_passager").style.display = "none";
 							}
 						}
@@ -575,16 +610,19 @@
 						boutton_vol_cargo.onclick = function () {
 							if (boutton_vol_cargo_actif == 0){
 								boutton_vol_cargo_actif = 1;
-								boutton_vol_cargo.classList.add("active")
+								boutton_vol_cargo.classList.add("active");
+								map.addLayer(layer_vol_cargo);
 								document.getElementById("boutton_generer_simbrief_cargo").style.display = "block";
 								if (boutton_vol_passager_actif == 1){
 									boutton_vol_passager_actif = 0;
-									boutton_vol_passager.classList.remove("active")
+									boutton_vol_passager.classList.remove("active");
+									map.removeLayer(layer_vol_passager);
 									document.getElementById("boutton_generer_simbrief_passager").style.display = "none";
 								}
 							} else if (boutton_vol_cargo_actif == 1){
 								boutton_vol_cargo_actif = 0;
-								boutton_vol_cargo.classList.remove("active")
+								boutton_vol_cargo.classList.remove("active");
+								map.removeLayer(layer_vol_cargo);
 								document.getElementById("boutton_generer_simbrief_cargo").style.display = "none";
 							}
 						}
