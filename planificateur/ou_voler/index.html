@@ -144,7 +144,7 @@
 			
 			#boutton_vol_passager,
 			#boutton_vol_cargo,
-			#boutton_generer_simbrief_passager
+			#boutton_generer_simbrief_passager,
 			#boutton_generer_simbrief_cargo{
    				display: none;
 			}
@@ -478,7 +478,7 @@
 				let boutton_vol_passager_actif = 0;
         		document.getElementById("boutton_vol_cargo").style.display = "none";
 				let boutton_vol_cargo_actif = 0;
-        		document.getElementById("boutton_generer_simbrief_pasager").style.display = "none";
+        		document.getElementById("boutton_generer_simbrief_passager").style.display = "none";
 				document.getElementById("boutton_generer_simbrief_cargo").style.display = "none";
 				
 				const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRk5HwoX9-ZlzVnEdobeUU795qpeZk2cP7BLfw9hOQVBV8WSJmsE4wV9oja_ey7vwetOvif9FB7o2cw/pub?gid=1325407337&single=true&output=csv";
@@ -569,10 +569,22 @@
 							}
 						}
 
+						document.getElementById('boutton_generer_simbrief_passager').addEventListener('click', () => {
+    						const departure = vol_passager_random[0];
+    						const arrival = vol_passager_random[3];
+    						const callsign = vol_passager_random[9];
+							const airlinePrefix = callsign.substring(0, 3);
+							const flightNumber = callsign.substring(3);
+       						const simBriefURL = `https://dispatch.simbrief.com/options/custom?airline=${airlinePrefix}&fltnum=${flightNumber}&orig=${departure}&dest=${arrival}`;
+        					console.log("URL générée : ", simBriefURL);
+       						window.open(simBriefURL, '_blank');
+						});
 						document.getElementById('boutton_generer_simbrief_cargo').addEventListener('click', () => {
     						const departure = vol_cargo_random[0];
     						const arrival = vol_cargo_random[3];
-    						const callsignSelect = vol_cargo_random[9];
+    						const callsign = vol_cargo_random[9];
+							const airlinePrefix = callsign.substring(0, 3);
+							const flightNumber = callsign.substring(3);
        						const simBriefURL = `https://dispatch.simbrief.com/options/custom?airline=${airlinePrefix}&fltnum=${flightNumber}&orig=${departure}&dest=${arrival}`;
         					console.log("URL générée : ", simBriefURL);
        						window.open(simBriefURL, '_blank');
