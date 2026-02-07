@@ -563,8 +563,18 @@
 								`<small>${vol_passager_random[11]}</small><br>`;
 							document.getElementById("boutton_vol_passager").style.display = "block";
 							
-							const PopupContent_depart = `<b>${vol_passager_random[0]}</b>`;
-							const PopupContent_arriver = `<b>${vol_passager_random[3]}</b>`;
+							const PopupContent_depart = 
+								`<b>${vol_passager_random[0]}</b><br>` +
+								`${vol_passager_random[14]}<br>` +
+								`longueur de piste : ${vol_passager_random[12]} ft<br>` +
+								`altitude : ${parseFloat(vol_passager_random[13]).toFixed(0)} ft<br>` +
+								`<a href="https://metar-taf.com/fr/metar/${vol_passager_random[0]}" target="_blank">metar</a>`;
+							const PopupContent_arriver =
+								`<b>${vol_passager_random[3]}</b><br>` +
+								`${vol_passager_random[17]}<br>` +
+								`longueur de piste : ${vol_passager_random[15]} ft<br>` +
+								`altitude : ${parseFloat(vol_passager_random[16]).toFixed(0)} ft<br>` +
+								`<a href="https://metar-taf.com/fr/metar/${vol_passager_random[3]}" target="_blank">metar</a>`;
 							const marker_passager_depart = L.marker([vol_passager_random[1], vol_passager_random[2]], {icon: icon_depart,}).bindPopup(PopupContent_depart);
 							const marker_passager_arriver = L.marker([vol_passager_random[4], vol_passager_random[5]], {icon: icon_arriver,}).bindPopup(PopupContent_arriver);
                             layer_vol_passager.addLayer(marker_passager_depart);
@@ -589,8 +599,18 @@
 								`<small>${vol_cargo_random[11]}</small><br>`;
 							document.getElementById("boutton_vol_cargo").style.display = "block";
 
-							const PopupContent_depart = `<b>${vol_cargo_random[0]}</b>`;
-							const PopupContent_arriver = `<b>${vol_cargo_random[3]}</b>`;
+							const PopupContent_depart = 
+								`<b>${vol_cargo_random[0]}</b><br>` +
+								`${vol_cargo_random[14]}<br>` +
+								`longueur de piste : ${vol_cargo_random[12]} ft<br>` +
+								`altitude : ${parseFloat(vol_cargo_random[13]).toFixed(0)} ft<br>` +
+								`<a href="https://metar-taf.com/fr/metar/${vol_cargo_random[0]}" target="_blank">metar</a>`;
+							const PopupContent_arriver =
+								`<b>${vol_cargo_random[3]}</b><br>` +
+								`${vol_cargo_random[17]}<br>` +
+								`longueur de piste : ${vol_cargo_random[15]} ft<br>` +
+								`altitude : ${parseFloat(vol_cargo_random[16]).toFixed(0)} ft<br>` +
+								`<a href="https://metar-taf.com/fr/metar/${vol_cargo_random[3]}" target="_blank">metar</a>`;
 							const marker_cargo_depart = L.marker([vol_cargo_random[1], vol_cargo_random[2]], {icon: icon_depart,}).bindPopup(PopupContent_depart);
 							const marker_cargo_arriver = L.marker([vol_cargo_random[4], vol_cargo_random[5]], {icon: icon_arriver,}).bindPopup(PopupContent_arriver);
                             layer_vol_cargo.addLayer(marker_cargo_depart);
