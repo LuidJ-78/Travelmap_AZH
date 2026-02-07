@@ -677,9 +677,10 @@
                             <span id="info-long-${lat}-${lng}" style="display:none;">
                                 ${info} <br>
                                 dist piste: ${longueur}ft <br> 
-                                altitude: ${altitude}ft <br>
+                                altitude: ${parseFloat(altitude).toFixed(0)}ft <br>
                                 ${metar}<br>
-                                <a href="https://metar-taf.com/fr/metar/${name}" target="_blank">metar complet</a> <br> </span>
+                                <a href="https://metar-taf.com/fr/metar/${name}" target="_blank">metar complet</a> <br>
+                                <a href="https://fsimnet.com/vam/index.php?page=airport_info&airport=${name}" target="_blank">plus d'info</a> <br></span>
                             <button id="toggle-desc-${lat}-${lng}" style="margin-top:5px;">plus</button>`
                         );
 
