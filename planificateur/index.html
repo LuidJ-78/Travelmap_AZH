@@ -438,25 +438,25 @@
 			}
             
             /** Animation functions * @param path - Path to the XYZ tile */
-            function addLayer(frame) {
-                if (!radarLayers[frame.path]) {
-                    var colorScheme = optionKind == 'satellite' ? optionColorScheme == 255 ? 255 : 0 : optionColorScheme;
-                    var smooth = optionKind == 'satellite' ? 0 : optionSmoothData;
-                    var snow = optionKind == 'satellite' ? 0 : optionSnowColors;
-                    var source = new L.TileLayer(apiData.host + frame.path + '/' + optionTileSize + '/{z}/{x}/{y}/' + colorScheme + '/' + smooth + '_' + snow + '.' + optionExtension, {
-                        tileSize: 256,
-                        opacity: 0.01,
-                        zIndex: frame.time
-                    }); // Track layer loading state to not display the overlay before it will completelly loads
-                    source.on('loading', startLoadingTile);
-                    source.on('load', finishLoadingTile); 
-                    source.on('remove', finishLoadingTile);
-                    radarLayers[frame.path] = source;
-                }
-                if (!map.hasLayer(radarLayers[frame.path])) {
-                    map.addLayer(radarLayers[frame.path]);
-                }
-            }
+			function addLayer(frame) {
+				if (!radarLayers[frame.path]) {
+					var colorScheme = optionKind == 'satellite' ? optionColorScheme == 255 ? 255 : 0 : optionColorScheme;
+					var smooth = optionKind == 'satellite' ? 0 : optionSmoothData;
+					var snow = optionKind == 'satellite' ? 0 : optionSnowColors;
+					var source = new L.TileLayer(apiData.host + frame.path + '/' + optionTileSize + '/{z}/{x}/{y}/' + colorScheme + '/' + smooth + '_' + snow + '.' + optionExtension, {
+						tileSize: 256,
+						opacity: 0.01,
+						zIndex: frame.time
+					});
+					source.on('loading', startLoadingTile);
+					source.on('load', finishLoadingTile);
+					source.on('remove', finishLoadingTile);
+					radarLayers[frame.path] = source;
+				}
+				if (!radar.hasLayer(radarLayers[frame.path])) {
+					radar.addLayer(radarLayers[frame.path]);
+				}
+			}
 
             /** Display particular frame of animation for the @position
              * If preloadOnly parameter is set to true, the frame layer only adds for the tiles preloading purpose
