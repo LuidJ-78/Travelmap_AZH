@@ -112,11 +112,23 @@
                 border-radius: 10px;
                 text-align: center;
                 z-index: 2;
+				display: none;
             }
             li {
                 list-style: none;
                 display: inline-block;
             }
+			#radarToggleTooltip {
+				display: none;
+				position: fixed;
+				background-color: rgba(0, 0, 0, 0.8);
+				color: white;
+				padding: 5px 10px;
+				border-radius: 5px;
+				font-size: 14px;
+				z-index: 3;
+				pointer-events: none;
+			}
             
             #sidebar {
                     position: fixed;
@@ -201,8 +213,6 @@
 
         <div id="radar_control">
             <ul>
-                <li><input type="radio" name="kind" onchange="setKind('sansradar')">désactivé</li><input type="radio" name="kind" checked="checked" onchange="setKind('radar')">Radar <input type="radio" name="kind" onchange="setKind('satellite')">Satellite</li>
-
                 <li><input type="button" onclick="stop(); showFrame(animationPosition - 1); return;" value="&lt;" /></li>
                 <li><input type="button" onclick="playStop();" value="Play / Stop" /></li>
                 <li><input type="button" onclick="stop(); showFrame(animationPosition + 1); return;" value="&gt;" /></li>
@@ -222,6 +232,7 @@
             </ul>  
             <div id="timestamp" style="text-align:center; position: absolute;top: 50px; left: 0; right: 0; height: 80px;">FRAME TIME</div>
         </div>
+		<div id="radarToggleTooltip" >Afficher/Masquer les contrôles radar</div>
 
        <div id="map" style="position: absolute; top: 0px; left: 0; bottom: 0; right: 0;"></div>
 
@@ -251,22 +262,65 @@
 
     <script> //affichage de la map, controle et météo
             const map = L.map("map", {zoomControl: false}).setView([20, 0], 2);
-            L.control.zoom({position: 'bottomright'}).addTo(map);
-            L.tileLayer("https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",{ attribution: "&copy; OpenStreetMap contributeurs" },).addTo(map);
+			L.control.zoom({position: 'bottomright'}).addTo(map);
+			L.Control.RadarControlToggle = L.Control.extend({ // Créer un contrôle personnalisé pour afficher/masquer la div radar_control
+				onAdd: function(map) {
+				var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+					container.style.backgroundColor = 'white';
+					container.style.width = '30px';
+					container.style.height = '30px';
+					container.style.cursor = 'pointer';
+					container.style.border = '2px solid rgba(0,0,0,0.2)';
+					container.style.borderRadius = '4px';
+					container.style.marginBottom = '15px';
+					container.style.fontSize = '20px';
+					container.style.textAlign = 'center';
+					container.innerHTML = '📡'; // Icône radar
+					
+					L.DomEvent.on(container, 'mouseover', function(e) { // Ajouter les événements mouseover et mouseout
+						var tooltip = document.getElementById('radarToggleTooltip');
+						var rect = container.getBoundingClientRect();
+						tooltip.style.display = 'block';
+						tooltip.style.left = (rect.left + window.scrollX - 95) + 'px';
+						tooltip.style.top = (rect.top + window.scrollY - 45) + 'px'; // Positionner au-dessus du bouton
+					});
+					L.DomEvent.on(container, 'mouseout', function(e) {
+						document.getElementById('radarToggleTooltip').style.display = 'none';
+					});
+
+					L.DomEvent.on(container, 'click', function() {
+						var radarControlDiv = document.getElementById('radar_control');
+						if (radarControlDiv.style.display === 'block') {
+							radarControlDiv.style.display = 'none';
+						} else {
+							radarControlDiv.style.display = 'block';
+						}
+					});
+					return container;
+				}
+			});
+			map.addControl(new L.Control.RadarControlToggle({ position: 'bottomright' })); // Ajouter le contrôle personnalisé à la carte
+			
             // Grouper les layers de base
             var clair = L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', { attribution: 'clair' });
             //var sombre = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', { attribution: 'sombre' });
             var topographique = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', { attribution: 'topographique' });
             var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: 'Satellite' });
+			var sansradar = L.layerGroup([]);
+			var radar = L.layerGroup([]);
             var baseLayers = {
                 "clair": clair,
                 //"sombre": sombre,
                 "topographique": topographique,
-                "Satellite": satellite
+                "Satellite": satellite,
+            };
+			var overLayers = {
+				"Radar météo": radar,
             };
             // Ajouter le contrôle à la carte
-            L.control.layers(baseLayers).addTo(map);
-
+            L.control.layers(baseLayers, overLayers).addTo(map);
+			map.addLayer(clair);
+			map.addLayer(radar);
             
             /** RainViewer radar animation part * @type {number[]} */
             var apiData = {};
@@ -304,52 +358,44 @@
             apiRequest.send();
 
             /** Initialize internal data from the API response and options*/
-            function initialize(api, kind) {
-                // remove all already added tiled layers
-                for (var i in radarLayers) {
-                    map.removeLayer(radarLayers[i]);
-                }
-                mapFrames = [];
-                radarLayers = [];
-                animationPosition = 0;
-                if (!api) {
-                    return;
-                }
-                if (kind == 'satellite' && api.satellite && api.satellite.infrared) {
-                    mapFrames = api.satellite.infrared;
-                    lastPastFramePosition = api.satellite.infrared.length - 1;
-                    showFrame(lastPastFramePosition, true);
-                }
-                else if (api.radar && api.radar.past) {
-                    mapFrames = api.radar.past;
-                    if (api.radar.nowcast) {
-                        mapFrames = mapFrames.concat(api.radar.nowcast);
-                    } // show the last "past" frame
-                    lastPastFramePosition = api.radar.past.length - 1;
-                    showFrame(lastPastFramePosition, true);
-                }
-            }
+			function initialize(api, kind) {
+				radar.clearLayers(); // Supprimer toutes les couches radar existantes
+				mapFrames = [];
+				radarLayers = [];
+				animationPosition = 0;
+				if (!api) {
+					return;
+				}
+				if (api.radar && api.radar.past) {
+					mapFrames = api.radar.past;
+					if (api.radar.nowcast) {
+						mapFrames = mapFrames.concat(api.radar.nowcast);
+					}
+					lastPastFramePosition = api.radar.past.length - 1;
+					showFrame(lastPastFramePosition, true);
+				}
+			}
             
             /** Animation functions * @param path - Path to the XYZ tile */
-            function addLayer(frame) {
-                if (!radarLayers[frame.path]) {
-                    var colorScheme = optionKind == 'satellite' ? optionColorScheme == 255 ? 255 : 0 : optionColorScheme;
-                    var smooth = optionKind == 'satellite' ? 0 : optionSmoothData;
-                    var snow = optionKind == 'satellite' ? 0 : optionSnowColors;
-                    var source = new L.TileLayer(apiData.host + frame.path + '/' + optionTileSize + '/{z}/{x}/{y}/' + colorScheme + '/' + smooth + '_' + snow + '.' + optionExtension, {
-                        tileSize: 256,
-                        opacity: 0.01,
-                        zIndex: frame.time
-                    }); // Track layer loading state to not display the overlay before it will completelly loads
-                    source.on('loading', startLoadingTile);
-                    source.on('load', finishLoadingTile); 
-                    source.on('remove', finishLoadingTile);
-                    radarLayers[frame.path] = source;
-                }
-                if (!map.hasLayer(radarLayers[frame.path])) {
-                    map.addLayer(radarLayers[frame.path]);
-                }
-            }
+			function addLayer(frame) {
+				if (!radarLayers[frame.path]) {
+					var colorScheme = optionKind == 'satellite' ? optionColorScheme == 255 ? 255 : 0 : optionColorScheme;
+					var smooth = optionKind == 'satellite' ? 0 : optionSmoothData;
+					var snow = optionKind == 'satellite' ? 0 : optionSnowColors;
+					var source = new L.TileLayer(apiData.host + frame.path + '/' + optionTileSize + '/{z}/{x}/{y}/' + colorScheme + '/' + smooth + '_' + snow + '.' + optionExtension, {
+						tileSize: 256,
+						opacity: 0.01,
+						zIndex: frame.time
+					});
+					source.on('loading', startLoadingTile);
+					source.on('load', finishLoadingTile);
+					source.on('remove', finishLoadingTile);
+					radarLayers[frame.path] = source;
+				}
+				if (!radar.hasLayer(radarLayers[frame.path])) {
+					radar.addLayer(radarLayers[frame.path]);
+				}
+			}
 
             /** Display particular frame of animation for the @position
              * If preloadOnly parameter is set to true, the frame layer only adds for the tiles preloading purpose
@@ -406,17 +452,14 @@
             }
 
             /**  Change map options */
-            function setKind(kind) {
+            function setKind(kind) { 
                 optionKind = kind;
                 if (kind === 'sansradar') {// Supprimer tous les layers radar existants
-                    for (var i in radarLayers) {
-                    map.removeLayer(radarLayers[i]);
-                    }
-                radarLayers = [];
-                document.getElementById("timestamp").innerHTML = "Radar désactivé";
-                return; // On sort de la fonction sans initialiser les layers radar
-                }
-                initialize(apiData, optionKind);
+					map.removeLayer(radar);
+					document.getElementById("timestamp").innerHTML = "Radar désactivé"
+                } else if (kind === 'radar') {
+					initialize(apiData, optionKind);
+				}
             }
             function setColors() {
                 var e = document.getElementById('colors');
