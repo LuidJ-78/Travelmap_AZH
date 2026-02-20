@@ -796,7 +796,7 @@
 				const flightTimeInMinutes = Math.round(flightTimeInHours * 60); // Convertir en minutes
 
 				document.getElementById('distance').innerText = distanceInNauticalMiles.toFixed(2);
-				document.getElementById('flightTime').innerText = (flightTimeInMinutes / 60).toFixed(2);
+				document.getElementById('flightTime').innerText = flightTimeInHours.toFixed(2);
 
 				document.getElementById('distanceBox').style.display = 'block';
 
