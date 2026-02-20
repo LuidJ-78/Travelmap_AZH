@@ -792,7 +792,7 @@
 				const distanceInNauticalMiles = distanceInKm * 0.53996; // Conversion en milles nautiques
 
 				// Calcul du temps de vol en heures
-				const flightTimeInHours = 0.25 + 0.006 * (distanceInNauticalMiles^0.878); // Vitesse de 800 km/h
+				const flightTimeInHours = 0.25 + 0.006 * (distanceInNauticalMiles ** 0.878); // Vitesse de 800 km/h
 				const flightTimeInMinutes = Math.round(flightTimeInHours * 60); // Convertir en minutes
 
 				document.getElementById('distance').innerText = distanceInNauticalMiles.toFixed(2);
