@@ -270,7 +270,7 @@
                 if (pointdepart < 1){
                     pointdepart = 1
                 }
-                //console.log(pointdepart);
+                console.log(`pointdepart ${pointdepart} `);
             
                 const markerPositions = [];
                 for (let i = pointdepart; i < rows_length; i++) {
@@ -296,6 +296,8 @@
                                 voyageLayer.addLayer(marker);
                                 break;
                     }
+
+                    console.log(`${i}, airportCode ${pairportCode} `);
                 }
                 // Ajouter la polyline si au moins 2 points
                if (markerPositions.length >= 2) {
