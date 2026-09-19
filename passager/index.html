@@ -265,6 +265,7 @@
         <script>
         
         function creation_polyline_voyage (table_voyage,nb_cols_voyage,n_voyage,rows_length,derniereLigneAvecContenu,pointafficher,voyageLayer){ // n_voyage = v,
+                console.log(`n_voyage ${n_voyage}, rows_length ${rows_length}, derniereLigneAvecContenu ${derniereLigneAvecContenu}, pointafficher ${pointafficher}, voyageLayer ${voyageLayer}, `);
                 var pointdepart = derniereLigneAvecContenu - pointafficher;
                 if (pointdepart < 1){
                     pointdepart = 1
